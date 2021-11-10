@@ -1,0 +1,17 @@
+{
+    "main": {
+        "title": "Dil Desteği",
+        "bodytext": "Dil Desteği yazısı için MobilerDev'i ziyaret edin."
+    },
+    "dashboard":{
+        "tablo":"Güncel Sipariş Tablosu",
+        "sample":"Sipariş Formu",
+        "production":"Üretim Talep",
+        "card1":"Mevcut Sipariş Sayısı",
+        "card2":"Beklemede olan Siparişler",
+        "card3":"Hazırlanan Siparişler",
+        "aktivite":"Aktiviteler",
+        "takvim":"Etkinlik Takvimi",
+        "dshboard":"Arayüz"
+    }
+}

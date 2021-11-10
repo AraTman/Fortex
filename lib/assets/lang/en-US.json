@@ -1,0 +1,17 @@
+{
+    "main": {
+        "title": "Language Support",
+        "bodytext": "Visit mobilerDev for language support article"
+    },
+    "dashboard":{
+        "tablo":"Current Order Table",
+        "sample":"Order Form",
+        "production":"Production Demand",
+        "card1":"Current Number of Orders",
+        "card2":"Pending Orders",
+        "card3":"Prepared Orders",
+        "aktivite":"Activities",
+        "takvim":"Event calendar",
+        "dshboard":"Dashboard"
+    }
+}
