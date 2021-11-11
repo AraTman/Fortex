@@ -10,6 +10,10 @@ import 'package:fortextm/screens/supervisor_module/emloyee_module/models/departm
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/department_list.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/employee_list.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/media_type_list.dart';
+import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart';
+import 'package:fortextm/screens/warehouse/settings/models/wh_list.dart';
+import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
+import 'package:fortextm/screens/warehouse/settings/models/wh_localization_size_list.dart';
 import 'package:http_parser/http_parser.dart';
 
 import 'futures_service.dart';
@@ -147,6 +151,149 @@ class FutureService extends IFutureService {
     }
   }
 
+//Warehouse
+  @override
+  Future<List<WhCategoryLists>> getHttpWhCategoryLists(String url) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls);
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhCategoryLists.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+  @override
+  Future<List<WhCategoryLists>> getHttpWhCategoryGets(
+      String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhCategoryLists.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+  @override
+  Future<List<WhModelList>> getHttpWhLists(String url) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls);
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+  @override
+  Future<List<WhModelList>> getHttpWhGets(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+ @override
+  Future<List<WhLocalizationModelList>> getHttpWhLocalizationLists(String url) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls);
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhLocalizationModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+  @override
+  Future<List<WhLocalizationModelList>> getHttpWhLocalizationGets(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhLocalizationModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+  @override
+  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeLists(String url) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls);
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhLocalizationSizeModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+  @override
+  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeGets(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhLocalizationSizeModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
   //Post
   dynamic postCompany(var data, String paths, var file) async {
     try {
@@ -294,6 +441,31 @@ class FutureService extends IFutureService {
         );
       } else {
         return 'Error';
+      }
+    } on DioError catch (e) {
+      // ignore: avoid_print
+      return e.error;
+    }
+  }
+
+  /* post Warehouse */
+  dynamic postWhCategory(var data, String paths) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $token";
+
+      Response response = await dio.post(
+        _baseUrl + paths,
+        data: data,
+        options: Options(
+          followRedirects: false,
+          // will not throw errors
+          validateStatus: (status) => true,
+        ),
+      );
+      if (response.statusCode == 200) {
+        return response.statusCode;
+      } else {
+        return response.statusCode;
       }
     } on DioError catch (e) {
       // ignore: avoid_print

@@ -7,11 +7,13 @@ import 'package:fortextm/screens/customer_agent/costumer/costumer.dart';
 import 'package:fortextm/screens/customer_agent/dashboard/dashboard.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/screens/sp_company.dart';
 import 'package:fortextm/screens/supervisor_module/dashboard/dashboard.dart';
+import 'package:fortextm/screens/warehouse/dashboard/dashbaord.dart';
 
 import 'core/config/constant.dart';
 import 'core/constants/colors.dart';
 import 'screens/customer_agent/production/production.dart';
 import 'screens/supervisor_module/emloyee_module/screens/sp_employee.dart';
+import 'screens/warehouse/settings/wh_settings.dart';
 
 void main() async {
   await StorageUtil.getInstance();
@@ -39,9 +41,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) =>  const Login(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
         '/costumer': (context) => Costumer(),
         '/moduleDashboard': (context) => ModuleDashboard(),
         '/costumerDashboard': (context) => CostumerDashboard(),
@@ -51,6 +51,10 @@ class MyApp extends StatelessWidget {
         '/spcompany':(context)=>SpCompany(),
         '/spemployee':(context)=>SpEmployee(),
         '/productDash':(context)=>CostumerProduction(),
+
+        //Warehouse,
+        '/warehouseDashboard':(context)=>WarehouseDashboard(),
+        '/whsettings':(context)=>WhSettings()
       },
       theme: ThemeData(
           primarySwatch: Colors.blue,
