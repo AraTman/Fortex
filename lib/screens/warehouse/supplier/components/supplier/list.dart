@@ -5,24 +5,26 @@ import 'package:fortextm/providers/future_extension.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_source.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
 import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart';
+import 'package:fortextm/screens/warehouse/settings/components/wh_category/profil_page.dart';
+import 'package:fortextm/screens/warehouse/supplier/models/supplier_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'profil_page.dart';
 
-class WhCategoryList extends StatefulWidget {
-  const WhCategoryList({Key? key}) : super(key: key);
+class SupplierList extends StatefulWidget {
+  const SupplierList({Key? key}) : super(key: key);
 
   @override
-  _WhCategoryListState createState() => _WhCategoryListState();
+  _SupplierListState createState() => _SupplierListState();
 }
 
-class _WhCategoryListState extends State<WhCategoryList>
+class _SupplierListState extends State<SupplierList>
     with AutomaticKeepAliveClientMixin {
-  final welPath = "warehouse/category/list";
+  final welPath = "supplier/list";
   bool isLoading = false;
 
   late IFutureService futureService;
-  late Future<List<WhCategoryLists>> httpWhCategory;
+  late Future<List<SupplierModelList>> httpsupplierList;
   final ExampleSource _source1 = ExampleSource(
       data: [],
       editListener: (value, index, sources, source) {
@@ -35,26 +37,26 @@ class _WhCategoryListState extends State<WhCategoryList>
   void initState() {
     super.initState();
     futureService = FutureService();
-    httpWhCategory = futureService.getHttpWhCategoryLists(welPath);
+    httpsupplierList = futureService.getHttpSupplierLists(welPath);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return  httpWhCategory.toBuild<List<WhCategoryLists>>(onSucces: (datas) {
+    return  httpsupplierList.toBuild<List<SupplierModelList>>(onSucces: (datas) {
       Future.delayed(Duration.zero, () async {
     _source1.clear();
     datas
-        .map((whCategory) => _source1.add({
-              'name': whCategory.name,
+        .map((supplierList) => _source1.add({
+              'name': supplierList.name,
               'actions': IconButton(
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,
-                  builder: (context) => WhCategoryProfilPage(
-                    id: whCategory.id
-                  ),
+                  builder: (context) => SupplierProfilPage(
+                    id: supplierList.id
+                ),
                 ),
               )
             }))
@@ -63,7 +65,7 @@ class _WhCategoryListState extends State<WhCategoryList>
       return BsCardContainer(
     child: BsDatatable(
       source: _source1,
-      title: const Text('Depo Kategori Listesi'),
+      title: const Text('Tedarikçi Kategori Listesi'),
       columns: ExampleSource.columns,
     ),
       );

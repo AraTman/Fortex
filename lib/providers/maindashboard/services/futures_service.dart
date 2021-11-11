@@ -9,6 +9,8 @@ import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart
 import 'package:fortextm/screens/warehouse/settings/models/wh_list.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_localization_size_list.dart';
+import 'package:fortextm/screens/warehouse/settings/models/wh_supplier_list.dart';
+import 'package:fortextm/screens/warehouse/supplier/models/supplier_list.dart';
 
 abstract class IFutureService {
   Future<List<modelCompanyTable>> getHttpTableModel(String path);
@@ -32,5 +34,10 @@ abstract class IFutureService {
 
   Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeLists(String url);
   Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeGets(
+      String url, int id);
+
+       Future<List<WhSupplierCategoryModelList>> getHttpSupplierCategoryLists(String url);
+         Future<List<SupplierModelList>> getHttpSupplierLists(String url);
+         Future<List<SupplierModelList>> getHttpSupplierGets(
       String url, int id);
 }

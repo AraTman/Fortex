@@ -4,8 +4,12 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/app_bar_actions_items.dart';
 import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'components/header.dart';
+import 'components/wh_category/add.dart';
 import 'components/wh_category/list.dart';
+import 'components/wh_supplier_category/add.dart';
+import 'components/wh_supplier_category/list.dart';
 
 class WhSettings extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -56,7 +60,55 @@ class WhSettings extends StatelessWidget {
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,
                         ),
+                        Wrap(
+                          spacing: 15,
+                          runSpacing: 15,
+                          children: [
+                            OutlinedButton(
+                              child: Column(
+                                children: const [
+                                  Text('Depo Kategori Ekle',style: TextStyle(fontSize: 20),),
+                                  Icon(Icons.branding_watermark,size: 32,),
+                                ],
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                primary: Colors.white,
+                                backgroundColor: Colors.black,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                              ),
+                              onPressed: () => showCupertinoModalBottomSheet(
+                                isDismissible: false,
+                                context: context,
+                                builder: (context) => const WhCategoryInsert(),
+                              ),
+                            ),
+                            OutlinedButton(
+                              child: Column(
+                                children: const [
+                                  Text('Tedarikçi Kategori Ekle',style: TextStyle(fontSize: 20),),
+                                  Icon(Icons.support_outlined,size: 32,),
+                                ],
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                primary: Colors.white,
+                                backgroundColor: Colors.red,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                              ),
+                              onPressed: () => showCupertinoModalBottomSheet(
+                                isDismissible: false,
+                                context: context,
+                                builder: (context) =>
+                                    const SupplierCategoryAdd(),
+                              ),
+                            ),
+                          ],
+                        ),
                         const WhCategoryList(),
+                        const WhSupplierCategoryList(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // ignore: prefer_const_literals_to_create_immutables

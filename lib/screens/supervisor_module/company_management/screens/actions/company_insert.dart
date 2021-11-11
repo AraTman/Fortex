@@ -24,7 +24,6 @@ class CompanyInsert extends StatefulWidget {
 
 class CompanyInsertState extends State<CompanyInsert>
     with SingleTickerProviderStateMixin {
-  TextEditingController companyName = TextEditingController();
   TextEditingController adress = TextEditingController();
   TextEditingController countrys = TextEditingController();
   final _formKey = GlobalKey<FormBuilderState>();

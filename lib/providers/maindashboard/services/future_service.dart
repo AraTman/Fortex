@@ -14,6 +14,8 @@ import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart
 import 'package:fortextm/screens/warehouse/settings/models/wh_list.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_localization_size_list.dart';
+import 'package:fortextm/screens/warehouse/settings/models/wh_supplier_list.dart';
+import 'package:fortextm/screens/warehouse/supplier/models/supplier_list.dart';
 import 'package:http_parser/http_parser.dart';
 
 import 'futures_service.dart';
@@ -287,6 +289,57 @@ class FutureService extends IFutureService {
         var data = response.data;
         if (data is List) {
           return data.map((e) => WhLocalizationSizeModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+   @override
+  Future<List<WhSupplierCategoryModelList>> getHttpSupplierCategoryLists(String url) async {
+      dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls);
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => WhSupplierCategoryModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+    @override
+  Future<List<SupplierModelList>> getHttpSupplierLists(String url) async {
+      dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls);
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => SupplierModelList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+   @override
+  Future<List<SupplierModelList>> getHttpSupplierGets(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        var data = response.data;
+        if (data is List) {
+          return data.map((e) => SupplierModelList.fromJson(e)).toList();
         } else {
           throw data;
         }

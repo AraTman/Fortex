@@ -20,24 +20,35 @@ class WarehouseSideMenu extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            const ModuleReturn(),
-               IconButton(
+              const ModuleReturn(),
+            
+             
+              IconButton(
                   iconSize: 20,
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   icon: const Icon(
                     Icons.home,
-                    color: AppColors.iconGray,
+                    color: AppColors.lgunder,
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/warehouseDashboard');
                   }),
-             
-             IconButton(
+              IconButton(
                   iconSize: 20,
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   icon: const Icon(
-                    Icons.settings_accessibility,
-                    color: AppColors.iconGray,
+                    Icons.support,
+                    color: AppColors.lgunder,
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/whsupplier');
+                  }),
+              IconButton(
+                  iconSize: 20,
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  icon: const Icon(
+                    Icons.settings,
+                    color: AppColors.lgunder,
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/whsettings');

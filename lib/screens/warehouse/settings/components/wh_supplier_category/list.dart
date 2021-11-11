@@ -5,24 +5,25 @@ import 'package:fortextm/providers/future_extension.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_source.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
 import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
+import 'package:fortextm/screens/warehouse/settings/components/wh_category/profil_page.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart';
+import 'package:fortextm/screens/warehouse/settings/models/wh_supplier_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'profil_page.dart';
 
-class WhCategoryList extends StatefulWidget {
-  const WhCategoryList({Key? key}) : super(key: key);
+class WhSupplierCategoryList extends StatefulWidget {
+  const WhSupplierCategoryList({Key? key}) : super(key: key);
 
   @override
-  _WhCategoryListState createState() => _WhCategoryListState();
+  _WhSupplierCategoryListState createState() => _WhSupplierCategoryListState();
 }
 
-class _WhCategoryListState extends State<WhCategoryList>
+class _WhSupplierCategoryListState extends State<WhSupplierCategoryList>
     with AutomaticKeepAliveClientMixin {
-  final welPath = "warehouse/category/list";
+  final welPath = "supplier/category/list";
   bool isLoading = false;
 
   late IFutureService futureService;
-  late Future<List<WhCategoryLists>> httpWhCategory;
+  late Future<List<WhSupplierCategoryModelList>> httpWhCategory;
   final ExampleSource _source1 = ExampleSource(
       data: [],
       editListener: (value, index, sources, source) {
@@ -35,13 +36,13 @@ class _WhCategoryListState extends State<WhCategoryList>
   void initState() {
     super.initState();
     futureService = FutureService();
-    httpWhCategory = futureService.getHttpWhCategoryLists(welPath);
+    httpWhCategory = futureService.getHttpSupplierCategoryLists(welPath);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return  httpWhCategory.toBuild<List<WhCategoryLists>>(onSucces: (datas) {
+    return  httpWhCategory.toBuild<List<WhSupplierCategoryModelList>>(onSucces: (datas) {
       Future.delayed(Duration.zero, () async {
     _source1.clear();
     datas
@@ -54,7 +55,7 @@ class _WhCategoryListState extends State<WhCategoryList>
                   context: context,
                   builder: (context) => WhCategoryProfilPage(
                     id: whCategory.id
-                  ),
+                ),
                 ),
               )
             }))
@@ -63,7 +64,7 @@ class _WhCategoryListState extends State<WhCategoryList>
       return BsCardContainer(
     child: BsDatatable(
       source: _source1,
-      title: const Text('Depo Kategori Listesi'),
+      title: const Text('Tedarikçi Kategori Listesi'),
       columns: ExampleSource.columns,
     ),
       );
