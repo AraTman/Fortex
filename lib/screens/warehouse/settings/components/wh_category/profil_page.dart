@@ -26,7 +26,7 @@ class WhCategoryProfilPageState extends State<WhCategoryProfilPage>
     SizeConfig().init(context);
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Depo Profili'),
+          title: const Text('Kategori Profili'),
           backgroundColor: AppColors.primaryBg,
           foregroundColor: Colors.black,
         ),

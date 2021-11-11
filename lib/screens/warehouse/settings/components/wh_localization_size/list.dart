@@ -5,9 +5,6 @@ import 'package:fortextm/providers/future_extension.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_source.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
 import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
-import 'package:fortextm/screens/warehouse/settings/components/wh_localization/add.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_list.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -50,15 +47,15 @@ class _WhLocalizationSizeListState extends State<WhLocalizationSizeList>
       Future.delayed(Duration.zero, () async {
     _source1.clear();
     datas
-        .map((Wh) => _source1.add({
-              'name': Wh.name,
+        .map((wh) => _source1.add({
+              'name': wh.name,
               'actions': IconButton(
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,
                   builder: (context) => WhLocalizationSizeProfilPage(
-                    id: Wh.id
+                    id: wh.id
                   ),
                 ),
               )

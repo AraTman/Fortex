@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final whCategory = whCategoryFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class WhCategoryLists {
@@ -33,6 +29,6 @@ class WhCategoryLists {
         "Id": id,
         "Name": name,
         "Code": code,
-        "Description": description == null ? null : description,
+        "Description": description,
     };
 }

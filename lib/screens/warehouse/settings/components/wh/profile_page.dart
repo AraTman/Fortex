@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/screens/warehouse/settings/components/wh/add.dart';
-import 'package:fortextm/screens/warehouse/settings/components/wh_category/profile.dart';
 import 'package:fortextm/screens/warehouse/settings/components/wh_localization/add.dart';
 import 'package:fortextm/screens/warehouse/settings/components/wh_localization/list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

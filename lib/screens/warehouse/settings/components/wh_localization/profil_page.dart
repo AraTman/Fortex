@@ -3,7 +3,6 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/screens/warehouse/settings/components/wh_localization_size/add.dart';
 import 'package:fortextm/screens/warehouse/settings/components/wh_localization_size/list.dart';
-import 'package:fortextm/screens/warehouse/settings/components/wh_localization_size/profil_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'profile.dart';
@@ -29,7 +28,7 @@ class WhLocalizationProfilPageState extends State<WhLocalizationProfilPage>
     SizeConfig().init(context);
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Depo Profili'),
+          title: const Text('Lokasyon Profili'),
           backgroundColor: AppColors.primaryBg,
           foregroundColor: Colors.black,
         ),

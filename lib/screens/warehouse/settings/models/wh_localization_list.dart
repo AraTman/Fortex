@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final whLocalizationModelList = whLocalizationModelListFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class WhLocalizationModelList {
@@ -15,8 +11,8 @@ class WhLocalizationModelList {
     });
 
     int id;
-    int warehouseId;
-    String name;
+    int? warehouseId;
+    String? name;
     String? qrCode;
     Warehouse warehouse;
 

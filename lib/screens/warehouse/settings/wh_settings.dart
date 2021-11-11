@@ -4,7 +4,6 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/app_bar_actions_items.dart';
 import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
-import 'package:fortextm/screens/supervisor_module/company_management/components/company_table.dart';
 import 'components/header.dart';
 import 'components/wh_category/list.dart';
 

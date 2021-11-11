@@ -2,12 +2,9 @@ import 'package:bs_flutter_card/bs_flutter_card.dart';
 import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/providers/future_extension.dart';
-import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_source.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
 import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
-import 'package:fortextm/screens/supervisor_module/company_management/screens/subsidiary_list.dart';
-import 'package:fortextm/screens/warehouse/settings/components/wh_category/profile.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'profil_page.dart';
@@ -48,15 +45,15 @@ class _WhCategoryListState extends State<WhCategoryList>
       Future.delayed(Duration.zero, () async {
     _source1.clear();
     datas
-        .map((WhCategory) => _source1.add({
-              'name': WhCategory.name,
+        .map((whCategory) => _source1.add({
+              'name': whCategory.name,
               'actions': IconButton(
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,
                   builder: (context) => WhCategoryProfilPage(
-                    id: WhCategory.id
+                    id: whCategory.id
                   ),
                 ),
               )

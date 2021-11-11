@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final whModelList = whModelListFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class WhModelList {
