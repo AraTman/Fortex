@@ -8,7 +8,6 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
-import 'package:fortextm/screens/warehouse/settings/wh_settings.dart';
 import 'package:fortextm/screens/warehouse/supplier/wh_supplier.dart';
 
 import 'add_category_list.dart';
@@ -244,9 +243,9 @@ class SupplierAddState extends State<SupplierAdd>
             _formKey.currentState!.save();
             futureService = FutureService();
 
-            futureService.postWhCategory(
+            futureService.postAll(
               _formKey.currentState!.value,
-              url,
+              url,context,'/whsettings'
             );
             if (_formKey.currentState!.validate()) {
               _succesMessage();

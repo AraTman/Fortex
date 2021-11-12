@@ -171,8 +171,8 @@ class WhCategoryInsertState extends State<WhCategoryInsert>
             _formKey.currentState!.save();
             futureService = FutureService();
 
-            futureService.postWhCategory(
-                _formKey.currentState!.value, url,);
+            futureService.postAll(
+                _formKey.currentState!.value, url,context,'/whsettings');
             if (_formKey.currentState!.validate()) {
               _succesMessage();
             } else {

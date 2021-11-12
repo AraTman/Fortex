@@ -6,7 +6,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/providers/future_extension.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
 import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
-import 'package:fortextm/screens/supervisor_module/emloyee_module/models/department_list.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_supplier_list.dart';
 
 class SupplierCategoryAddList extends StatefulWidget {

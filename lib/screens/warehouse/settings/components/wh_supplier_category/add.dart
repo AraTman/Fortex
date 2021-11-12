@@ -1,13 +1,11 @@
 // ignore_for_file: avoid_print, duplicate_ignore
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
-import 'package:fortextm/screens/warehouse/settings/wh_settings.dart';
 
 class SupplierCategoryAdd extends StatefulWidget {
   const SupplierCategoryAdd({Key? key}) : super(key: key);
@@ -144,12 +142,13 @@ class SupplierCategoryAddState extends State<SupplierCategoryAdd>
             _formKey.currentState!.save();
             futureService = FutureService();
 
-            futureService.postWhCategory(
+          var response=  futureService.postAll(
               _formKey.currentState!.value,
-              url,
+              url,context,'/whsettings'
             );
             if (_formKey.currentState!.validate()) {
-              _succesMessage();
+             print(response.hashCode);
+             
             } else {
               print("validation failed");
             }
@@ -159,26 +158,5 @@ class SupplierCategoryAddState extends State<SupplierCategoryAdd>
     );
   }
 
-  AwesomeDialog _succesMessage() {
-    return AwesomeDialog(
-        context: context,
-        width: 300,
-        animType: AnimType.LEFTSLIDE,
-        headerAnimationLoop: false,
-        dialogType: DialogType.SUCCES,
-        showCloseIcon: true,
-        title: 'Başarılı',
-        desc: 'Kayıt başarılı',
-        btnOkOnPress: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => WhSettings(), fullscreenDialog: true),
-          );
-        },
-        btnOkIcon: Icons.check_circle,
-        onDissmissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        })
-      ..show();
-  }
+  
 }

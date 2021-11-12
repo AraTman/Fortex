@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:fortextm/providers/maindashboard/services/shared_preferences_util.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/error_model.dart';
@@ -226,8 +228,10 @@ class FutureService extends IFutureService {
         return response.data;
     }
   }
- @override
-  Future<List<WhLocalizationModelList>> getHttpWhLocalizationLists(String url) async {
+
+  @override
+  Future<List<WhLocalizationModelList>> getHttpWhLocalizationLists(
+      String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
     final response = await dio.get(urls);
@@ -245,7 +249,8 @@ class FutureService extends IFutureService {
   }
 
   @override
-  Future<List<WhLocalizationModelList>> getHttpWhLocalizationGets(String url, int id) async {
+  Future<List<WhLocalizationModelList>> getHttpWhLocalizationGets(
+      String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
@@ -261,8 +266,10 @@ class FutureService extends IFutureService {
         return response.data;
     }
   }
+
   @override
-  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeLists(String url) async {
+  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeLists(
+      String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
     final response = await dio.get(urls);
@@ -270,7 +277,9 @@ class FutureService extends IFutureService {
       case HttpStatus.ok:
         var data = response.data;
         if (data is List) {
-          return data.map((e) => WhLocalizationSizeModelList.fromJson(e)).toList();
+          return data
+              .map((e) => WhLocalizationSizeModelList.fromJson(e))
+              .toList();
         } else {
           throw data;
         }
@@ -280,7 +289,8 @@ class FutureService extends IFutureService {
   }
 
   @override
-  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeGets(String url, int id) async {
+  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeGets(
+      String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
@@ -288,7 +298,9 @@ class FutureService extends IFutureService {
       case HttpStatus.ok:
         var data = response.data;
         if (data is List) {
-          return data.map((e) => WhLocalizationSizeModelList.fromJson(e)).toList();
+          return data
+              .map((e) => WhLocalizationSizeModelList.fromJson(e))
+              .toList();
         } else {
           throw data;
         }
@@ -296,16 +308,20 @@ class FutureService extends IFutureService {
         return response.data;
     }
   }
-   @override
-  Future<List<WhSupplierCategoryModelList>> getHttpSupplierCategoryLists(String url) async {
-      dio.options.headers["Authorization"] = "Bearer $token";
+
+  @override
+  Future<List<WhSupplierCategoryModelList>> getHttpSupplierCategoryLists(
+      String url) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
         var data = response.data;
         if (data is List) {
-          return data.map((e) => WhSupplierCategoryModelList.fromJson(e)).toList();
+          return data
+              .map((e) => WhSupplierCategoryModelList.fromJson(e))
+              .toList();
         } else {
           throw data;
         }
@@ -313,9 +329,10 @@ class FutureService extends IFutureService {
         return response.data;
     }
   }
-    @override
+
+  @override
   Future<List<SupplierModelList>> getHttpSupplierLists(String url) async {
-      dio.options.headers["Authorization"] = "Bearer $token";
+    dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
@@ -330,8 +347,10 @@ class FutureService extends IFutureService {
         return response.data;
     }
   }
-   @override
-  Future<List<SupplierModelList>> getHttpSupplierGets(String url, int id) async {
+
+  @override
+  Future<List<SupplierModelList>> getHttpSupplierGets(
+      String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
@@ -347,6 +366,7 @@ class FutureService extends IFutureService {
         return response.data;
     }
   }
+
   //Post
   dynamic postCompany(var data, String paths, var file) async {
     try {
@@ -437,30 +457,6 @@ class FutureService extends IFutureService {
     }
   }
 
-  dynamic postEmployee(var data, String paths) async {
-    try {
-      dio.options.headers["Authorization"] = "Bearer $token";
-
-      Response response = await dio.post(
-        _baseUrl + paths,
-        data: data,
-        options: Options(
-          followRedirects: false,
-          // will not throw errors
-          validateStatus: (status) => true,
-        ),
-      );
-      if (response.statusCode == 200) {
-        return response.statusCode;
-      } else {
-        return response.statusCode;
-      }
-    } on DioError catch (e) {
-      // ignore: avoid_print
-      return e.error;
-    }
-  }
-
   dynamic postImage(
       var file, int id, String url, int employeeId, String fileType) async {
     try {
@@ -502,7 +498,8 @@ class FutureService extends IFutureService {
   }
 
   /* post Warehouse */
-  dynamic postWhCategory(var data, String paths) async {
+  dynamic postAll(
+      var data, String paths, BuildContext context, String location) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
 
@@ -511,18 +508,57 @@ class FutureService extends IFutureService {
         data: data,
         options: Options(
           followRedirects: false,
-          // will not throw errors
-          validateStatus: (status) => true,
         ),
       );
       if (response.statusCode == 200) {
-        return response.statusCode;
+        return _succesMessage(context, location);
       } else {
-        return response.statusCode;
+        return _errorMessage(context, location, "");
       }
     } on DioError catch (e) {
       // ignore: avoid_print
-      return e.error;
+      return _errorMessage(context, location, e.error);
     }
+  }
+
+  AwesomeDialog _succesMessage(BuildContext context, String location) {
+    return AwesomeDialog(
+        context: context,
+        width: 300,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.SUCCES,
+        showCloseIcon: true,
+        title: 'Başarılı',
+        desc: 'İşlem başarılı',
+        btnOkOnPress: () {
+          Navigator.pushNamed(context, location);
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        })
+      ..show();
+  }
+
+  AwesomeDialog _errorMessage(
+      BuildContext context, String location, String message) {
+    return AwesomeDialog(
+        context: context,
+        width: 300,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.WARNING,
+        showCloseIcon: true,
+        title: 'Hata',
+        desc: 'İşlem Başarısız' + message,
+        btnOkOnPress: () {
+          Navigator.pushNamed(context, location);
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        })
+      ..show();
   }
 }

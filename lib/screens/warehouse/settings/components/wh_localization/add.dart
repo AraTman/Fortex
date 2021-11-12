@@ -143,9 +143,9 @@ class WhLocalizationAddState extends State<WhLocalizationAdd> with SingleTickerP
             _formKey.currentState!.save();
             futureService = FutureService();
 
-            futureService.postWhCategory(
+            futureService.postAll(
               _formKey.currentState!.value,
-              url,
+              url,context,'/whsettings'
             );
             if (_formKey.currentState!.validate()) {
               _succesMessage();

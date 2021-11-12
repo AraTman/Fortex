@@ -179,7 +179,7 @@ class EmployeeInsertState extends State<EmployeeInsert>
           onPressed: () {
             _formKey.currentState!.save();
 
-            futureService.postEmployee(_formKey.currentState!.value, url);
+            futureService.postAll(_formKey.currentState!.value, url,context,'/spemployee');
             if (_formKey.currentState!.validate()) {
               _succesMessage();
             } else {
