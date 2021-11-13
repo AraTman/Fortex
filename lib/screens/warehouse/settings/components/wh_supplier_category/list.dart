@@ -48,7 +48,7 @@ class _WhSupplierCategoryListState extends State<WhSupplierCategoryList>
         .map((whCategory) => _source1.add({
               'name': whCategory.name,
               'actions': IconButton(
-                icon: const Icon(Icons.remove_red_eye),
+                icon: const Icon(Icons.update,color: Colors.orangeAccent,),
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,

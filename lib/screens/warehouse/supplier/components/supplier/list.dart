@@ -64,7 +64,7 @@ class _SupplierListState extends State<SupplierList>
       return BsCardContainer(
     child: BsDatatable(
       source: _source1,
-      title: const Text('Tedarikçi Kategori Listesi'),
+      title: const Text('Tedarikçi Listesi'),
       columns: ExampleSource.columns,
     ),
       );

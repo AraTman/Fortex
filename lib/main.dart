@@ -14,6 +14,7 @@ import 'core/constants/colors.dart';
 import 'screens/customer_agent/production/production.dart';
 import 'screens/supervisor_module/emloyee_module/screens/sp_employee.dart';
 import 'screens/warehouse/settings/wh_settings.dart';
+import 'screens/warehouse/stock/stock.dart';
 import 'screens/warehouse/supplier/wh_supplier.dart';
 
 void main() async {
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         '/warehouseDashboard':(context)=>WarehouseDashboard(),
         '/whsettings':(context)=>WhSettings(),
         '/whsupplier':(context)=>WhSupplier(),
+        '/inv03':(context)=>INV03(), //Stock
       },
       theme: ThemeData(
           primarySwatch: Colors.blue,

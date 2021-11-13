@@ -6,8 +6,11 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/app_bar_actions_items.dart';
 import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
+import 'components/activity.dart';
 import 'components/header.dart';
+
 // ignore: must_be_immutable
 class WarehouseDashboard extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -61,28 +64,92 @@ class WarehouseDashboard extends StatelessWidget {
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 4,
                         ),
-                    
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 4,
                         ),
+                        Wrap(
+                          children: [
+                            SizedBox(
+                              width: 250,
+                              child: _getRadialGauge(),
+                            ),
+                          ],
+                        ),
+                        if (!Responsive.isDesktop(context)) const ActivityList()
                       ],
                     ),
                   ),
                 )),
             if (Responsive.isDesktop(context))
-              SingleChildScrollView(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-                child: Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    const AppBarActionItems(),
-                  ],
+              Expanded(
+                flex: 4,
+                child: SafeArea(
+                  child: Container(
+                    width: double.infinity,
+                    height: SizeConfig.screenHeight,
+                    decoration:
+                        const BoxDecoration(color: AppColors.secondaryBg),
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 30, horizontal: 30),
+                      child: Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const AppBarActionItems(),
+                          const ActivityList(),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _getRadialGauge() {
+    return SfRadialGauge(
+        title: const GaugeTitle(
+            text: 'Stok doluluk oranı',
+            textStyle: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+        axes: <RadialAxis>[
+          RadialAxis(minimum: 0, maximum: 100, ranges: <GaugeRange>[
+            GaugeRange(
+                startValue: 0,
+                endValue: 25,
+                color: Colors.green,
+                startWidth: 10,
+                endWidth: 10),
+            GaugeRange(
+                startValue: 25,
+                endValue: 50,
+                color: Colors.orangeAccent,
+                startWidth: 10,
+                endWidth: 10),
+            GaugeRange(
+                startValue: 50,
+                endValue: 75,
+                color: Colors.orange,
+                startWidth: 10,
+                endWidth: 10),
+            GaugeRange(
+                startValue: 75,
+                endValue: 100,
+                color: Colors.red,
+                startWidth: 10,
+                endWidth: 10)
+          ], pointers: const <GaugePointer>[
+            NeedlePointer(value: 90)
+          ], annotations: const <GaugeAnnotation>[
+            GaugeAnnotation(
+                widget: Text('90.0',
+                    style:
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                angle: 90,
+                positionFactor: 0.5)
+          ])
+        ]);
   }
 }

@@ -7,9 +7,7 @@ import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'components/header.dart';
 import 'components/wh_category/add.dart';
-import 'components/wh_category/list.dart';
 import 'components/wh_supplier_category/add.dart';
-import 'components/wh_supplier_category/list.dart';
 
 class WhSettings extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -67,8 +65,14 @@ class WhSettings extends StatelessWidget {
                             OutlinedButton(
                               child: Column(
                                 children: const [
-                                  Text('Depo Kategori Ekle',style: TextStyle(fontSize: 20),),
-                                  Icon(Icons.branding_watermark,size: 32,),
+                                  Text(
+                                    'Depo Kategori Ekle',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Icon(
+                                    Icons.branding_watermark,
+                                    size: 32,
+                                  ),
                                 ],
                               ),
                               style: OutlinedButton.styleFrom(
@@ -87,8 +91,14 @@ class WhSettings extends StatelessWidget {
                             OutlinedButton(
                               child: Column(
                                 children: const [
-                                  Text('Tedarikçi Kategori Ekle',style: TextStyle(fontSize: 20),),
-                                  Icon(Icons.support_outlined,size: 32,),
+                                  Text(
+                                    'Tedarikçi Kategori Ekle',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Icon(
+                                    Icons.support_outlined,
+                                    size: 32,
+                                  ),
                                 ],
                               ),
                               style: OutlinedButton.styleFrom(
@@ -107,8 +117,9 @@ class WhSettings extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const WhCategoryList(),
-                        const WhSupplierCategoryList(),
+
+                        //     const WhCategoryList(),
+                        //   const WhSupplierCategoryList(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // ignore: prefer_const_literals_to_create_immutables

@@ -1,15 +1,18 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/app_bar_actions_items.dart';
 import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
+import 'components/expanded.dart';
 import 'components/header.dart';
-import 'components/supplier/list.dart';
-class WhSupplier extends StatelessWidget {
+
+class INV03 extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  WhSupplier({Key? key}) : super(key: key);
+  INV03({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -52,12 +55,17 @@ class WhSupplier extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const HeaderSupplier(),
+                        const HeaderStock(),
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,
                         ),
-                        
-                        const SupplierList(),
+                        Wrap(
+                          runSpacing: 50,
+                          spacing: 50,
+                          children: const [
+                            LokasyonCard(),
+                          ],
+                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // ignore: prefer_const_literals_to_create_immutables

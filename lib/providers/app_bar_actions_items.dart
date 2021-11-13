@@ -1,4 +1,3 @@
-
 import 'package:badges/badges.dart';
 // ignore: implementation_imports
 import 'package:easy_localization/src/public_ext.dart';
@@ -20,7 +19,6 @@ class AppBarActionItems extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-     
         _selectLanguage(context),
         IconButton(
           icon: SvgPicture.asset(
@@ -36,7 +34,11 @@ class AppBarActionItems extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Badge(
-          badgeContent:const Text('2',style: TextStyle(color: Colors.white),),animationType: BadgeAnimationType.scale,
+          badgeContent: const Text(
+            '2',
+            style: TextStyle(color: Colors.white),
+          ),
+          animationType: BadgeAnimationType.scale,
           child: IconButton(
               icon: SvgPicture.asset('lib/assets/svg/ring.svg', width: 20.0),
               onPressed: () {}),
@@ -56,7 +58,8 @@ class AppBarActionItems extends StatelessWidget {
       ],
     );
   }
-Widget _selectLanguage(BuildContext context) {
+
+  Widget _selectLanguage(BuildContext context) {
     return PopupMenuButton<int>(
       onSelected: (item) => onSelectedLanguage(context, item),
       itemBuilder: (context) => [
@@ -65,11 +68,11 @@ Widget _selectLanguage(BuildContext context) {
             child: Row(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                   Flag.fromCode(
-                FlagsCode.TR,
-                height: 25,
-                width: 25,
-              ),
+                Flag.fromCode(
+                  FlagsCode.TR,
+                  height: 25,
+                  width: 25,
+                ),
                 const SizedBox(
                   width: 5,
                 ),
@@ -82,11 +85,11 @@ Widget _selectLanguage(BuildContext context) {
             child: Row(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                  Flag.fromCode(
-                FlagsCode.US,
-                height: 25,
-                width: 25,
-              ),
+                Flag.fromCode(
+                  FlagsCode.US,
+                  height: 25,
+                  width: 25,
+                ),
                 const SizedBox(
                   width: 5,
                 ),
@@ -94,7 +97,7 @@ Widget _selectLanguage(BuildContext context) {
               ],
             )),
       ],
-      icon: const Icon(Icons.language,color:Colors.black),
+      icon: const Icon(Icons.language, color: Colors.black),
     );
   }
 
@@ -128,10 +131,14 @@ Widget _selectLanguage(BuildContext context) {
               ],
             )),
       ],
-      icon: const Icon(Icons.arrow_drop_down_outlined,color: Colors.black,),
+      icon: const Icon(
+        Icons.arrow_drop_down_outlined,
+        color: Colors.black,
+      ),
     );
   }
- void onSelectedLanguage(BuildContext context, int item) {
+
+  void onSelectedLanguage(BuildContext context, int item) {
     switch (item) {
       case 0:
         context.setLocale(AppConstant.TR_LOCALE);
@@ -142,6 +149,7 @@ Widget _selectLanguage(BuildContext context) {
       default:
     }
   }
+
   void onSelected(BuildContext context, int item) {
     switch (item) {
       case 0:

@@ -68,6 +68,9 @@ dependencies:
   http_parser: ^4.0.0
   auto_size_text: ^3.0.0
   syncfusion_flutter_calendar: ^19.3.48
+  syncfusion_flutter_gauges: ^19.3.53
+  expandable: ^5.0.1
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
