@@ -8,6 +8,7 @@ import 'package:fortextm/screens/customer_agent/dashboard/dashboard.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/screens/sp_company.dart';
 import 'package:fortextm/screens/supervisor_module/dashboard/dashboard.dart';
 import 'package:fortextm/screens/warehouse/dashboard/dashbaord.dart';
+import 'package:fortextm/screens/warehouse/locations/locations.dart';
 
 import 'core/config/constant.dart';
 import 'core/constants/colors.dart';
@@ -16,6 +17,7 @@ import 'screens/supervisor_module/emloyee_module/screens/sp_employee.dart';
 import 'screens/warehouse/settings/wh_settings.dart';
 import 'screens/warehouse/stock/stock.dart';
 import 'screens/warehouse/supplier/wh_supplier.dart';
+import 'screens/warehouse/undocumented/undocumented.dart';
 
 void main() async {
   await StorageUtil.getInstance();
@@ -43,22 +45,24 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       routes: {
-        '/': (context) =>  const Login(),
+        '/': (context) => const Login(),
         '/costumer': (context) => Costumer(),
         '/moduleDashboard': (context) => ModuleDashboard(),
         '/costumerDashboard': (context) => CostumerDashboard(),
 
         //Supervisor
         '/supervisorDashboard': (context) => SupervisorDashboard(),
-        '/spcompany':(context)=>SpCompany(),
-        '/spemployee':(context)=>SpEmployee(),
-        '/productDash':(context)=>CostumerProduction(),
+        '/spcompany': (context) => SpCompany(),
+        '/spemployee': (context) => SpEmployee(),
+        '/productDash': (context) => CostumerProduction(),
 
         //Warehouse,
-        '/warehouseDashboard':(context)=>WarehouseDashboard(),
-        '/whsettings':(context)=>WhSettings(),
-        '/whsupplier':(context)=>WhSupplier(),
-        '/inv03':(context)=>INV03(), //Stock
+        '/warehouseDashboard': (context) => WarehouseDashboard(),
+        '/whsettings': (context) => WhSettings(),
+        '/whsupplier': (context) => WhSupplier(),
+        '/inv03': (context) => INVStock(), //Stock
+        '/inv09': (context) => INVLocation(),
+        '/inv01':(context)=> INVUndocumented(),
       },
       theme: ThemeData(
           primarySwatch: Colors.blue,

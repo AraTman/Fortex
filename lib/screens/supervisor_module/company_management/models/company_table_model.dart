@@ -1,21 +1,3 @@
-// To parse this JSON data, do
-//
-//     final companytable = companytableFromJson(jsonString);
-
-// ignore: camel_case_types
-/*class modelCompanyTable {
-  String name;
-
-  modelCompanyTable({
-    required this.name,
-  });
-
-  factory modelCompanyTable.fromJson(Map<String, dynamic> json) {
-    return modelCompanyTable(
-      name: json["Name"],
-    );
-  }
-}*/
 
 // ignore: camel_case_types
 class modelCompanyTable {

@@ -23,7 +23,7 @@ class WarehouseDashboard extends StatelessWidget {
 
     return Scaffold(
       key: _drawerKey,
-      drawer: const SizedBox(width: 100, child: WarehouseSideMenu()),
+      drawer:  SizedBox(width: 100, child: WarehouseSideMenu(id: 0,)),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -47,9 +47,9 @@ class WarehouseDashboard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-              const Expanded(
+               Expanded(
                 flex: 1,
-                child: WarehouseSideMenu(),
+                child: WarehouseSideMenu(id: 0,),
               ),
             Expanded(
                 flex: 10,

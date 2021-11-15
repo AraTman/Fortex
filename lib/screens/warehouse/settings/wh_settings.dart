@@ -7,7 +7,9 @@ import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'components/header.dart';
 import 'components/wh_category/add.dart';
+import 'components/wh_category/list.dart';
 import 'components/wh_supplier_category/add.dart';
+import 'components/wh_supplier_category/list.dart';
 
 class WhSettings extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -17,7 +19,7 @@ class WhSettings extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       key: _drawerKey,
-      drawer: const SizedBox(width: 100, child: WarehouseSideMenu()),
+      drawer:  SizedBox(width: 100, child: WarehouseSideMenu(id: 8,)),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -41,9 +43,9 @@ class WhSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-              const Expanded(
+               Expanded(
                 flex: 1,
-                child: WarehouseSideMenu(),
+                child: WarehouseSideMenu(id: 8,),
               ),
             Expanded(
                 flex: 14,
@@ -118,13 +120,9 @@ class WhSettings extends StatelessWidget {
                           ],
                         ),
 
-                        //     const WhCategoryList(),
-                        //   const WhSupplierCategoryList(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [],
-                        ),
+                           const WhCategoryList(),
+                          const WhSupplierCategoryList(),
+                     
                       ],
                     ),
                   ),

@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
+import 'package:fortextm/core/models/menu.dart';
 import 'package:fortextm/providers/menu/components/module_return.dart';
 
+// ignore: must_be_immutable
 class WarehouseSideMenu extends StatefulWidget {
-  const WarehouseSideMenu({
-    final Key? key,
-  }) : super(key: key);
+  WarehouseSideMenu({final Key? key, required this.id}) : super(key: key);
+  late int id;
 
   @override
   State<WarehouseSideMenu> createState() => _WarehouseSideMenuState();
 }
 
 class _WarehouseSideMenuState extends State<WarehouseSideMenu> {
-  int value = 0;
+  late IdManager idManager;
+  @override
+  void initState() {
+    super.initState();
+    idManager = IdManager(id: widget.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,11 +37,15 @@ class _WarehouseSideMenuState extends State<WarehouseSideMenu> {
               const Divider(),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: AppColors.secondaryBg,
+                      primary: idManager.id == 0
+                          ? AppColors.mtred
+                          : AppColors.secondaryBg,
                       shadowColor: Colors.transparent),
                   onPressed: () {
                     Navigator.pushNamed(context, '/warehouseDashboard');
-                    setState(() {});
+                    setState(() {
+                      idManager.id = 0;
+                    });
                   },
                   child: Column(
                     children: const [
@@ -51,11 +62,15 @@ class _WarehouseSideMenuState extends State<WarehouseSideMenu> {
               const Divider(),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: AppColors.secondaryBg,
+                      primary: idManager.id == 1
+                          ? AppColors.mtred
+                          : AppColors.secondaryBg,
                       shadowColor: Colors.transparent),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/warehouseDashboard');
-                    setState(() {});
+                    Navigator.pushNamed(context, '/inv01');
+                    setState(() {
+                      idManager.id = 1;
+                    });
                   },
                   child: Column(
                     children: const [
@@ -72,11 +87,15 @@ class _WarehouseSideMenuState extends State<WarehouseSideMenu> {
               const Divider(),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: AppColors.secondaryBg,
+                      primary: idManager.id == 2
+                          ? AppColors.mtred
+                          : AppColors.secondaryBg,
                       shadowColor: Colors.transparent),
                   onPressed: () {
                     Navigator.pushNamed(context, '/inv03');
-                    setState(() {});
+                    setState(() {
+                      idManager.id = 2;
+                    });
                   },
                   child: Column(
                     children: const [
@@ -156,26 +175,26 @@ class _WarehouseSideMenuState extends State<WarehouseSideMenu> {
               const Divider(),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: AppColors.secondaryBg,
+                      primary:idManager.id==9 ? AppColors.mtred: AppColors.secondaryBg,
                       shadowColor: Colors.transparent),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/whsupplier');
+                    Navigator.pushNamed(context, '/inv09');
                     setState(() {});
                   },
                   child: Column(
                     children: const [
                       Icon(
-                        Icons.support,
+                        Icons.location_disabled,
                         color: AppColors.lgunder,
                       ),
                       Text(
-                        'Tedarikçi',
+                        'Lokasyon',
                         style: TextStyle(color: AppColors.lgunder),
                       )
                     ],
                   )),
               SizedBox(
-                height: SizeConfig.blockSizeHorizontal! * 22,
+                height: SizeConfig.blockSizeHorizontal! *22,
               ),
               const Divider(),
               ElevatedButton(

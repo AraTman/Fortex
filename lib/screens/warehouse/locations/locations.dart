@@ -6,18 +6,15 @@ import 'package:fortextm/providers/app_bar_actions_items.dart';
 import 'package:fortextm/providers/menu/components/header.dart';
 import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
 
-import 'widget/expanded.dart';
-
-// ignore: must_be_immutable
-class INVStock extends StatelessWidget {
+class INVLocation extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  INVStock({Key? key}) : super(key: key);
+  INVLocation({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
       key: _drawerKey,
-      drawer:  SizedBox(width: 100, child: WarehouseSideMenu(id: 2,)),
+      drawer:  SizedBox(width: 100, child: WarehouseSideMenu(id: 9,)),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -43,7 +40,7 @@ class INVStock extends StatelessWidget {
             if (Responsive.isDesktop(context))
                Expanded(
                 flex: 1,
-                child: WarehouseSideMenu(id: 2,),
+                child: WarehouseSideMenu(id: 9,),
               ),
             Expanded(
                 flex: 14,
@@ -54,22 +51,11 @@ class INVStock extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        HeaderProvider(baslik: 'Stok'),
+                         HeaderProvider(baslik: 'Lokasyonlar',),
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,
                         ),
-                        Wrap(
-                          runSpacing: 50,
-                          spacing: 50,
-                          children: const [
-                            LokasyonCard(),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [],
-                        ),
+                
                       ],
                     ),
                   ),
