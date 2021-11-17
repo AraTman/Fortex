@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/providers/future_extension.dart';
-import 'package:fortextm/providers/maindashboard/services/future_service.dart';
-import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
+import 'package:fortextm/core/services/future_service.dart';
+import 'package:fortextm/core/services/futures_service.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/department_list.dart';
 
 class DepartmentList extends StatefulWidget {

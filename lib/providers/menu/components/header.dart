@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/style.dart';
 // ignore: must_be_immutable
 class HeaderProvider extends StatefulWidget {
@@ -22,7 +23,7 @@ class _HeaderProviderState extends State<HeaderProvider> {
             children: [
               // ignore: prefer_const_constructors
               PrimaryText(
-                  text: widget.baslik, size: 30, fontWeight: FontWeight.w800),
+                  text: widget.baslik, size: SizeConfig.screenWidth!/17, fontWeight: FontWeight.w800),
             ]),
       ),
      

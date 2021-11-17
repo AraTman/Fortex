@@ -20,7 +20,6 @@ import 'screens/warehouse/supplier/wh_supplier.dart';
 import 'screens/warehouse/undocumented/undocumented.dart';
 
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await StorageUtil.getInstance();
   await EasyLocalization.ensureInitialized();
@@ -58,12 +57,14 @@ class MyApp extends StatelessWidget {
         '/productDash': (context) => CostumerProduction(),
 
         //Warehouse,
-        '/warehouseDashboard': (context) => WarehouseDashboard(),
+        '/wh0': (context) => WarehouseDashboard(),
         '/whsettings': (context) => WhSettings(),
-        '/whsupplier': (context) => WhSupplier(),
-        '/inv03': (context) => INVStock(), //Stock
-        '/inv09': (context) => INVLocation(),
-        '/inv01':(context)=> INVUndocumented(),
+        '/wh03': (context) => INVStock(), //Stock
+        '/wh09': (context) => INVLocation(),
+        '/wh01': (context) => INVUndocumented(),
+
+        //TestSupplier
+        '/testsupplier': (context) => TestSupplier(),
       },
       theme: ThemeData(
           primarySwatch: Colors.blue,

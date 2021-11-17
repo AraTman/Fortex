@@ -7,9 +7,9 @@ import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
 
 import 'components/header.dart';
 import 'components/supplier/list.dart';
-class WhSupplier extends StatelessWidget {
+class TestSupplier extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  WhSupplier({Key? key}) : super(key: key);
+  TestSupplier({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

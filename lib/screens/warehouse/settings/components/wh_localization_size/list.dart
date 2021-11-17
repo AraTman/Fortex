@@ -3,8 +3,8 @@ import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/providers/future_extension.dart';
 import 'package:fortextm/core/config/company_table_source.dart';
-import 'package:fortextm/providers/maindashboard/services/future_service.dart';
-import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
+import 'package:fortextm/core/services/future_service.dart';
+import 'package:fortextm/core/services/futures_service.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 

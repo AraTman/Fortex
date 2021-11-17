@@ -3,9 +3,10 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/app_bar_actions_items.dart';
+import 'package:fortextm/providers/menu/components/header.dart';
 import 'package:fortextm/providers/menu/supervisor/supervisor.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/components/company_table.dart';
-import 'package:fortextm/screens/supervisor_module/company_management/components/header.dart';
+import 'package:fortextm/screens/supervisor_module/company_management/components/company_add_button.dart';
 
 class SpCompany extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -52,8 +53,8 @@ class SpCompany extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const HeaderCompany(),
-                       
+                         HeaderProvider(baslik: 'Firma Bilgileri',),
+                       const CompanyAddButton(),
                     
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:fortextm/core/config/size_config.dart';
 
 class BarChartSample1 extends StatefulWidget {
   final List<Color> availableColors = const [
@@ -31,8 +30,7 @@ class BarChartSample1State extends State<BarChartSample1> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width:SizeConfig.screenWidth! / 2.85,
-      height: SizeConfig.screenHeight! / 2.55,
+    
       child: AspectRatio(
         aspectRatio: 1,
         child: Card(

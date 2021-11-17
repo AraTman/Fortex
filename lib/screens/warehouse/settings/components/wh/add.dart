@@ -6,7 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/providers/maindashboard/services/future_service.dart';
+import 'package:fortextm/core/services/future_service.dart';
 import 'package:fortextm/screens/warehouse/settings/wh_settings.dart';
 
 class WhAdd extends StatefulWidget {

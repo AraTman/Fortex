@@ -3,10 +3,11 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/app_bar_actions_items.dart';
+import 'package:fortextm/providers/menu/components/header.dart';
 import 'package:fortextm/providers/menu/supervisor/supervisor.dart';
+import 'package:fortextm/screens/supervisor_module/emloyee_module/components/employee_add_button.dart';
 
 import '../components/employee_table.dart';
-import '../components/header.dart';
 
 class SpEmployee extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -53,8 +54,8 @@ class SpEmployee extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const HeaderEmployee(),
-                       
+                         HeaderProvider(baslik: 'Personel Bilgileri',),
+                       const EmployeeAddButton(),
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,
                         ),

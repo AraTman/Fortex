@@ -2,8 +2,8 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/providers/future_extension.dart';
-import 'package:fortextm/providers/maindashboard/services/future_service.dart';
-import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
+import 'package:fortextm/core/services/future_service.dart';
+import 'package:fortextm/core/services/futures_service.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/media_type_list.dart';
 
 import 'image_pick.dart';

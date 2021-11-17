@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/providers/maindashboard/services/future_service.dart';
+import 'package:fortextm/core/services/future_service.dart';
 
 // ignore: must_be_immutable
 class ImagePicker extends StatefulWidget {

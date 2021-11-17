@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:fortextm/core/config/size_config.dart';
 
 class LineChartSample2 extends StatefulWidget {
   const LineChartSample2({Key? key}) : super(key: key);
@@ -19,8 +18,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(   width:SizeConfig.screenWidth! / 2.85,
-      height: SizeConfig.screenHeight! *4,
+    return SizedBox(
       child: Stack(
         children: <Widget>[
           AspectRatio(

@@ -11,7 +11,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/providers/maindashboard/services/future_service.dart';
+import 'package:fortextm/core/services/future_service.dart';
 
 import '../sp_company.dart';
 
@@ -166,7 +166,7 @@ class CompanyInsertState extends State<CompanyInsert>
                                       Row(
                                         children: [
                                           SizedBox(
-                                            width: 530,
+                                            width: SizeConfig.screenWidth! -130,
                                             child: FormBuilderTextField(
                                               name: 'CountryId',
                                               controller: countrys,

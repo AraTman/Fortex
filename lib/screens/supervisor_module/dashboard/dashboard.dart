@@ -5,10 +5,10 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/app_bar_actions_items.dart';
+import 'package:fortextm/providers/menu/components/header.dart';
 import 'package:fortextm/providers/menu/supervisor/supervisor.dart';
 import 'components/chart/bar_chart.dart';
 import 'components/chart/line_chart.dart';
-import 'components/header.dart';
 
 // ignore: must_be_immutable
 class SupervisorDashboard extends StatelessWidget {
@@ -59,7 +59,7 @@ class SupervisorDashboard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SupervisorHeader(),
+                         HeaderProvider(baslik: 'Dashboard',),
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 4,
                         ),

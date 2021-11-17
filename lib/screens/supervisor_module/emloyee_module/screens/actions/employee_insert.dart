@@ -4,7 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/providers/maindashboard/services/future_service.dart';
+import 'package:fortextm/core/services/future_service.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/components/department_list.dart';
 
 import '../sp_employee.dart';
