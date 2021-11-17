@@ -1,8 +1,8 @@
-
 import 'dart:convert';
 
-class PermissonModel {
-    PermissonModel({
+// ignore: camel_case_types
+class permissionModel {
+    permissionModel({
         required this.id,
         required this.userId,
         required this.permissions,
@@ -12,11 +12,11 @@ class PermissonModel {
     int userId;
     Permissions permissions;
 
-    factory PermissonModel.fromRawJson(String str) => PermissonModel.fromJson(json.decode(str));
+    factory permissionModel.fromRawJson(String str) => permissionModel.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());
 
-    factory PermissonModel.fromJson(Map<String, dynamic> json) => PermissonModel(
+    factory permissionModel.fromJson(Map<String, dynamic> json) => permissionModel(
         id: json["Id"],
         userId: json["UserId"],
         permissions: Permissions.fromJson(json["Permissions"]),
