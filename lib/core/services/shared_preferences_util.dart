@@ -30,4 +30,9 @@ class StorageUtil {
     if (_preferences == null) return null;
     return _preferences!.setString(key, value);
   }
+
+  static getClear() {
+   
+    return _preferences!.clear();
+  }
 }

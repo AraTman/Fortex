@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/providers/maindashboard/moduledashboard.dart';
-import 'package:fortextm/providers/maindashboard/services/shared_preferences_util.dart';
+import 'package:fortextm/core/services/shared_preferences_util.dart';
 import 'package:fortextm/screens/authentication/login/login.dart';
 import 'package:fortextm/screens/customer_agent/costumer/costumer.dart';
 import 'package:fortextm/screens/customer_agent/dashboard/dashboard.dart';

@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/providers/maindashboard/components/module_card.dart';
-import 'components/header.dart';
+import 'package:fortextm/providers/menu/components/header.dart';
+
+import '../../core/init/app_bar_actions_items.dart';
 
 // ignore: must_be_immutable
 class ModuleDashboard extends StatelessWidget {
@@ -16,31 +18,27 @@ class ModuleDashboard extends StatelessWidget {
     SizeConfig().init(context);
 
     return Scaffold(
-      body: SafeArea(
-        child: Row(
+        body: SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-                flex: 12,
-                child: SafeArea(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 30, horizontal: 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const ModuleHeader(),
-                        SizedBox(
-                          height: SizeConfig.blockSizeVertical! * 4,
-                        ),
-                         const ModuleWidget(),
-                      ],
-                    ),
-                  ),
-                )),
+            const SizedBox(child: AppBarActionItems()),
+            SizedBox(
+              height: SizeConfig.blockSizeVertical! * 4,
+            ),
+            Center(
+                child: HeaderProvider(
+              title: 'Moduls',
+            )),
+            SizedBox(
+              height: SizeConfig.blockSizeVertical! * 4,
+            ),
+            const ModuleWidget(),
           ],
         ),
       ),
-    );
+    ));
   }
 }

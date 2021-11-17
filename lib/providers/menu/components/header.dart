@@ -4,9 +4,9 @@ import 'package:fortextm/core/constants/style.dart';
 // ignore: must_be_immutable
 class HeaderProvider extends StatefulWidget {
    HeaderProvider({
-    final Key? key,required this.baslik
+    final Key? key,required this.title
   }) : super(key: key);
-late String baslik;
+late String title;
   @override
   State<HeaderProvider> createState() => _HeaderProviderState();
 }
@@ -23,7 +23,7 @@ class _HeaderProviderState extends State<HeaderProvider> {
             children: [
               // ignore: prefer_const_constructors
               PrimaryText(
-                  text: widget.baslik, size: SizeConfig.screenWidth!/17, fontWeight: FontWeight.w800),
+                  text: widget.title, size: SizeConfig.screenWidth!/17, fontWeight: FontWeight.w800),
             ]),
       ),
      

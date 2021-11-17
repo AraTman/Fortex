@@ -4,11 +4,12 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fortextm/core/services/shared_preferences_util.dart';
 import 'package:fortextm/screens/authentication/login/login.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../core/config/constant.dart';
-import '../screens/customer_agent/dashboard/components/calender.dart';
+import '../config/constant.dart';
+import '../../screens/customer_agent/dashboard/components/calender.dart';
 
 class AppBarActionItems extends StatelessWidget {
   const AppBarActionItems({
@@ -127,7 +128,7 @@ class AppBarActionItems extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                const Text("Çıkış")
+                const Text('Çıkış')
               ],
             )),
       ],
@@ -159,6 +160,7 @@ class AppBarActionItems extends StatelessWidget {
       case 1:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const Login()));
+        StorageUtil.getClear();
         break;
       default:
     }

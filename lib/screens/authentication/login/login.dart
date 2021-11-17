@@ -3,44 +3,44 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:fortextm/core/constants/colors.dart';
+import 'package:fortextm/core/init/loading.dart';
 import 'package:fortextm/providers/maindashboard/moduledashboard.dart';
-import 'package:fortextm/providers/maindashboard/services/shared_preferences_util.dart';
+import 'package:fortextm/core/services/shared_preferences_util.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   Duration get loginTime => const Duration(milliseconds: 2250);
-
-  Future<String> _authUser(LoginData data) async {
-    Map datas = {
-      'grant_type': 'password',
-      'username': data.name,
-      'password': data.password
-    };
-    // ignore: prefer_typing_uninitialized_variables
-    var jsonResponse;
-    var url = 'https://app.portalofarge.com/api/login';
-    var response = await http.post(Uri.parse(url),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: datas);
-
-    return Future.delayed(loginTime).then((_) {
-      if (response.statusCode == 200) {
-        jsonResponse = json.decode(response.body);
-          StorageUtil.putString("token", jsonResponse['access_token']);
-     
-      } else {
-        return 'User not exists';
-      }
+ String token=StorageUtil.getString('token');
+   late  bool _isLoading=true;
+  @override
+  void initState() {
+    super.initState();
     
-      return '';
-    });
-    // ignore: avoid_print
+    if (token != "") {
+      setState(() {
+      _isLoading=true;
+      
+      });
+      String username=StorageUtil.getString('username');
+      String password=StorageUtil.getString('password');
+       _DenemeauthUser(username,password);
+    } else {
+      
+        _isLoading=false;
+      
+    }
+   
   }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class Login extends StatelessWidget {
       bottom: Radius.circular(10.0),
       top: Radius.circular(20.0),
     );
-    return FlutterLogin(
+    return _isLoading? const LoadingLottie() : FlutterLogin(
       onLogin: _authUser,logo: 'lib/assets/images/fortex_logo.png',footer:'BRC Tekstil - Forbigs Ortaklığı' ,
       onSignup: (_) => Future(() => null),
       hideForgotPasswordButton: true,
@@ -139,5 +139,68 @@ class Login extends StatelessWidget {
         ),footerBackgroundColor: Colors.black,footerTextStyle:const TextStyle(fontSize: 15),
       ),
     );
+  }
+   Future<String> _authUser(LoginData data) async {
+    Map datas = {
+      'grant_type': 'password',
+      'username': data.name,
+      'password': data.password
+    };
+    // ignore: prefer_typing_uninitialized_variables
+    var jsonResponse;
+    var url = 'https://app.portalofarge.com/api/login';
+    var response = await http.post(Uri.parse(url),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: datas);
+
+    return Future.delayed(loginTime).then((_) {
+      if (response.statusCode == 200) {
+        jsonResponse = json.decode(response.body);
+          StorageUtil.putString("token", jsonResponse['access_token']);
+      StorageUtil.putString("username", data.name);
+       StorageUtil.putString("password", data.password);
+      } else {
+        return 'User not exists';
+      }
+    
+      return '';
+    });
+    // ignore: avoid_print
+  }
+ 
+  Future<String> _DenemeauthUser(String username,password) async {
+    Map datas = {
+      'grant_type': 'password',
+      'username': username,
+      'password': password
+    };
+    // ignore: prefer_typing_uninitialized_variables
+    var jsonResponse;
+    var url = 'https://app.portalofarge.com/api/login';
+    var response = await http.post(Uri.parse(url),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: datas);
+
+    return Future.delayed(loginTime).then((_) {
+      if (response.statusCode == 200) {
+         Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => ModuleDashboard()),
+  );
+     
+      } else {
+        
+        return 'User not exists';
+      }
+    
+      return '';
+    });
+    // ignore: avoid_print
   }
 }

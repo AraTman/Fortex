@@ -4,17 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/providers/app_bar_actions_items.dart';
+import 'package:fortextm/core/init/app_bar_actions_items.dart';
+import 'package:fortextm/core/models/menu.dart';
 import 'package:fortextm/providers/menu/components/header.dart';
+import 'package:fortextm/providers/menu/menu.dart';
 import 'package:fortextm/providers/menu/supervisor/supervisor.dart';
 import 'components/chart/bar_chart.dart';
 import 'components/chart/line_chart.dart';
 
 // ignore: must_be_immutable
-class SupervisorDashboard extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-
+class SupervisorDashboard extends StatefulWidget {
   SupervisorDashboard({Key? key}) : super(key: key);
+  
+  @override
+  State<SupervisorDashboard> createState() => _SupervisorDashboardState();
+}
+
+class _SupervisorDashboardState extends State<SupervisorDashboard> {
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+   int id=2;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +36,11 @@ class SupervisorDashboard extends StatelessWidget {
 
     return Scaffold(
       key: _drawerKey,
-      drawer: const SizedBox(width: 100, child: SupervisorSideMenu()),
+      drawer: SizedBox(
+          width: 100,
+          child: SideMenu(
+            id: id,
+          )),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -46,9 +64,11 @@ class SupervisorDashboard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-              const Expanded(
+              Expanded(
                 flex: 1,
-                child: SupervisorSideMenu(),
+                child: SideMenu(
+                  id: id,
+                ),
               ),
             Expanded(
                 flex: 10,
@@ -59,7 +79,9 @@ class SupervisorDashboard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         HeaderProvider(baslik: 'Dashboard',),
+                        HeaderProvider(
+                          title: 'Dashboards',
+                        ),
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 4,
                         ),

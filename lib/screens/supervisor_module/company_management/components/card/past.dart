@@ -1,7 +1,7 @@
 import 'package:bs_flutter_card/bs_flutter_card.dart';
 import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
 import 'package:flutter/material.dart';
-import 'package:fortextm/providers/future_extension.dart';
+import 'package:fortextm/core/services/future_extension.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/core/config/company_table_source.dart';
 import 'package:fortextm/core/services/future_service.dart';

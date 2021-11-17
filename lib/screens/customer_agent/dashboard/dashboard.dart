@@ -8,7 +8,7 @@ import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/core/extensions/localekeys.dart';
 import 'package:fortextm/providers/menu/costumer_agent/side_menu.dart';
 
-import '../../../providers/app_bar_actions_items.dart';
+import '../../../core/init/app_bar_actions_items.dart';
 import 'components/cardcostumeragent.dart';
 import 'components/header.dart';
 import 'components/real_table.dart';
