@@ -5,33 +5,25 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/init/app_bar_actions_items.dart';
-import 'package:fortextm/core/models/menu.dart';
 import 'package:fortextm/providers/menu/components/header.dart';
 import 'package:fortextm/providers/menu/menu.dart';
-import 'package:fortextm/providers/menu/supervisor/supervisor.dart';
 import 'components/chart/bar_chart.dart';
 import 'components/chart/line_chart.dart';
 
 // ignore: must_be_immutable
 class SupervisorDashboard extends StatefulWidget {
-  SupervisorDashboard({Key? key}) : super(key: key);
+  const SupervisorDashboard({Key? key}) : super(key: key);
   
   @override
-  State<SupervisorDashboard> createState() => _SupervisorDashboardState();
+  _SupervisorDashboardState createState() => _SupervisorDashboardState();
 }
 
 class _SupervisorDashboardState extends State<SupervisorDashboard> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-   int id=2;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    
-  }
-
+   
   @override
   Widget build(BuildContext context) {
+    final Map list = ModalRoute.of(context)?.settings.arguments as Map;
     SizeConfig().init(context);
 
     return Scaffold(
@@ -39,7 +31,7 @@ class _SupervisorDashboardState extends State<SupervisorDashboard> {
       drawer: SizedBox(
           width: 100,
           child: SideMenu(
-            id: id,
+            code: list['code'],
           )),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
@@ -67,7 +59,7 @@ class _SupervisorDashboardState extends State<SupervisorDashboard> {
               Expanded(
                 flex: 1,
                 child: SideMenu(
-                  id: id,
+                  code: list['code'],
                 ),
               ),
             Expanded(
@@ -116,3 +108,4 @@ class _SupervisorDashboardState extends State<SupervisorDashboard> {
     );
   }
 }
+

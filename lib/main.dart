@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+      
       routes: {
         '/': (context) => const Login(),
         '/costumer': (context) => Costumer(),
@@ -51,8 +52,8 @@ class MyApp extends StatelessWidget {
         '/costumerDashboard': (context) => CostumerDashboard(),
 
         //Supervisor
-        '/supervisorDashboard': (context) => SupervisorDashboard(),
-        '/spcompany': (context) => SpCompany(),
+        '/supervisorDashboard': (context) => const SupervisorDashboard(),
+        '/spCompany': (context) => SpCompany(),
         '/spemployee': (context) => SpEmployee(),
         '/productDash': (context) => CostumerProduction(),
 

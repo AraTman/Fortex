@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/providers/menu/costumer_agent/side_menu.dart';
 import 'package:fortextm/core/init/app_bar_actions_items.dart';
+import 'package:fortextm/providers/menu/menu.dart';
 
 import 'components/header.dart';
 
@@ -12,10 +12,11 @@ class Costumer extends StatelessWidget {
   Costumer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+     final Map list = ModalRoute.of(context)?.settings.arguments as Map;
     SizeConfig().init(context);
     return Scaffold(
       key: _drawerKey,
-      drawer: const SizedBox(width: 100, child: CostumerSideMenu()),
+      drawer:  SizedBox(width: 100, child: SideMenu(code: list['code'],)),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -39,9 +40,9 @@ class Costumer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-              const Expanded(
+               Expanded(
                 flex: 1,
-                child: CostumerSideMenu(),
+                child: SideMenu(code: list['code']),
                 
               ),
               

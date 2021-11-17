@@ -5,11 +5,12 @@ import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/services/future_extension.dart';
 import 'package:fortextm/core/services/future_service.dart';
 import 'package:fortextm/core/services/futures_service.dart';
-import 'package:fortextm/providers/menu/models/permissonModel.dart';
+import 'package:fortextm/providers/menu/models/permissonmodel.dart';
 
+// ignore: must_be_immutable
 class MenuListWidget extends StatefulWidget {
-   MenuListWidget({Key? key,required this.id}) : super(key: key);
-late var id;
+  MenuListWidget({Key? key, required this.id}) : super(key: key);
+  late String id;
   @override
   _MenuListWidgetState createState() => _MenuListWidgetState();
 }
@@ -20,44 +21,40 @@ class _MenuListWidgetState extends State<MenuListWidget>
   bool isLoading = false;
 
   late IFutureService futureService;
-  late Future<List<PermissonModel>> httpCompany;
+  late Future<List<permissionModel>> httpCompany;
 
   @override
   void initState() {
     super.initState();
     futureService = FutureService();
-    httpCompany = futureService.getHttpPermisson(welPath,widget.id);
+    httpCompany = futureService.getHttpPermission(welPath, widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return httpCompany.toBuild<List<PermissonModel>>(onSucces: (datas) {
+    return httpCompany.toBuild<List<permissionModel>>(onSucces: (datas) {
       return Wrap(
         runSpacing: 15,
         spacing: 15,
         children: datas
             .map((item) => (() {
-                  int color = int.parse(item.permissions.icon);
-                  return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: AppColors.mtred,
-                          shadowColor: Colors.transparent),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/warehouseDashboard');
-                      },
-                      child: Column(
-                        children: const [
-                          Icon(
-                            Icons.dashboard_customize,
-                            color: AppColors.lgunder,
-                          ),
-                          Text(
-                            'Anasayfa',
-                            style: TextStyle(color: AppColors.lgunder),
-                          ),
-                        ],
-                      ));
+                  return ListTile(
+                    title: Column(
+                      children: [
+                        const Icon(Icons.code),
+                        Text(
+                          item.permissions.name,
+                          style: const TextStyle(color: AppColors.lgunder),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/${item.permissions.url}', arguments: <String, String>{
+                            'code': widget.id
+                          },);
+                    },selectedColor: Colors.red,
+                  );
                 }()))
             .toList()
             .cast<Widget>(),

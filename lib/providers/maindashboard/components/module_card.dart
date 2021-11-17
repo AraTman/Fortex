@@ -2,11 +2,9 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
-import 'package:fortextm/core/models/menu.dart';
 import 'package:fortextm/core/services/future_extension.dart';
 import 'package:fortextm/core/services/future_service.dart';
 import 'package:fortextm/core/services/futures_service.dart';
-import 'package:fortextm/providers/menu/models/permissonModel.dart';
 import 'package:fortextm/screens/customer_agent/dashboard/components/info_card.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/departmans.dart';
 
@@ -41,15 +39,21 @@ class _ModuleWidgetState extends State<ModuleWidget>
         spacing: 15,
         children: datas
             .map((item) => (() {
-              int color = int.parse(item.department.color);
-                  return SizedBox(width: SizeConfig.screenWidth,
+                  int color = int.parse(item.department.color);
+                  return SizedBox(
+                    width: SizeConfig.screenWidth,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,
                           shadowColor: Colors.transparent),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/${item.department.routes}',arguments: IdManager(id: item.id),);
-                      
+                        Navigator.pushNamed(
+                          context,
+                          '/${item.department.routes}',
+                          arguments: <String, String>{
+                            'code': item.department.code.toString()
+                          },
+                        );
                       },
                       child: InfoCard(
                           border: Color(color),

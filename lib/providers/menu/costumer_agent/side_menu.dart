@@ -3,8 +3,8 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/providers/menu/components/module_return.dart';
 
-class CostumerSideMenu extends StatelessWidget {
-  const CostumerSideMenu({
+class CostumerSideMenur extends StatelessWidget {
+  const CostumerSideMenur({
     final Key? key,
   }) : super(key: key);
 

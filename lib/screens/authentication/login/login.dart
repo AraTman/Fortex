@@ -7,7 +7,6 @@ import 'package:fortextm/core/init/loading.dart';
 import 'package:fortextm/providers/maindashboard/moduledashboard.dart';
 import 'package:fortextm/core/services/shared_preferences_util.dart';
 import 'package:http/http.dart' as http;
-import 'package:lottie/lottie.dart';
 
 
 class Login extends StatefulWidget {
@@ -171,6 +170,7 @@ class _LoginState extends State<Login> {
     // ignore: avoid_print
   }
  
+  // ignore: non_constant_identifier_names
   Future<String> _DenemeauthUser(String username,password) async {
     Map datas = {
       'grant_type': 'password',
@@ -178,7 +178,6 @@ class _LoginState extends State<Login> {
       'password': password
     };
     // ignore: prefer_typing_uninitialized_variables
-    var jsonResponse;
     var url = 'https://app.portalofarge.com/api/login';
     var response = await http.post(Uri.parse(url),
         headers: {

@@ -6,7 +6,7 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/core/extensions/localekeys.dart';
-import 'package:fortextm/providers/menu/costumer_agent/side_menu.dart';
+import 'package:fortextm/providers/menu/menu.dart';
 
 import '../../../core/init/app_bar_actions_items.dart';
 import 'components/card.dart';
@@ -21,10 +21,10 @@ class CostumerProduction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
+final Map list = ModalRoute.of(context)?.settings.arguments as Map;
     return Scaffold(
       key: _drawerKey,
-      drawer: const SizedBox(width: 100, child: CostumerSideMenu()),
+      drawer:  SizedBox(width: 100, child: SideMenu(code: list['code'],)),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -48,9 +48,9 @@ class CostumerProduction extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-              const Expanded(
+               Expanded(
                 flex: 1,
-                child: CostumerSideMenu(),
+                child: SideMenu(code: list['code'],),
               ),
             Expanded(
                 flex: 10,

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/core/models/menu.dart';
 import 'package:fortextm/providers/menu/components/module_return.dart';
 
 import 'components/menu_list.dart';
 
 // ignore: must_be_immutable
 class SideMenu extends StatefulWidget {
-  SideMenu({final Key? key, required this.id}) : super(key: key);
-  late int id;
+  SideMenu({final Key? key, required this.code}) : super(key: key);
+  late String code;
 
   @override
   State<SideMenu> createState() => _SideMenuState();
 }
 
 class _SideMenuState extends State<SideMenu> {
+  // ignore: prefer_typing_uninitialized_variables
   
   @override
   void initState() {
     super.initState();
-    
   }
 
   @override
@@ -38,7 +37,7 @@ class _SideMenuState extends State<SideMenu> {
             children: [
               const ModuleReturn(),
               const Divider(),
-               MenuListWidget(id: widget.id,),
+               MenuListWidget(id:widget.code),
               SizedBox(
                 height: SizeConfig.blockSizeHorizontal! * 22,
               ),

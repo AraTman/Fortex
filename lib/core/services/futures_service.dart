@@ -1,4 +1,4 @@
-import 'package:fortextm/providers/menu/models/permissonModel.dart';
+import 'package:fortextm/providers/menu/models/permissonmodel.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/official_list.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/subsidiary_list.dart';
@@ -22,7 +22,7 @@ abstract class IFutureService {
   Future<List<OfficialList>> getHttpOfficialList(String url, int id);
   Future<List<DepartmentLists>> getHttpDepartmentLists(String url);
   Future<List<MediaTypeList>> getHttpMediaTypeLists(String url);
-  Future<List<PermissonModel>> getHttpPermisson(String url,int id);
+  Future<List<permissionModel>> getHttpPermission(String url,String code);
 
   //Warehouse
   Future<List<WhCategoryLists>> getHttpWhCategoryLists(String url);

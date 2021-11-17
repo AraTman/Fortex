@@ -4,7 +4,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/services/shared_preferences_util.dart';
-import 'package:fortextm/providers/menu/models/permissonModel.dart';
+import 'package:fortextm/providers/menu/models/permissonmodel.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/error_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/official_list.dart';
@@ -60,15 +60,15 @@ class FutureService extends IFutureService {
     }
   }
     @override
-  Future<List<PermissonModel>> getHttpPermisson(String url, int id) async {
+  Future<List<permissionModel>> getHttpPermission(String url, String code) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     String urls = _baseUrl + url;
-    final response = await dio.get(urls, queryParameters: {"companyId": id});
+    final response = await dio.get(urls, queryParameters: {"code": code});
     switch (response.statusCode) {
       case HttpStatus.ok:
         var data = response.data;
         if (data is List) {
-          return data.map((e) => PermissonModel.fromJson(e)).toList();
+          return data.map((e) => permissionModel.fromJson(e)).toList();
         } else {
           throw data;
         }
