@@ -1,6 +1,7 @@
 // ignore: implementation_imports, unused_import
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/providers/future_extension.dart';
 import 'package:fortextm/providers/maindashboard/services/future_service.dart';
 import 'package:fortextm/providers/maindashboard/services/futures_service.dart';
@@ -34,21 +35,25 @@ class _ModuleWidgetState extends State<ModuleWidget>
     super.build(context);
     return httpCompany.toBuild<List<Departmans>>(onSucces: (datas) {
       return Wrap(
+        runSpacing: 15,
+        spacing: 15,
         children: datas
             .map((item) => (() {
               int color = int.parse(item.department.color);
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        shadowColor: Colors.transparent),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/${item.department.routes}');
-                    },
-                    child: InfoCard(
-                        border: Color(color),
-                        icon: 'lib/assets/images/${item.department.image}',
-                        label: item.department.name,
-                        amount: ''),
+                  return SizedBox(width: SizeConfig.screenWidth,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.transparent,
+                          shadowColor: Colors.transparent),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/${item.department.routes}');
+                      },
+                      child: InfoCard(
+                          border: Color(color),
+                          icon: 'lib/assets/images/${item.department.image}',
+                          label: item.department.name,
+                          amount: ''),
+                    ),
                   );
                 }()))
             .toList()

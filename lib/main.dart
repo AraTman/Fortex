@@ -20,8 +20,9 @@ import 'screens/warehouse/supplier/wh_supplier.dart';
 import 'screens/warehouse/undocumented/undocumented.dart';
 
 void main() async {
-  await StorageUtil.getInstance();
+  
   WidgetsFlutterBinding.ensureInitialized();
+  await StorageUtil.getInstance();
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(

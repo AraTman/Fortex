@@ -20,7 +20,7 @@ class Login extends StatelessWidget {
     };
     // ignore: prefer_typing_uninitialized_variables
     var jsonResponse;
-    var url = 'https://localhost:44372/api/login';
+    var url = 'https://app.portalofarge.com/api/login';
     var response = await http.post(Uri.parse(url),
         headers: {
           'Accept': 'application/json',

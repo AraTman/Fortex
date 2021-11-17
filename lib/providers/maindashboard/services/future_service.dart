@@ -25,7 +25,7 @@ import 'futures_service.dart';
 class FutureService extends IFutureService {
   var token = StorageUtil.getString("token");
   final dio = Dio();
-  final _baseUrl = "https://localhost:44372/api/";
+  final _baseUrl = "https://app.portalofarge.com/api/";
   dynamic _getDioRequest(String path) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     final response = await dio.get(_baseUrl + path);
