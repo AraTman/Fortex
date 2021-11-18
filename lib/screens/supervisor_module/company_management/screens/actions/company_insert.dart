@@ -28,6 +28,7 @@ class CompanyInsertState extends State<CompanyInsert>
 
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final url = "company/add";
+  final imgUrl="company/media/add";
   // ignore: unused_field
   String? _fileName;
   List<PlatformFile>? _paths;
@@ -165,7 +166,7 @@ class CompanyInsertState extends State<CompanyInsert>
                                           SizedBox(
                                             width: SizeConfig.screenWidth! -130,
                                             child: FormBuilderTextField(
-                                              name: 'CountryId',
+                                              name: 'Country',
                                               controller: countrys,
                                               readOnly: true,
                                               decoration: const InputDecoration(
@@ -412,7 +413,7 @@ class CompanyInsertState extends State<CompanyInsert>
             futureService = FutureService();
             if (_formKey.currentState!.validate()) {
              futureService.postCompany(
-                _formKey.currentState!.value, url, _paths,context,'/sp1',code);
+                _formKey.currentState!.value, url, _paths,context,'/sp1',code,imgUrl,1);
             } else {
               print("validation failed");
             }

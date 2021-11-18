@@ -7,8 +7,9 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'actions/company_sub_insert.dart';
 
 class CompanyProfile extends StatefulWidget {
-  const CompanyProfile({Key? key, required this.id}) : super(key: key);
+  const CompanyProfile({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   CompanyProfileState createState() => CompanyProfileState();
 }
@@ -40,7 +41,7 @@ class CompanyProfileState extends State<CompanyProfile>
                        onPressed: () => showCupertinoModalBottomSheet(
                          isDismissible: false,
                          context: context,
-                         builder: (context) =>  CompanySubInsert(id: widget.id),
+                         builder: (context) =>  CompanySubInsert(id: widget.id,code: widget.code,),
                        ),
                      )
               ],

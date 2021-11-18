@@ -61,8 +61,10 @@ class FutureService extends IFutureService {
       throw response;
     }
   }
-    @override
-  Future<List<permissionModel>> getHttpPermission(String url, String code) async {
+
+  @override
+  Future<List<permissionModel>> getHttpPermission(
+      String url, String code) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"code": code});
@@ -388,7 +390,8 @@ class FutureService extends IFutureService {
   }
 
   //Post
-  dynamic postCompany(var data, String paths, var file,BuildContext context,String location,String code) async {
+  dynamic postCompany(var data, String paths, var file, BuildContext context,
+      String location, String code, String imgUrl, int postNum) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
       Response response = await dio.post(
@@ -403,75 +406,56 @@ class FutureService extends IFutureService {
       final datas = response.data;
       if (response.statusCode == 200) {
         // ignore: prefer_typing_uninitialized_variables
-        var deger;
-        datas.forEach((key, value) {
-          deger = value;
-        });
-       if (file != null) {
-          final path = file!.map((e) => e.path).toList()[0].toString();
-        final dger = File(path);
-        final String _fileName =
-            file != null ? file!.map((e) => e.name).toString() : '...';
-        final FormData formData = FormData.fromMap({
-          "CompanyId": deger,
-          "Media": await MultipartFile.fromFile(dger.path,
-              filename: _fileName.replaceAll('(', '').replaceAll(')', ''),
-              contentType: MediaType('image', 'png'),),
-        });
-        final urls = "${_baseUrl}company/media/add";
-        response = await dio.post(urls, data: formData);
-        return _succesMessage(context, location,code);
-       } else {
-          return _warningMessage(context, 'Firma Görünümü Seçmediniz!');
-       }
-       
-      } else {
-        return response.statusCode;
-      }
-    } on DioError catch (e) {
-      // ignore: avoid_print
-      return e.error;
-    }
-  }
 
-  dynamic postSubsidiry(var data, String paths, var file, int id) async {
-    try {
-      dio.options.headers["Authorization"] = "Bearer $token";
-
-      Response response = await dio.post(
-        _baseUrl + paths,
-        data: data,
-        options: Options(
-          followRedirects: false,
-          // will not throw errors
-          validateStatus: (status) => true,
-        ),
-      );
-      final datas = response.data;
-      if (response.statusCode == 200) {
-        // ignore: prefer_typing_uninitialized_variables
         var deger;
         datas.forEach((key, value) {
           deger = value;
         });
         if (file != null) {
           final path = file!.map((e) => e.path).toList()[0].toString();
-          final dger = File(path);
+          final _path = File(path);
           final String _fileName =
               file != null ? file!.map((e) => e.name).toString() : '...';
-          final FormData formData = FormData.fromMap({
-            "CompanyId": deger,
-            "Media": await MultipartFile.fromFile(dger.path,
-                filename: _fileName, contentType: MediaType('image', 'png'),),
-          });
-          final urls = "${_baseUrl}company/subsidiary/media/add";
-          response = await dio.post(
-            urls,
-            data: formData,
-          );
-        }
+          final String _extension =
+              file != null ? file!.map((e) => e.extension).toString() : '...';
+          final String fileTyp =
+              _extension.replaceAll('(', '').replaceAll(')', '');
+          String filesfType;
+          if (fileTyp == "pdf" ||
+              fileTyp == "docx" ||
+              fileTyp == "xlsx" ||
+              fileTyp == "xls") {
+            filesfType = "document";
+          } else {
+            filesfType = "image";
+          }
+          final FormData formData;
+          if (postNum == 1) {
+            formData = FormData.fromMap({
+              "CompanyId": deger,
+              "Media": await MultipartFile.fromFile(
+                _path.path,
+                filename: _fileName.replaceAll('(', '').replaceAll(')', ''),
+                contentType: MediaType(filesfType, fileTyp),
+              ),
+            });
+          } else {
+            formData = FormData.fromMap({
+              "CompanySubsidiaryId": deger,
+              "Media": await MultipartFile.fromFile(
+                _path.path,
+                filename: _fileName.replaceAll('(', '').replaceAll(')', ''),
+                contentType: MediaType(filesfType, fileTyp),
+              ),
+            });
+          }
 
-        return response.statusCode;
+          final urls = "${_baseUrl + imgUrl}";
+          response = await dio.post(urls, data: formData);
+          return _succesMessage(context, location, code);
+        } else {
+          return _warningMessage(context, 'Firma Görünümü Seçmediniz!');
+        }
       } else {
         return response.statusCode;
       }
@@ -483,7 +467,11 @@ class FutureService extends IFutureService {
 
   dynamic postImage(
       // ignore: type_annotate_public_apis
-      var file, int id, String url, int employeeId, String fileType) async {
+      var file,
+      int id,
+      String url,
+      int employeeId,
+      String fileType) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
       if (file != null) {
@@ -504,9 +492,11 @@ class FutureService extends IFutureService {
         final FormData formData = FormData.fromMap({
           "MediaTypeId": id,
           "EmployeeId": employeeId,
-          "Media": await MultipartFile.fromFile(dger.path,
-              filename: _fileName.replaceAll('(', '').replaceAll(')', ''),
-              contentType: MediaType(filesfType, fileTyp),),
+          "Media": await MultipartFile.fromFile(
+            dger.path,
+            filename: _fileName.replaceAll('(', '').replaceAll(')', ''),
+            contentType: MediaType(filesfType, fileTyp),
+          ),
         });
         final urls = _baseUrl + url;
         await dio.post(
@@ -525,7 +515,11 @@ class FutureService extends IFutureService {
   /* post Warehouse */
   dynamic postAll(
       // ignore: type_annotate_public_apis
-      var data, String paths, BuildContext context, String location,String code) async {
+      var data,
+      String paths,
+      BuildContext context,
+      String location,
+      String code) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
 
@@ -538,76 +532,75 @@ class FutureService extends IFutureService {
       );
       if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously
-        return _succesMessage(context, location,code);
+        return _succesMessage(context, location, code);
       } else {
         // ignore: use_build_context_synchronously
-        return _errorMessage(context, location, "",code);
+        return _errorMessage(context, location, "", code);
       }
     } on DioError catch (e) {
       // ignore: avoid_print
-      return _errorMessage(context, location, e.error as String,code);
+      return _errorMessage(context, location, e.error as String, code);
     }
   }
 
-  AwesomeDialog _succesMessage(BuildContext context, String location,String code) {
-    
+  AwesomeDialog _succesMessage(
+      BuildContext context, String location, String code) {
     return AwesomeDialog(
-        context: context,
-        width: 300,
-        animType: AnimType.LEFTSLIDE,
-        headerAnimationLoop: false,
-        dialogType: DialogType.SUCCES,
-        showCloseIcon: true,
-        title: 'Başarılı',
-        desc: 'İşlem başarılı',
-        btnOkOnPress: () {
-         Navigator.pushNamed(context, location,arguments:<String, String>{'code':code});
-        },
-        btnOkIcon: Icons.check_circle,
-        onDissmissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        },)
-      ..show();
+      context: context,
+      width: 300,
+      animType: AnimType.LEFTSLIDE,
+      headerAnimationLoop: false,
+      dialogType: DialogType.SUCCES,
+      showCloseIcon: true,
+      title: 'Başarılı',
+      desc: 'İşlem başarılı',
+      btnOkOnPress: () {
+        Navigator.pushNamed(context, location,
+            arguments: <String, String>{'code': code});
+      },
+      btnOkIcon: Icons.check_circle,
+      onDissmissCallback: (type) {
+        debugPrint('Dialog Dissmiss from callback $type');
+      },
+    )..show();
   }
 
   AwesomeDialog _errorMessage(
-      BuildContext context, String location, String message,String code) {
-      
+      BuildContext context, String location, String message, String code) {
     return AwesomeDialog(
-        context: context,
-        width: 300,
-        animType: AnimType.LEFTSLIDE,
-        headerAnimationLoop: false,
-        dialogType: DialogType.ERROR,
-        showCloseIcon: true,
-        title: 'Hata',
-        desc: 'İşlem Başarısız$message',
-        btnOkOnPress: () {
-          Navigator.pushNamed(context, location,arguments:<String, String>{'code':code});
-        },
-        btnOkIcon: Icons.check_circle,
-        onDissmissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        },)
-      ..show();
+      context: context,
+      width: 300,
+      animType: AnimType.LEFTSLIDE,
+      headerAnimationLoop: false,
+      dialogType: DialogType.ERROR,
+      showCloseIcon: true,
+      title: 'Hata',
+      desc: 'İşlem Başarısız$message',
+      btnOkOnPress: () {
+        Navigator.pushNamed(context, location,
+            arguments: <String, String>{'code': code});
+      },
+      btnOkIcon: Icons.check_circle,
+      onDissmissCallback: (type) {
+        debugPrint('Dialog Dissmiss from callback $type');
+      },
+    )..show();
   }
- AwesomeDialog _warningMessage(
-      BuildContext context, String message) {
-      
+
+  AwesomeDialog _warningMessage(BuildContext context, String message) {
     return AwesomeDialog(
-        context: context,
-        width: 300,
-        animType: AnimType.LEFTSLIDE,
-        headerAnimationLoop: false,
-        dialogType: DialogType.WARNING,
-        showCloseIcon: true,
-        title: 'Hata',
-        desc: 'İşlem Başarısız$message',
-        btnOkIcon: Icons.check_circle,
-        onDissmissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        },)
-      ..show();
+      context: context,
+      width: 300,
+      animType: AnimType.LEFTSLIDE,
+      headerAnimationLoop: false,
+      dialogType: DialogType.WARNING,
+      showCloseIcon: true,
+      title: 'Hata',
+      desc: 'İşlem Başarısız$message',
+      btnOkIcon: Icons.check_circle,
+      onDissmissCallback: (type) {
+        debugPrint('Dialog Dissmiss from callback $type');
+      },
+    )..show();
   }
- 
 }

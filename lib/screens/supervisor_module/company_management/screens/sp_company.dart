@@ -64,7 +64,7 @@ class SpCompany extends StatelessWidget {
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,
                         ),
-                        const CompanyList(),
+                         CompanyList( code: list['code']),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // ignore: prefer_const_literals_to_create_immutables

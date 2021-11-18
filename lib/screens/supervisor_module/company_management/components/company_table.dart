@@ -10,8 +10,8 @@ import 'package:fortextm/screens/supervisor_module/company_management/screens/su
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CompanyList extends StatefulWidget {
-  const CompanyList({Key? key}) : super(key: key);
-
+  const CompanyList({Key? key, required this.code}) : super(key: key);
+final String code;
   @override
   _CompanyListState createState() => _CompanyListState();
 }
@@ -46,15 +46,15 @@ class _CompanyListState extends State<CompanyList>
     _source1.clear();
     datas
         .map((companys) => _source1.add({
-              'name': companys.name,
+              'name': companys.name ,
               'actions': IconButton(
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,
                   builder: (context) => CompanyProfile(
-                    id: companys.id
-                  ),
+                    id: companys.id,code: widget.code,
+                  ), 
                 ),
               )
             }))
@@ -63,7 +63,7 @@ class _CompanyListState extends State<CompanyList>
       return BsCardContainer(
     child: BsDatatable(
       source: _source1,
-      title: const Text('Datatables Data'),
+      title: const Text('Firma Listesi'),
       columns: ExampleSource.columns,
     ),
       );

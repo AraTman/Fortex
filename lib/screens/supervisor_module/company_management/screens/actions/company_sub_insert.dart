@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,11 +11,11 @@ import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 
-import '../sp_company.dart';
 
 class CompanySubInsert extends StatefulWidget {
-  const CompanySubInsert({Key? key, required this.id}) : super(key: key);
+  const CompanySubInsert({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   CompanySubInsertState createState() => CompanySubInsertState();
 }
@@ -31,6 +30,7 @@ class CompanySubInsertState extends State<CompanySubInsert>
 
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final url = "company/subsidiary/add";
+  final imgUrl = "company/subsidiary/media/add";
   // ignore: unused_field
   String? _fileName;
   List<PlatformFile>? _paths;
@@ -157,240 +157,7 @@ class CompanySubInsertState extends State<CompanySubInsert>
                             width: 600,
                             child: Column(
                               children: [
-                                FormBuilder(
-                                  key: _formKey,
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  child: Column(
-                                    children: <Widget>[
-                                      FormBuilderTextField(
-                                        name: 'CompanyId',
-                                        initialValue: widget.id.toString(),
-                                        enabled: false,
-                                        decoration: const InputDecoration(
-                                          labelText: 'Şube No',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      FormBuilderTextField(
-                                        name: 'Name',
-                                        decoration: const InputDecoration(
-                                          labelText: 'Şube Adı',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      FormBuilderTextField(
-                                        name: 'Code',
-                                        decoration: const InputDecoration(
-                                          labelText: 'Şube Kodu',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      FormBuilderTextField(
-                                        name: 'Address',
-                                        decoration: const InputDecoration(
-                                          labelText: 'Şube Adress',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      FormBuilderTextField(
-                                        name: 'OfficialName',
-                                        decoration: const InputDecoration(
-                                          labelText: 'Yetkili Adı',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      FormBuilderTextField(
-                                        name: 'OfficialSurname',
-                                        decoration: const InputDecoration(
-                                          labelText: 'Yetkili Soyadı',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      FormBuilderTextField(
-                                        name: 'OfficialEmail',
-                                        decoration: const InputDecoration(
-                                          labelText: 'Yetkili Email',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      FormBuilderTextField(
-                                        name: 'OfficialTelephoneNumber',
-                                        decoration: const InputDecoration(
-                                          labelText: 'Yetkili Telefon',
-                                        ),
-                                        // valueTransformer: (text) => num.tryParse(text),
-                                        validator:
-                                            FormBuilderValidators.compose([
-                                          FormBuilderValidators.required(
-                                              context),
-                                          FormBuilderValidators.max(
-                                              context, 70),
-                                        ]),
-                                        keyboardType: TextInputType.text,
-                                      ),
-                                      const SizedBox(
-                                        height: 25,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          const PrimaryText(
-                                              text: 'Görünüm Ekle',
-                                              size: 10,
-                                              fontWeight: FontWeight.w800),
-                                          Wrap(
-                                            children: <Widget>[
-                                              IconButton(
-                                                onPressed: () => _pickFiles(),
-                                                icon: const Icon(
-                                                  Icons.add_a_photo_sharp,
-                                                  color: Colors.green,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10),
-                                              IconButton(
-                                                onPressed: () =>
-                                                    _clearCachedFiles(),
-                                                icon: const Icon(
-                                                  Icons.cleaning_services,
-                                                  color: Colors.red,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Builder(
-                                        builder: (BuildContext context) =>
-                                            _isLoading
-                                                ? const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 10.0),
-                                                    child:
-                                                        CircularProgressIndicator(),
-                                                  )
-                                                : _paths != null
-                                                    ? Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                bottom: 30.0),
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.50,
-                                                        child: Scrollbar(
-                                                            child: ListView
-                                                                .separated(
-                                                          itemCount: _paths !=
-                                                                      null &&
-                                                                  _paths!
-                                                                      .isNotEmpty
-                                                              ? _paths!.length
-                                                              : 1,
-                                                          itemBuilder:
-                                                              (BuildContext
-                                                                      context,
-                                                                  int index) {
-                                                            final path = _paths!
-                                                                .map((e) =>
-                                                                    e.path)
-                                                                .toList()[index]
-                                                                .toString();
-
-                                                            return ListTile(
-                                                                title: Center(
-                                                              child: SizedBox(
-                                                                width: 350,
-                                                                height: 350,
-                                                                child: Card(
-                                                                    shape: RoundedRectangleBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                20.0)),
-                                                                    child: Image
-                                                                        .file(
-                                                                      File(
-                                                                          path),
-                                                                      width:
-                                                                          340,
-                                                                      height:
-                                                                          340,
-                                                                    )),
-                                                              ),
-                                                            ));
-                                                          },
-                                                          separatorBuilder:
-                                                              (BuildContext
-                                                                          context,
-                                                                      int index) =>
-                                                                  const Divider(),
-                                                        )),
-                                                      )
-                                                    : const SizedBox(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                builderForm(context),
                                 _getActionButtons(),
                               ],
                             ),
@@ -402,6 +169,188 @@ class CompanySubInsertState extends State<CompanySubInsert>
                 )),
           ],
         ),
+      ),
+    );
+  }
+
+  FormBuilder builderForm(BuildContext context) {
+    return FormBuilder(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        children: <Widget>[
+          FormBuilderTextField(
+            name: 'CompanyId',
+            initialValue: widget.id.toString(),
+            enabled: false,
+            decoration: const InputDecoration(
+              labelText: 'Şube No',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'Name',
+            decoration: const InputDecoration(
+              labelText: 'Şube Adı',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'Code',
+            decoration: const InputDecoration(
+              labelText: 'Şube Kodu',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'Address',
+            decoration: const InputDecoration(
+              labelText: 'Şube Adress',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'OfficialName',
+            decoration: const InputDecoration(
+              labelText: 'Yetkili Adı',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'OfficialSurname',
+            decoration: const InputDecoration(
+              labelText: 'Yetkili Soyadı',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'OfficialEmail',
+            decoration: const InputDecoration(
+              labelText: 'Yetkili Email',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'OfficialTelephoneNumber',
+            decoration: const InputDecoration(
+              labelText: 'Yetkili Telefon',
+            ),
+            // valueTransformer: (text) => num.tryParse(text),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const PrimaryText(
+                  text: 'Görünüm Ekle', size: 10, fontWeight: FontWeight.w800),
+              Wrap(
+                children: <Widget>[
+                  IconButton(
+                    onPressed: () => _pickFiles(),
+                    icon: const Icon(
+                      Icons.add_a_photo_sharp,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  IconButton(
+                    onPressed: () => _clearCachedFiles(),
+                    icon: const Icon(
+                      Icons.cleaning_services,
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Builder(
+            builder: (BuildContext context) => _isLoading
+                ? const Padding(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: CircularProgressIndicator(),
+                  )
+                : _paths != null
+                    ? Container(
+                        padding: const EdgeInsets.only(bottom: 30.0),
+                        height: MediaQuery.of(context).size.height * 0.50,
+                        child: Scrollbar(
+                            child: ListView.separated(
+                          itemCount: _paths != null && _paths!.isNotEmpty
+                              ? _paths!.length
+                              : 1,
+                          itemBuilder: (BuildContext context, int index) {
+                            final path = _paths!
+                                .map((e) => e.path)
+                                .toList()[index]
+                                .toString();
+
+                            return ListTile(
+                                title: Center(
+                              child: SizedBox(
+                                width: 350,
+                                height: 350,
+                                child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    child: Image.file(
+                                      File(path),
+                                      width: 340,
+                                      height: 340,
+                                    )),
+                              ),
+                            ));
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(),
+                        )),
+                      )
+                    : const SizedBox(),
+          ),
+        ],
       ),
     );
   }
@@ -426,10 +375,10 @@ class CompanySubInsertState extends State<CompanySubInsert>
             _formKey.currentState!.save();
             futureService = FutureService();
 
-            futureService.postSubsidiry(
-                _formKey.currentState!.value, url, _paths, widget.id);
             if (_formKey.currentState!.validate()) {
-              _succesMessage();
+               futureService.postCompany(
+                _formKey.currentState!.value, url, _paths,context,'/sp1',widget.code,imgUrl,2);
+            
             } else {
               print("validation failed");
             }
@@ -439,26 +388,4 @@ class CompanySubInsertState extends State<CompanySubInsert>
     );
   }
 
-  AwesomeDialog _succesMessage() {
-    return AwesomeDialog(
-        context: context,
-        width: 300,
-        animType: AnimType.LEFTSLIDE,
-        headerAnimationLoop: false,
-        dialogType: DialogType.SUCCES,
-        showCloseIcon: true,
-        title: 'Başarılı',
-        desc: 'Kayıt başarılı',
-        btnOkOnPress: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => SpCompany(), fullscreenDialog: true),
-          );
-        },
-        btnOkIcon: Icons.check_circle,
-        onDissmissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        })
-      ..show();
-  }
 }
