@@ -48,7 +48,7 @@ class SupplierAddState extends State<SupplierAdd>
                 child: SafeArea(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 30, horizontal: 30),
+                        vertical: 30, horizontal: 30,),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -60,7 +60,7 @@ class SupplierAddState extends State<SupplierAdd>
                             child: const PrimaryText(
                                 text: "Tedarikçi Eklemek",
                                 size: 30,
-                                fontWeight: FontWeight.w800)),
+                                fontWeight: FontWeight.w800,),),
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 5,
                         ),
@@ -85,9 +85,9 @@ class SupplierAddState extends State<SupplierAdd>
                                         validator:
                                             FormBuilderValidators.compose([
                                           FormBuilderValidators.required(
-                                              context),
+                                              context,),
                                           FormBuilderValidators.max(
-                                              context, 70),
+                                              context, 70,),
                                         ]),
                                         keyboardType: TextInputType.text,
                                       ),
@@ -100,9 +100,9 @@ class SupplierAddState extends State<SupplierAdd>
                                         validator:
                                             FormBuilderValidators.compose([
                                           FormBuilderValidators.required(
-                                              context),
+                                              context,),
                                           FormBuilderValidators.max(
-                                              context, 70),
+                                              context, 70,),
                                         ]),
                                         keyboardType: TextInputType.text,
                                       ),
@@ -122,9 +122,9 @@ class SupplierAddState extends State<SupplierAdd>
                                               validator: FormBuilderValidators
                                                   .compose([
                                                 FormBuilderValidators.required(
-                                                    context),
+                                                    context,),
                                                 FormBuilderValidators.max(
-                                                    context, 70),
+                                                    context, 70,),
                                               ]),
                                               keyboardType: TextInputType.text,
                                             ),
@@ -140,7 +140,7 @@ class SupplierAddState extends State<SupplierAdd>
                                                         Colors.white,
                                                     textStyle: const TextStyle(
                                                         fontSize: 16,
-                                                        color: Colors.blueGrey),
+                                                        color: Colors.blueGrey,),
                                                     //Optional. Sets the border radius for the bottomsheet.
                                                     borderRadius:
                                                         const BorderRadius.only(
@@ -156,12 +156,12 @@ class SupplierAddState extends State<SupplierAdd>
                                                       hintText:
                                                           'Start typing to search',
                                                       prefixIcon: const Icon(
-                                                          Icons.search),
+                                                          Icons.search,),
                                                       border:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                           color: const Color(
-                                                                  0xFF8C98A8)
+                                                                  0xFF8C98A8,)
                                                               .withOpacity(0.2),
                                                         ),
                                                       ),
@@ -170,18 +170,18 @@ class SupplierAddState extends State<SupplierAdd>
                                                   onSelect: (Country country) =>
                                                       {
                                                         print(
-                                                            'Select country: ${country.countryCode}'),
+                                                            'Select country: ${country.countryCode}',),
                                                         setState(() {
                                                           countrys.text =
                                                               country
                                                                   .displayName
                                                                   .toString();
                                                         })
-                                                      });
+                                                      },);
                                             },
                                             child: const Text('Ülke'),
                                             style: ElevatedButton.styleFrom(
-                                                primary: Colors.deepOrange),
+                                                primary: Colors.deepOrange,),
                                           ),
                                         ],
                                       ),
@@ -194,9 +194,9 @@ class SupplierAddState extends State<SupplierAdd>
                                         validator:
                                             FormBuilderValidators.compose([
                                           FormBuilderValidators.required(
-                                              context),
+                                              context,),
                                           FormBuilderValidators.max(
-                                              context, 70),
+                                              context, 70,),
                                         ]),
                                         keyboardType: TextInputType.text,
                                       ),
@@ -214,7 +214,7 @@ class SupplierAddState extends State<SupplierAdd>
                       ],
                     ),
                   ),
-                )),
+                ),),
           ],
         ),
       ),
@@ -235,7 +235,7 @@ class SupplierAddState extends State<SupplierAdd>
           style: ElevatedButton.styleFrom(
             primary: Colors.green,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
+                borderRadius: BorderRadius.circular(20.0),),
           ),
           onPressed: () {
             _formKey.currentState!.save();
@@ -243,7 +243,7 @@ class SupplierAddState extends State<SupplierAdd>
 
             if (_formKey.currentState!.validate()) {
               futureService.postAll(
-                  _formKey.currentState!.value, url, context, '/whsettings');
+                  _formKey.currentState!.value, url, context, '/whsettings',);
             } else {
               print("validation failed");
             }

@@ -2,6 +2,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/constants/colors.dart';
+import 'package:fortextm/core/init/icon_helper.dart';
 import 'package:fortextm/core/services/future_extension.dart';
 import 'package:fortextm/core/services/future_service.dart';
 import 'package:fortextm/core/services/futures_service.dart';
@@ -34,15 +35,18 @@ class _MenuListWidgetState extends State<MenuListWidget>
   Widget build(BuildContext context) {
     super.build(context);
     return httpCompany.toBuild<List<permissionModel>>(onSucces: (datas) {
+      
       return Wrap(
         runSpacing: 15,
         spacing: 15,
         children: datas
             .map((item) => (() {
+         var iconName=getIconUsingPrefix(name: item.permissions.icon);
                   return ListTile(
                     title: Column(
                       children: [
-                        const Icon(Icons.code),
+                        // ignore: unnecessary_new
+                        Icon(iconName),
                         Text(
                           item.permissions.name,
                           style: const TextStyle(color: AppColors.lgunder),

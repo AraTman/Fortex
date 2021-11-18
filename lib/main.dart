@@ -47,15 +47,12 @@ class MyApp extends StatelessWidget {
       
       routes: {
         '/': (context) => const Login(),
-        '/costumer': (context) => Costumer(),
         '/moduleDashboard': (context) => ModuleDashboard(),
-        '/costumerDashboard': (context) => CostumerDashboard(),
 
         //Supervisor
-        '/supervisorDashboard': (context) => const SupervisorDashboard(),
-        '/spCompany': (context) => SpCompany(),
-        '/spemployee': (context) => SpEmployee(),
-        '/productDash': (context) => CostumerProduction(),
+        '/sp0': (context) => const SupervisorDashboard(),
+        '/sp1': (context) => SpCompany(),
+        //Personele yetki ekleme
 
         //Warehouse,
         '/wh0': (context) => WarehouseDashboard(),
@@ -66,6 +63,15 @@ class MyApp extends StatelessWidget {
 
         //TestSupplier
         '/testsupplier': (context) => TestSupplier(),
+
+        //HumanResources
+        '/hr1': (context) => SpEmployee(),
+
+        '/productDash': (context) => CostumerProduction(),
+        '/costumer': (context) => Costumer(),
+      
+        '/costumerDashboard': (context) => CostumerDashboard(),
+
       },
       theme: ThemeData(
           primarySwatch: Colors.blue,

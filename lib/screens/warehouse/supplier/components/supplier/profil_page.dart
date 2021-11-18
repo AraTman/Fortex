@@ -48,9 +48,9 @@ class SupplierProfilPageState extends State<SupplierProfilPage>
                         ],
                       ),
                     ),
-                  )),
+                  ),),
             ],
           ),
-        ));
+        ),);
   }
 }

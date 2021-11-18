@@ -1,4 +1,3 @@
-
 import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
 import 'package:flutter/material.dart';
 
@@ -26,25 +25,33 @@ class ExampleSource extends BsDatatableSource {
 
   static List<BsDataColumn> get columns => <BsDataColumn>[
         BsDataColumn(
-            label: const Text('No'),
-            orderable: false,
-            searchable: false,
-            width: 100.0),
-        BsDataColumn(label: const Text('Name'), columnName: 'name', width: 200.0),
+          label: const Text('No'),
+          orderable: false,
+          searchable: false,
+          width: 100.0,
+        ),
         BsDataColumn(
-            label: const Text('Action'),
-            orderable: false,
-            searchable: false,
-            width: 200.0),
+            label: const Text('Name'), columnName: 'name', width: 200.0),
+        BsDataColumn(
+          label: const Text('Action'),
+          orderable: false,
+          searchable: false,
+          width: 200.0,
+        ),
       ];
 
   @override
   BsDataRow getRow(int index) {
-    return BsDataRow(index: index, cells: <BsDataCell>[
-      BsDataCell(Text('${controller.start + index + 1}')),
-      BsDataCell(Text('${response.data[index]['name'] }') ,),
-      BsDataCell(response.data[index]['actions'])
-    ]);
+    return BsDataRow(
+      index: index,
+      cells: <BsDataCell>[
+        BsDataCell(Text('${controller.start + index + 1}')),
+        BsDataCell(
+          Text('${response.data[index]['name']}'),
+        ),
+        BsDataCell(response.data[index]['actions'] as Widget)
+      ],
+    );
   }
 }
 
@@ -72,25 +79,34 @@ class EmployeeListTabSource extends BsDatatableSource {
 
   static List<BsDataColumn> get columns => <BsDataColumn>[
         BsDataColumn(
-            label: const Text('No'),
-            orderable: false,
-            searchable: false,
-            width: 100.0),
-        BsDataColumn(label: const Text('Name'), columnName: 'name', width: 200.0),
-         BsDataColumn(label: const Text('Phone'), columnName: 'phone', width: 200.0),
+          label: const Text('No'),
+          orderable: false,
+          searchable: false,
+          width: 100.0,
+        ),
         BsDataColumn(
-            label: const Text('Action'),
-            orderable: false,
-            searchable: false,
-            width: 200.0),
+            label: const Text('Name'), columnName: 'name', width: 200.0),
+        BsDataColumn(
+            label: const Text('Phone'), columnName: 'phone', width: 200.0),
+        BsDataColumn(
+          label: const Text('Action'),
+          orderable: false,
+          searchable: false,
+          width: 200.0,
+        ),
       ];
 
   @override
   BsDataRow getRow(int index) {
-    return BsDataRow(index: index, cells: <BsDataCell>[
-      BsDataCell(Text('${controller.start + index + 1}')),
-      BsDataCell(Text('${response.data[index]['name'] }') ,),
-      BsDataCell(response.data[index]['actions'])
-    ]);
+    return BsDataRow(
+      index: index,
+      cells: <BsDataCell>[
+        BsDataCell(Text('${controller.start + index + 1}')),
+        BsDataCell(
+          Text('${response.data[index]['name']}'),
+        ),
+        BsDataCell(response.data[index]['actions'] as Widget)
+      ],
+    );
   }
 }

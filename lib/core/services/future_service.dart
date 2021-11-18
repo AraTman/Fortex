@@ -1,3 +1,5 @@
+// ignore_for_file: require_trailing_commas
+
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -62,11 +64,11 @@ class FutureService extends IFutureService {
     @override
   Future<List<permissionModel>> getHttpPermission(String url, String code) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"code": code});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => permissionModel.fromJson(e)).toList();
         } else {
@@ -80,11 +82,11 @@ class FutureService extends IFutureService {
   @override
   Future<List<SubsidiaryList>> getHttpSubsidiaryList(String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"companyId": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => SubsidiaryList.fromJson(e)).toList();
         } else {
@@ -110,11 +112,11 @@ class FutureService extends IFutureService {
   Future<List<EmployeeListModel>> getHttpEmployeeGets(
       String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => EmployeeListModel.fromJson(e)).toList();
         } else {
@@ -139,12 +141,12 @@ class FutureService extends IFutureService {
   @override
   Future<List<OfficialList>> getHttpOfficialList(String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response =
         await dio.get(urls, queryParameters: {"companySubsidiaryId": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => OfficialList.fromJson(e)).toList();
         } else {
@@ -158,11 +160,11 @@ class FutureService extends IFutureService {
   @override
   Future<List<MediaTypeList>> getHttpMediaTypeLists(String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => MediaTypeList.fromJson(e)).toList();
         } else {
@@ -177,11 +179,11 @@ class FutureService extends IFutureService {
   @override
   Future<List<WhCategoryLists>> getHttpWhCategoryLists(String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => WhCategoryLists.fromJson(e)).toList();
         } else {
@@ -196,11 +198,11 @@ class FutureService extends IFutureService {
   Future<List<WhCategoryLists>> getHttpWhCategoryGets(
       String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => WhCategoryLists.fromJson(e)).toList();
         } else {
@@ -213,12 +215,12 @@ class FutureService extends IFutureService {
 
   @override
   Future<List<WhModelList>> getHttpWhLists(String url) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    dio.options.headers["Authorization"] = 'Bearer $token';
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => WhModelList.fromJson(e)).toList();
         } else {
@@ -232,11 +234,11 @@ class FutureService extends IFutureService {
   @override
   Future<List<WhModelList>> getHttpWhGets(String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => WhModelList.fromJson(e)).toList();
         } else {
@@ -251,11 +253,11 @@ class FutureService extends IFutureService {
   Future<List<WhLocalizationModelList>> getHttpWhLocalizationLists(
       String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => WhLocalizationModelList.fromJson(e)).toList();
         } else {
@@ -270,11 +272,11 @@ class FutureService extends IFutureService {
   Future<List<WhLocalizationModelList>> getHttpWhLocalizationGets(
       String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => WhLocalizationModelList.fromJson(e)).toList();
         } else {
@@ -289,11 +291,11 @@ class FutureService extends IFutureService {
   Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeLists(
       String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data
               .map((e) => WhLocalizationSizeModelList.fromJson(e))
@@ -310,11 +312,11 @@ class FutureService extends IFutureService {
   Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeGets(
       String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data
               .map((e) => WhLocalizationSizeModelList.fromJson(e))
@@ -331,11 +333,11 @@ class FutureService extends IFutureService {
   Future<List<WhSupplierCategoryModelList>> getHttpSupplierCategoryLists(
       String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data
               .map((e) => WhSupplierCategoryModelList.fromJson(e))
@@ -351,11 +353,11 @@ class FutureService extends IFutureService {
   @override
   Future<List<SupplierModelList>> getHttpSupplierLists(String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls);
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => SupplierModelList.fromJson(e)).toList();
         } else {
@@ -370,11 +372,11 @@ class FutureService extends IFutureService {
   Future<List<SupplierModelList>> getHttpSupplierGets(
       String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    String urls = _baseUrl + url;
+    final String urls = _baseUrl + url;
     final response = await dio.get(urls, queryParameters: {"id": id});
     switch (response.statusCode) {
       case HttpStatus.ok:
-        var data = response.data;
+        final data = response.data;
         if (data is List) {
           return data.map((e) => SupplierModelList.fromJson(e)).toList();
         } else {
@@ -398,7 +400,7 @@ class FutureService extends IFutureService {
           validateStatus: (status) => true,
         ),
       );
-      var datas = response.data;
+      final datas = response.data;
       if (response.statusCode == 200) {
         // ignore: prefer_typing_uninitialized_variables
         var deger;
@@ -407,16 +409,16 @@ class FutureService extends IFutureService {
         });
 
         final path = file!.map((e) => e.path).toList()[0].toString();
-        var dger = File(path);
-        String _fileName =
+        final dger = File(path);
+        final String _fileName =
             file != null ? file!.map((e) => e.name).toString() : '...';
-        FormData formData = FormData.fromMap({
+        final FormData formData = FormData.fromMap({
           "CompanyId": deger,
           "Media": await MultipartFile.fromFile(dger.path,
               filename: _fileName.replaceAll('(', '').replaceAll(')', ''),
-              contentType: MediaType('image', 'png')),
+              contentType: MediaType('image', 'png'),),
         });
-        var urls = _baseUrl + "company/media/add";
+        final urls = "${_baseUrl}company/media/add";
         response = await dio.post(urls, data: formData);
         return response.statusCode;
       } else {
@@ -441,7 +443,7 @@ class FutureService extends IFutureService {
           validateStatus: (status) => true,
         ),
       );
-      var datas = response.data;
+      final datas = response.data;
       if (response.statusCode == 200) {
         // ignore: prefer_typing_uninitialized_variables
         var deger;
@@ -450,15 +452,15 @@ class FutureService extends IFutureService {
         });
         if (file != null) {
           final path = file!.map((e) => e.path).toList()[0].toString();
-          var dger = File(path);
-          String _fileName =
+          final dger = File(path);
+          final String _fileName =
               file != null ? file!.map((e) => e.name).toString() : '...';
-          FormData formData = FormData.fromMap({
+          final FormData formData = FormData.fromMap({
             "CompanyId": deger,
             "Media": await MultipartFile.fromFile(dger.path,
-                filename: _fileName, contentType: MediaType('image', 'png')),
+                filename: _fileName, contentType: MediaType('image', 'png'),),
           });
-          var urls = _baseUrl + "company/subsidiary/media/add";
+          final urls = "${_baseUrl}company/subsidiary/media/add";
           response = await dio.post(
             urls,
             data: formData,
@@ -476,15 +478,16 @@ class FutureService extends IFutureService {
   }
 
   dynamic postImage(
+      // ignore: type_annotate_public_apis
       var file, int id, String url, int employeeId, String fileType) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
       if (file != null) {
         final path = file!.map((e) => e.path).toList()[0].toString();
-        var dger = File(path);
-        String _fileName =
+        final dger = File(path);
+        final String _fileName =
             file != null ? file!.map((e) => e.name).toString() : '...';
-        String fileTyp = fileType.replaceAll('(', '').replaceAll(')', '');
+        final String fileTyp = fileType.replaceAll('(', '').replaceAll(')', '');
         String filesfType;
         if (fileTyp == "pdf" ||
             fileTyp == "docx" ||
@@ -494,14 +497,14 @@ class FutureService extends IFutureService {
         } else {
           filesfType = "image";
         }
-        FormData formData = FormData.fromMap({
+        final FormData formData = FormData.fromMap({
           "MediaTypeId": id,
           "EmployeeId": employeeId,
           "Media": await MultipartFile.fromFile(dger.path,
               filename: _fileName.replaceAll('(', '').replaceAll(')', ''),
-              contentType: MediaType(filesfType, fileTyp)),
+              contentType: MediaType(filesfType, fileTyp),),
         });
-        var urls = _baseUrl + url;
+        final urls = _baseUrl + url;
         await dio.post(
           urls,
           data: formData,
@@ -517,11 +520,12 @@ class FutureService extends IFutureService {
 
   /* post Warehouse */
   dynamic postAll(
+      // ignore: type_annotate_public_apis
       var data, String paths, BuildContext context, String location) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
 
-      Response response = await dio.post(
+      final Response response = await dio.post(
         _baseUrl + paths,
         data: data,
         options: Options(
@@ -529,13 +533,15 @@ class FutureService extends IFutureService {
         ),
       );
       if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
         return _succesMessage(context, location);
       } else {
+        // ignore: use_build_context_synchronously
         return _errorMessage(context, location, "");
       }
     } on DioError catch (e) {
       // ignore: avoid_print
-      return _errorMessage(context, location, e.error);
+      return _errorMessage(context, location, e.error as String);
     }
   }
 
@@ -555,7 +561,7 @@ class FutureService extends IFutureService {
         btnOkIcon: Icons.check_circle,
         onDissmissCallback: (type) {
           debugPrint('Dialog Dissmiss from callback $type');
-        })
+        },)
       ..show();
   }
 
@@ -569,14 +575,14 @@ class FutureService extends IFutureService {
         dialogType: DialogType.WARNING,
         showCloseIcon: true,
         title: 'Hata',
-        desc: 'İşlem Başarısız' + message,
+        desc: 'İşlem Başarısız$message',
         btnOkOnPress: () {
           Navigator.pushNamed(context, location);
         },
         btnOkIcon: Icons.check_circle,
         onDissmissCallback: (type) {
           debugPrint('Dialog Dissmiss from callback $type');
-        })
+        },)
       ..show();
   }
 

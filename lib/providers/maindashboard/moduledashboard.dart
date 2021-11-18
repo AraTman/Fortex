@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/providers/maindashboard/components/module_card.dart';
-import 'package:fortextm/providers/menu/components/header.dart';
+import 'package:fortextm/core/init/header.dart';
 
 import '../../core/init/app_bar_actions_items.dart';
 
@@ -35,7 +35,7 @@ class ModuleDashboard extends StatelessWidget {
             SizedBox(
               height: SizeConfig.blockSizeVertical! * 4,
             ),
-            const ModuleWidget(),
+            const ModuleList(),
           ],
         ),
       ),

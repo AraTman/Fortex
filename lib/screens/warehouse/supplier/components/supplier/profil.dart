@@ -58,7 +58,7 @@ class SupplierProfileState extends State<SupplierProfile>
                           initialValue: datas.first.supplierCategory.name,
                           enabled: _status,
                           decoration: const InputDecoration(
-                              border: UnderlineInputBorder(), labelText: 'Tedarikçi Türü'),
+                              border: UnderlineInputBorder(), labelText: 'Tedarikçi Türü',),
                         ),
                       ),
                      SizedBox(
@@ -67,7 +67,7 @@ class SupplierProfileState extends State<SupplierProfile>
                           initialValue: datas.first.country,
                           enabled: _status,
                           decoration: const InputDecoration(
-                              border: UnderlineInputBorder(), labelText: 'Ülke'),
+                              border: UnderlineInputBorder(), labelText: 'Ülke',),
                         ),
                       ),
                       SizedBox(
@@ -76,7 +76,7 @@ class SupplierProfileState extends State<SupplierProfile>
                           initialValue: datas.first.name,
                           enabled: _status,
                           decoration: const InputDecoration(
-                              border: UnderlineInputBorder(), labelText: 'Adı'),
+                              border: UnderlineInputBorder(), labelText: 'Adı',),
                         ),
                       ),
                        SizedBox(
@@ -85,7 +85,7 @@ class SupplierProfileState extends State<SupplierProfile>
                           initialValue: datas.first.address,
                           enabled: _status,
                           decoration: const InputDecoration(
-                              border: UnderlineInputBorder(), labelText: 'Adress'),
+                              border: UnderlineInputBorder(), labelText: 'Adress',),
                         ),
                       ),
                         SizedBox(
@@ -94,7 +94,7 @@ class SupplierProfileState extends State<SupplierProfile>
                           initialValue: datas.first.code,
                           enabled: _status,
                           decoration: const InputDecoration(
-                              border: UnderlineInputBorder(), labelText: 'Kodu'),
+                              border: UnderlineInputBorder(), labelText: 'Kodu',),
                         ),
                       ),
                     ],
@@ -106,7 +106,7 @@ class SupplierProfileState extends State<SupplierProfile>
           ),
         ],
       );
-    });
+    },);
   }
 
   @override
@@ -125,55 +125,57 @@ class SupplierProfileState extends State<SupplierProfile>
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Expanded(
+             flex: 2,
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               // ignore: avoid_unnecessary_containers
               child: Container(
                   child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _status = false;
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  });
+                },
                 child: const Text(
                   "Kaydet",
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _status = false;
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  });
-                },
-              )),
+              ),),
             ),
-            flex: 2,
+           
           ),
           Expanded(
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.only(left: 10.0),
               // ignore: avoid_unnecessary_containers
               child: Container(
                   child: ElevatedButton(
-                child: const Text(
-                  "Çık",
-                  style: TextStyle(color: Colors.white),
-                ),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.red,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0))),
+                        borderRadius: BorderRadius.circular(20.0),),),
                 onPressed: () {
                   setState(() {
                     _status = false;
                     FocusScope.of(context).requestFocus(FocusNode());
                   });
                 },
-              )),
+                child: const Text(
+                  "Çık",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),),
             ),
-            flex: 2,
+            
           ),
         ],
       ),

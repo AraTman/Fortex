@@ -3,7 +3,7 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/init/app_bar_actions_items.dart';
-import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
+import 'package:fortextm/providers/menu/menu.dart';
 
 import 'components/header.dart';
 import 'components/supplier/list.dart';
@@ -12,10 +12,11 @@ class TestSupplier extends StatelessWidget {
   TestSupplier({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+     final Map list = ModalRoute.of(context)?.settings.arguments as Map;
     SizeConfig().init(context);
     return Scaffold(
       key: _drawerKey,
-      drawer:  SizedBox(width: 100, child: WarehouseSideMenu(id: 6,)),
+      drawer:  SizedBox(width: 100, child: SideMenu(code: list['code'],)),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -41,7 +42,7 @@ class TestSupplier extends StatelessWidget {
             if (Responsive.isDesktop(context))
                Expanded(
                 flex: 1,
-                child: WarehouseSideMenu(id: 6,),
+                child: SideMenu(code: list['code'],),
               ),
             Expanded(
                 flex: 14,

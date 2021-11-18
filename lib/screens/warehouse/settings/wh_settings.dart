@@ -3,7 +3,7 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/init/app_bar_actions_items.dart';
-import 'package:fortextm/providers/menu/warehouse/sidemenu.dart';
+import 'package:fortextm/providers/menu/menu.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'components/header.dart';
 import 'components/wh_category/add.dart';
@@ -16,10 +16,11 @@ class WhSettings extends StatelessWidget {
   WhSettings({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+     final Map list = ModalRoute.of(context)?.settings.arguments as Map;
     SizeConfig().init(context);
     return Scaffold(
       key: _drawerKey,
-      drawer:  SizedBox(width: 100, child: WarehouseSideMenu(id: 8,)),
+      drawer:  SizedBox(width: 100, child: SideMenu(code:list['code'],)),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -45,7 +46,7 @@ class WhSettings extends StatelessWidget {
             if (Responsive.isDesktop(context))
                Expanded(
                 flex: 1,
-                child: WarehouseSideMenu(id: 8,),
+                child: SideMenu(code: list['code'],),
               ),
             Expanded(
                 flex: 14,

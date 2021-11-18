@@ -8,14 +8,14 @@ import 'package:fortextm/core/services/futures_service.dart';
 import 'package:fortextm/screens/customer_agent/dashboard/components/info_card.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/departmans.dart';
 
-class ModuleWidget extends StatefulWidget {
-  const ModuleWidget({Key? key}) : super(key: key);
+class ModuleList extends StatefulWidget {
+  const ModuleList({Key? key}) : super(key: key);
 
   @override
-  _ModuleWidgetState createState() => _ModuleWidgetState();
+  _ModuleListState createState() => _ModuleListState();
 }
 
-class _ModuleWidgetState extends State<ModuleWidget>
+class _ModuleListState extends State<ModuleList>
     with AutomaticKeepAliveClientMixin {
   final welPath = "login/role";
   bool isLoading = false;
@@ -38,20 +38,20 @@ class _ModuleWidgetState extends State<ModuleWidget>
         runSpacing: 15,
         spacing: 15,
         children: datas
-            .map((item) => (() {
-                  int color = int.parse(item.department.color);
+            .map((item) => () {
+                  final int color = int.parse(item.department.color);
                   return SizedBox(
                     width: SizeConfig.screenWidth,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,
-                          shadowColor: Colors.transparent),
+                          shadowColor: Colors.transparent,),
                       onPressed: () {
                         Navigator.pushNamed(
                           context,
                           '/${item.department.routes}',
                           arguments: <String, String>{
-                            'code': item.department.code.toString()
+                            'code': item.department.code
                           },
                         );
                       },
@@ -59,14 +59,14 @@ class _ModuleWidgetState extends State<ModuleWidget>
                           border: Color(color),
                           icon: 'lib/assets/images/${item.department.image}',
                           label: item.department.name,
-                          amount: ''),
+                          amount: '',),
                     ),
                   );
-                }()))
+                }(),)
             .toList()
             .cast<Widget>(),
       );
-    });
+    },);
   }
 
   Widget get buildTitleLaoding {

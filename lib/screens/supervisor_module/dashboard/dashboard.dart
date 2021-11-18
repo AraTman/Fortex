@@ -5,7 +5,7 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/init/app_bar_actions_items.dart';
-import 'package:fortextm/providers/menu/components/header.dart';
+import 'package:fortextm/core/init/header.dart';
 import 'package:fortextm/providers/menu/menu.dart';
 import 'components/chart/bar_chart.dart';
 import 'components/chart/line_chart.dart';
