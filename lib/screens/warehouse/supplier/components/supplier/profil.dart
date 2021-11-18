@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
-import 'package:fortextm/core/services/future_extension.dart';
-import 'package:fortextm/core/services/future_service.dart';
-import 'package:fortextm/core/services/futures_service.dart';
+import 'package:fortextm/core/init/api_services/future_extension.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
+import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/warehouse/supplier/models/supplier_list.dart';
 
 // ignore: must_be_immutable

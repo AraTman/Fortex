@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fortextm/screens/maindashboard/moduledashboard.dart';
 
 class ModuleReturn extends StatelessWidget {
   const ModuleReturn({Key? key}) : super(key: key);
@@ -16,7 +17,11 @@ class ModuleReturn extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   icon:SvgPicture.asset('lib/assets/svg/mac-action.svg'),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/moduleDashboard');
+                    Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute<void>(
+                      builder: (BuildContext context) => ModuleDashboard()),
+                  (route) => false);
                   }),
               );
   }

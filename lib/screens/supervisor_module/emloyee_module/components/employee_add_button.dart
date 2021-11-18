@@ -3,10 +3,8 @@ import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/action
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class EmployeeAddButton extends StatelessWidget {
-  const EmployeeAddButton({
-    final Key? key,
-  }) : super(key: key);
-
+  EmployeeAddButton(this.code);
+  final String code;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class EmployeeAddButton extends StatelessWidget {
               onPressed: ()=>showCupertinoModalBottomSheet(
                 isDismissible: false,
                 context: context,
-                builder: (context) => const EmployeeInsert(),
+                builder: (context) =>  EmployeeInsert(code: code,),
               ),
             );
   }

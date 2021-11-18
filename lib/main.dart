@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:fortextm/providers/maindashboard/moduledashboard.dart';
-import 'package:fortextm/core/services/shared_preferences_util.dart';
+import 'package:fortextm/core/init/cache/shared_preferences_util.dart';
 import 'package:fortextm/screens/authentication/login/login.dart';
 import 'package:fortextm/screens/customer_agent/costumer/costumer.dart';
 import 'package:fortextm/screens/customer_agent/dashboard/dashboard.dart';
@@ -13,6 +12,7 @@ import 'package:fortextm/screens/warehouse/locations/locations.dart';
 import 'core/config/constant.dart';
 import 'core/constants/colors.dart';
 import 'screens/customer_agent/production/production.dart';
+import 'screens/maindashboard/moduledashboard.dart';
 import 'screens/supervisor_module/emloyee_module/screens/sp_employee.dart';
 import 'screens/warehouse/settings/wh_settings.dart';
 import 'screens/warehouse/stock/stock.dart';
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
         '/productDash': (context) => CostumerProduction(),
         '/costumer': (context) => Costumer(),
       
-        '/costumerDashboard': (context) => CostumerDashboard(),
+        '/cd0': (context) => CostumerDashboard(),
 
       },
       theme: ThemeData(

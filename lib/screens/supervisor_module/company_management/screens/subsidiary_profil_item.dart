@@ -14,10 +14,6 @@ class SubsidiaryProfileItem extends StatefulWidget {
 class SubsidiaryProfileItemState extends State<SubsidiaryProfileItem>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
-  TextEditingController ad = TextEditingController();
-  TextEditingController unvan = TextEditingController();
-  TextEditingController tel = TextEditingController();
-  TextEditingController tarih = TextEditingController();
   // ignore: unused_field
   bool _status = false;
   @override

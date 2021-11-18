@@ -9,8 +9,9 @@ import 'profile.dart';
 
 
 class WhLocalizationProfilPage extends StatefulWidget {
-  const WhLocalizationProfilPage({Key? key, required this.id}) : super(key: key);
+  const WhLocalizationProfilPage({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   WhLocalizationProfilPageState createState() => WhLocalizationProfilPageState();
 }
@@ -60,14 +61,14 @@ class WhLocalizationProfilPageState extends State<WhLocalizationProfilPage>
                               onPressed: () => showCupertinoModalBottomSheet(
                                 isDismissible: false,
                                 context: context,
-                                builder: (context) =>  WhLocalizationSizeAdd(id: widget.id,),
+                                builder: (context) =>  WhLocalizationSizeAdd(id: widget.id,code: widget.code,),
                               ),
                             ),
                           ),
                           SizedBox(
                             height: SizeConfig.blockSizeVertical! * 3,
                           ),
-                        const WhLocalizationSizeList()
+                         WhLocalizationSizeList(code: widget.code,)
                         ],
                       ),
                     ),

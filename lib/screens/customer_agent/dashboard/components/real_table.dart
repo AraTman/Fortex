@@ -3,7 +3,7 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/core/models/data.dart';
+import 'package:fortextm/providers/models/data.dart';
 
 class HistoryTable extends StatelessWidget {
   const HistoryTable({

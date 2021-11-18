@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/core/init/app_bar_actions_items.dart';
-import 'package:fortextm/core/init/header.dart';
+import 'package:fortextm/core/base/app_bar_actions_items.dart';
+import 'package:fortextm/core/base/header.dart';
 import 'package:fortextm/providers/menu/menu.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/components/company_table.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/components/company_add_button.dart';
@@ -59,7 +59,7 @@ class SpCompany extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                          HeaderProvider(title: 'Firma Bilgileri',),
-                       const CompanyAddButton(),
+                        CompanyAddButton(list['code']),
                     
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,

@@ -2,7 +2,6 @@
 
 import 'dart:io';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +10,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/core/services/future_service.dart';
-
-import '../sp_company.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
 
 class CompanyInsert extends StatefulWidget {
-  const CompanyInsert({Key? key}) : super(key: key);
-
+  const CompanyInsert({Key? key,required this.code}) : super(key: key);
+ final String code;
   @override
   CompanyInsertState createState() => CompanyInsertState();
 }
@@ -379,7 +376,7 @@ class CompanyInsertState extends State<CompanyInsert>
                                     ],
                                   ),
                                 ),
-                                _getActionButtons(),
+                                _getActionButtons(widget.code),
                               ],
                             ),
                           ),
@@ -395,7 +392,7 @@ class CompanyInsertState extends State<CompanyInsert>
   }
 
   // ignore: unused_element
-  Widget _getActionButtons() {
+  Widget _getActionButtons(String code) {
     return Column(
       children: [
         ElevatedButton(
@@ -413,11 +410,9 @@ class CompanyInsertState extends State<CompanyInsert>
           onPressed: () {
             _formKey.currentState!.save();
             futureService = FutureService();
-
-            futureService.postCompany(
-                _formKey.currentState!.value, url, _paths);
             if (_formKey.currentState!.validate()) {
-              _succesMessage();
+             futureService.postCompany(
+                _formKey.currentState!.value, url, _paths,context,'/sp1',code);
             } else {
               print("validation failed");
             }
@@ -425,28 +420,5 @@ class CompanyInsertState extends State<CompanyInsert>
         ),
       ],
     );
-  }
-
-  AwesomeDialog _succesMessage() {
-    return AwesomeDialog(
-        context: context,
-        width: 300,
-        animType: AnimType.LEFTSLIDE,
-        headerAnimationLoop: false,
-        dialogType: DialogType.SUCCES,
-        showCloseIcon: true,
-        title: 'Başarılı',
-        desc: 'Kayıt başarılı',
-        btnOkOnPress: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => SpCompany(), fullscreenDialog: true),
-          );
-        },
-        btnOkIcon: Icons.check_circle,
-        onDissmissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        })
-      ..show();
   }
 }

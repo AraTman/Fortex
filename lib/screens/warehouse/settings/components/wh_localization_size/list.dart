@@ -1,10 +1,10 @@
 import 'package:bs_flutter_card/bs_flutter_card.dart';
 import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
 import 'package:flutter/material.dart';
-import 'package:fortextm/core/services/future_extension.dart';
+import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/config/company_table_source.dart';
-import 'package:fortextm/core/services/future_service.dart';
-import 'package:fortextm/core/services/futures_service.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
+import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -12,8 +12,8 @@ import 'profil_page.dart';
 
 
 class WhLocalizationSizeList extends StatefulWidget {
-  const WhLocalizationSizeList({Key? key}) : super(key: key);
-
+  const WhLocalizationSizeList({Key? key,required this.code}) : super(key: key);
+final String code;
   @override
   _WhLocalizationSizeListState createState() => _WhLocalizationSizeListState();
 }
@@ -55,7 +55,8 @@ class _WhLocalizationSizeListState extends State<WhLocalizationSizeList>
                   isDismissible: false,
                   context: context,
                   builder: (context) => WhLocalizationSizeProfilPage(
-                    id: wh.id
+                    id: wh.id,
+                    code: widget.code
                   ),
                 ),
               )

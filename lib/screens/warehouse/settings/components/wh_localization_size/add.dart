@@ -1,17 +1,16 @@
 // ignore_for_file: avoid_print, duplicate_ignore
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/core/services/future_service.dart';
-import 'package:fortextm/screens/warehouse/settings/wh_settings.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
 
 class WhLocalizationSizeAdd extends StatefulWidget {
-  const WhLocalizationSizeAdd({Key? key, required this.id}) : super(key: key);
+  const WhLocalizationSizeAdd({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   WhLocalizationSizeAddState createState() => WhLocalizationSizeAddState();
 }
@@ -72,7 +71,8 @@ class WhLocalizationSizeAddState extends State<WhLocalizationSizeAdd> with Singl
                                       AutovalidateMode.onUserInteraction,
                                   child: Column(
                                     children: <Widget>[
-                                      FormBuilderTextField( readOnly: true,
+                                      Visibility(visible: true,
+                                        child: FormBuilderTextField( readOnly: true,
                                         name: 'WarehouseLocalizationId',
                                         initialValue: widget.id.toString(),
                                         // valueTransformer: (text) => num.tryParse(text),
@@ -84,7 +84,8 @@ class WhLocalizationSizeAddState extends State<WhLocalizationSizeAdd> with Singl
                                               context, 70),
                                         ]),
                                         keyboardType: TextInputType.text,
-                                      ),
+                                      ),),
+                                      
                                       FormBuilderTextField(
                                         name: 'x',
                                         decoration: const InputDecoration(
@@ -232,12 +233,12 @@ class WhLocalizationSizeAddState extends State<WhLocalizationSizeAdd> with Singl
             _formKey.currentState!.save();
             futureService = FutureService();
 
-            futureService.postAll(
-              _formKey.currentState!.value,
-              url,context,'/whsettings'
-            );
+          
             if (_formKey.currentState!.validate()) {
-              _succesMessage();
+               futureService.postAll(
+              _formKey.currentState!.value,
+              url,context,'/whsettings',widget.code
+            );
             } else {
               print("validation failed");
             }
@@ -247,26 +248,5 @@ class WhLocalizationSizeAddState extends State<WhLocalizationSizeAdd> with Singl
     );
   }
 
-  AwesomeDialog _succesMessage() {
-    return AwesomeDialog(
-        context: context,
-        width: 300,
-        animType: AnimType.LEFTSLIDE,
-        headerAnimationLoop: false,
-        dialogType: DialogType.SUCCES,
-        showCloseIcon: true,
-        title: 'Başarılı',
-        desc: 'Kayıt başarılı',
-        btnOkOnPress: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => WhSettings(), fullscreenDialog: true),
-          );
-        },
-        btnOkIcon: Icons.check_circle,
-        onDissmissCallback: (type) {
-          debugPrint('Dialog Dissmiss from callback $type');
-        })
-      ..show();
-  }
+ 
 }

@@ -5,7 +5,7 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/core/extensions/localekeys.dart';
-import 'package:fortextm/core/models/data.dart';
+import 'package:fortextm/providers/models/data.dart';
 import 'package:fortextm/screens/customer_agent/dashboard/components/right_bar_tile.dart';
 
 class AktivitelerList extends StatelessWidget {

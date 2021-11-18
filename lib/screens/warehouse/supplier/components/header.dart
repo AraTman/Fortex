@@ -7,9 +7,8 @@ import 'supplier/add.dart';
 
 
 class HeaderSupplier extends StatelessWidget {
-  const HeaderSupplier({
-    final Key? key,
-  }) : super(key: key);
+  const HeaderSupplier(this.code);
+  final String code;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class HeaderSupplier extends StatelessWidget {
               onPressed: () => showCupertinoModalBottomSheet(
                 isDismissible: false,
                 context: context,
-                builder: (context) => const SupplierAdd(),
+                builder: (context) =>  SupplierAdd(code:code,),
               ),
             ),
           ],

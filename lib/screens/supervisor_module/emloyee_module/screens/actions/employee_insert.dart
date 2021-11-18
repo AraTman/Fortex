@@ -4,14 +4,14 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/core/services/future_service.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/components/department_list.dart';
 
 import '../sp_employee.dart';
 
 class EmployeeInsert extends StatefulWidget {
-  const EmployeeInsert({Key? key}) : super(key: key);
-
+  const EmployeeInsert({Key? key,required this.code}) : super(key: key);
+final String code;
   @override
   EmployeeInsertState createState() => EmployeeInsertState();
 }
@@ -179,7 +179,7 @@ class EmployeeInsertState extends State<EmployeeInsert>
           onPressed: () {
             _formKey.currentState!.save();
 
-            futureService.postAll(_formKey.currentState!.value, url,context,'/spemployee');
+            futureService.postAll(_formKey.currentState!.value, url,context,'/spemployee',widget.code);
             if (_formKey.currentState!.validate()) {
               _succesMessage();
             } else {

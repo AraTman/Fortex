@@ -7,8 +7,9 @@ import 'package:fortextm/screens/warehouse/settings/components/wh_category/profi
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class WhCategoryProfilPage extends StatefulWidget {
-  const WhCategoryProfilPage({Key? key, required this.id}) : super(key: key);
+  const WhCategoryProfilPage({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   WhCategoryProfilPageState createState() => WhCategoryProfilPageState();
 }
@@ -58,14 +59,14 @@ class WhCategoryProfilPageState extends State<WhCategoryProfilPage>
                               onPressed: () => showCupertinoModalBottomSheet(
                                 isDismissible: false,
                                 context: context,
-                                builder: (context) =>  WhAdd(id: widget.id,),
+                                builder: (context) =>  WhAdd(id: widget.id,code: widget.code,),
                               ),
                             ),
                           ),
                           SizedBox(
                             height: SizeConfig.blockSizeVertical! * 3,
                           ),
-                         const WhList()
+                          WhList(code:  widget.code,)
                         ],
                       ),
                     ),

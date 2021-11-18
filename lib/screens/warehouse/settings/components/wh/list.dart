@@ -1,18 +1,18 @@
 import 'package:bs_flutter_card/bs_flutter_card.dart';
 import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
 import 'package:flutter/material.dart';
-import 'package:fortextm/core/services/future_extension.dart';
+import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/config/company_table_source.dart';
-import 'package:fortextm/core/services/future_service.dart';
-import 'package:fortextm/core/services/futures_service.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
+import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'profile_page.dart';
 
 class WhList extends StatefulWidget {
-  const WhList({Key? key}) : super(key: key);
-
+  const WhList({Key? key,required this.code}) : super(key: key);
+final String code;
   @override
   _WhListState createState() => _WhListState();
 }
@@ -54,7 +54,7 @@ class _WhListState extends State<WhList>
                   isDismissible: false,
                   context: context,
                   builder: (context) => WhProfilPage(
-                    id: wh.id
+                    id: wh.id,code: widget.code,
                   ),
                 ),
               )

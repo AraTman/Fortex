@@ -4,7 +4,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fortextm/core/services/shared_preferences_util.dart';
+import 'package:fortextm/core/init/cache/shared_preferences_util.dart';
 import 'package:fortextm/screens/authentication/login/login.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 

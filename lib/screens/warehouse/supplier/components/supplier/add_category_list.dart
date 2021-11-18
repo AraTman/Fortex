@@ -3,9 +3,9 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:fortextm/core/services/future_extension.dart';
-import 'package:fortextm/core/services/future_service.dart';
-import 'package:fortextm/core/services/futures_service.dart';
+import 'package:fortextm/core/init/api_services/future_extension.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
+import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/warehouse/settings/models/wh_supplier_list.dart';
 
 class SupplierCategoryAddList extends StatefulWidget {

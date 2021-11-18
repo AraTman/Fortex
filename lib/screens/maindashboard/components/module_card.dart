@@ -2,9 +2,9 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
-import 'package:fortextm/core/services/future_extension.dart';
-import 'package:fortextm/core/services/future_service.dart';
-import 'package:fortextm/core/services/futures_service.dart';
+import 'package:fortextm/core/init/api_services/future_extension.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
+import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/customer_agent/dashboard/components/info_card.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/departmans.dart';
 
@@ -47,6 +47,7 @@ class _ModuleListState extends State<ModuleList>
                           primary: Colors.transparent,
                           shadowColor: Colors.transparent,),
                       onPressed: () {
+                        
                         Navigator.pushNamed(
                           context,
                           '/${item.department.routes}',
@@ -54,6 +55,7 @@ class _ModuleListState extends State<ModuleList>
                             'code': item.department.code
                           },
                         );
+                       
                       },
                       child: InfoCard(
                           border: Color(color),

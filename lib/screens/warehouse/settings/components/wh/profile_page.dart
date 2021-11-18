@@ -8,8 +8,9 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'profile.dart';
 
 class WhProfilPage extends StatefulWidget {
-  const WhProfilPage({Key? key, required this.id}) : super(key: key);
+  const WhProfilPage({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   WhProfilPageState createState() => WhProfilPageState();
 }
@@ -59,14 +60,14 @@ class WhProfilPageState extends State<WhProfilPage>
                               onPressed: () => showCupertinoModalBottomSheet(
                                 isDismissible: false,
                                 context: context,
-                                builder: (context) =>  WhLocalizationAdd(id: widget.id,),
+                                builder: (context) =>  WhLocalizationAdd(id: widget.id,code: widget.code,),
                               ),
                             ),
                           ),
                           SizedBox(
                             height: SizeConfig.blockSizeVertical! * 3,
                           ),
-                          const WhLocalizationList()
+                           WhLocalizationList(code: widget.code,)
                         ],
                       ),
                     ),

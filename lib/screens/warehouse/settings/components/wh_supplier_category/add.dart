@@ -5,11 +5,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
-import 'package:fortextm/core/services/future_service.dart';
+import 'package:fortextm/core/init/api_services/future_service.dart';
 
 class SupplierCategoryAdd extends StatefulWidget {
-  const SupplierCategoryAdd({Key? key}) : super(key: key);
-
+  const SupplierCategoryAdd({Key? key,required this.code}) : super(key: key);
+final String code;
   @override
   SupplierCategoryAddState createState() => SupplierCategoryAddState();
 }
@@ -144,7 +144,7 @@ class SupplierCategoryAddState extends State<SupplierCategoryAdd>
 
           var response=  futureService.postAll(
               _formKey.currentState!.value,
-              url,context,'/whsettings'
+              url,context,'/whsettings',widget.code
             );
             if (_formKey.currentState!.validate()) {
              print(response.hashCode);

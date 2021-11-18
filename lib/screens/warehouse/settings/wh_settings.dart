@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/core/init/app_bar_actions_items.dart';
+import 'package:fortextm/core/base/app_bar_actions_items.dart';
 import 'package:fortextm/providers/menu/menu.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'components/header.dart';
@@ -88,7 +88,7 @@ class WhSettings extends StatelessWidget {
                               onPressed: () => showCupertinoModalBottomSheet(
                                 isDismissible: false,
                                 context: context,
-                                builder: (context) => const WhCategoryInsert(),
+                                builder: (context) =>  WhCategoryInsert(code: list['code'],),
                               ),
                             ),
                             OutlinedButton(
@@ -115,14 +115,14 @@ class WhSettings extends StatelessWidget {
                                 isDismissible: false,
                                 context: context,
                                 builder: (context) =>
-                                    const SupplierCategoryAdd(),
+                                     SupplierCategoryAdd(code: list['code'],),
                               ),
                             ),
                           ],
                         ),
 
-                           const WhCategoryList(),
-                          const WhSupplierCategoryList(),
+                            WhCategoryList(code: list['code'],),
+                           WhSupplierCategoryList(code:list['code'],),
                      
                       ],
                     ),

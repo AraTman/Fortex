@@ -1,8 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/core/constants/style.dart';
 
 class InfoCard extends StatelessWidget {
   final String icon;
@@ -38,18 +38,17 @@ class InfoCard extends StatelessWidget {
       ),
       child: Wrap(
         children: [
-          Image.asset(icon, width: 55),
-          SizedBox(width: SizeConfig.blockSizeHorizontal!*2,),
-          Column(
-            children: [
-               SizedBox(
-                height: SizeConfig.blockSizeVertical!*2,
-              ),
-              PrimaryText(text: label, color: AppColors.black, size: 18),
-             
-             
-            ],
+          Center(child: Image.asset(icon, width: 35)),
+          SizedBox(
+            width: SizeConfig.blockSizeHorizontal! * 3,
+          ),Center(
+          child: AutoSizeText(
+          label,
+          style: TextStyle(fontSize: 17,color: AppColors.black),
+          maxLines: 2,
           ),
+        ),
+         
         ],
       ),
     );

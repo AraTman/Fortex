@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fortextm/core/services/shared_preferences_util.dart';
+import 'package:fortextm/core/init/cache/shared_preferences_util.dart';
 import 'package:fortextm/providers/menu/models/permissonmodel.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/error_model.dart';
@@ -388,7 +388,7 @@ class FutureService extends IFutureService {
   }
 
   //Post
-  dynamic postCompany(var data, String paths, var file) async {
+  dynamic postCompany(var data, String paths, var file,BuildContext context,String location,String code) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
       Response response = await dio.post(
@@ -407,8 +407,8 @@ class FutureService extends IFutureService {
         datas.forEach((key, value) {
           deger = value;
         });
-
-        final path = file!.map((e) => e.path).toList()[0].toString();
+       if (file != null) {
+          final path = file!.map((e) => e.path).toList()[0].toString();
         final dger = File(path);
         final String _fileName =
             file != null ? file!.map((e) => e.name).toString() : '...';
@@ -420,7 +420,11 @@ class FutureService extends IFutureService {
         });
         final urls = "${_baseUrl}company/media/add";
         response = await dio.post(urls, data: formData);
-        return response.statusCode;
+        return _succesMessage(context, location,code);
+       } else {
+          return _warningMessage(context, 'Firma Görünümü Seçmediniz!');
+       }
+       
       } else {
         return response.statusCode;
       }
@@ -521,7 +525,7 @@ class FutureService extends IFutureService {
   /* post Warehouse */
   dynamic postAll(
       // ignore: type_annotate_public_apis
-      var data, String paths, BuildContext context, String location) async {
+      var data, String paths, BuildContext context, String location,String code) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
 
@@ -534,18 +538,19 @@ class FutureService extends IFutureService {
       );
       if (response.statusCode == 200) {
         // ignore: use_build_context_synchronously
-        return _succesMessage(context, location);
+        return _succesMessage(context, location,code);
       } else {
         // ignore: use_build_context_synchronously
-        return _errorMessage(context, location, "");
+        return _errorMessage(context, location, "",code);
       }
     } on DioError catch (e) {
       // ignore: avoid_print
-      return _errorMessage(context, location, e.error as String);
+      return _errorMessage(context, location, e.error as String,code);
     }
   }
 
-  AwesomeDialog _succesMessage(BuildContext context, String location) {
+  AwesomeDialog _succesMessage(BuildContext context, String location,String code) {
+    
     return AwesomeDialog(
         context: context,
         width: 300,
@@ -556,7 +561,7 @@ class FutureService extends IFutureService {
         title: 'Başarılı',
         desc: 'İşlem başarılı',
         btnOkOnPress: () {
-          Navigator.pushNamed(context, location);
+         Navigator.pushNamed(context, location,arguments:<String, String>{'code':code});
         },
         btnOkIcon: Icons.check_circle,
         onDissmissCallback: (type) {
@@ -566,7 +571,29 @@ class FutureService extends IFutureService {
   }
 
   AwesomeDialog _errorMessage(
-      BuildContext context, String location, String message) {
+      BuildContext context, String location, String message,String code) {
+      
+    return AwesomeDialog(
+        context: context,
+        width: 300,
+        animType: AnimType.LEFTSLIDE,
+        headerAnimationLoop: false,
+        dialogType: DialogType.ERROR,
+        showCloseIcon: true,
+        title: 'Hata',
+        desc: 'İşlem Başarısız$message',
+        btnOkOnPress: () {
+          Navigator.pushNamed(context, location,arguments:<String, String>{'code':code});
+        },
+        btnOkIcon: Icons.check_circle,
+        onDissmissCallback: (type) {
+          debugPrint('Dialog Dissmiss from callback $type');
+        },)
+      ..show();
+  }
+ AwesomeDialog _warningMessage(
+      BuildContext context, String message) {
+      
     return AwesomeDialog(
         context: context,
         width: 300,
@@ -576,15 +603,11 @@ class FutureService extends IFutureService {
         showCloseIcon: true,
         title: 'Hata',
         desc: 'İşlem Başarısız$message',
-        btnOkOnPress: () {
-          Navigator.pushNamed(context, location);
-        },
         btnOkIcon: Icons.check_circle,
         onDissmissCallback: (type) {
           debugPrint('Dialog Dissmiss from callback $type');
         },)
       ..show();
   }
-
  
 }
