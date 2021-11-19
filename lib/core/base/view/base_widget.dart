@@ -5,6 +5,7 @@ import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 
+ // ignore: must_be_immutable
  class BaseView extends StatefulWidget {
   BaseView({Key? key,required this.id,required this.code,required this.context,required this.mainMobilPageBuilder,required this.mainWebPageBuilder,required this.title}) : super(key: key);
 final int id;

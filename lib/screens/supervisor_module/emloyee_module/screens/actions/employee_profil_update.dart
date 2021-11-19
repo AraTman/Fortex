@@ -8,7 +8,8 @@ import 'package:fortextm/screens/supervisor_module/emloyee_module/models/employe
 
 // ignore: must_be_immutable
 class EmployeeProfil extends StatefulWidget {
-  EmployeeProfil({Key? key, required this.id,required this.code}) : super(key: key);
+  EmployeeProfil({Key? key, required this.id, required this.code})
+      : super(key: key);
   late int id;
   final String code;
   @override
@@ -24,7 +25,7 @@ class EmployeeProfilState extends State<EmployeeProfil>
   late FutureService futureServices;
   late Future<List<EmployeeListModel>> httpEmployee;
   final welPath = "employee/get";
-  final url="employee/update";
+  final url = "employee/update";
   bool _status = false;
   @override
   void initState() {
@@ -56,26 +57,26 @@ class EmployeeProfilState extends State<EmployeeProfil>
                   'https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859',
                 ),
               ),
-                SizedBox(
+              SizedBox(
                 height: SizeConfig.blockSizeVertical! * 4,
               ),
-                if (_status == false) _getEditIcon(),
+              if (_status == false) _getEditIcon(),
             ],
           )),
           SizedBox(
             height: SizeConfig.blockSizeVertical! * 5,
           ),
-            Center(child: buildForm(datas, context)),
-                 SizedBox(
-                    height: SizeConfig.blockSizeVertical! * 2,
-                  ),
-                  if (_status != false) _getActionButtons()
+          Center(child: buildForm(datas, context)),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical! * 2,
+          ),
+          if (_status != false) _getActionButtons()
         ],
       );
     });
   }
-FormBuilder buildForm(
-      List<EmployeeListModel> datas, BuildContext context) {
+
+  FormBuilder buildForm(List<EmployeeListModel> datas, BuildContext context) {
     return FormBuilder(
       key: _formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -83,14 +84,13 @@ FormBuilder buildForm(
         width: SizeConfig.screenWidth! / 1.5,
         child: Wrap(
           children: [
-           
-            FormBuilderTextField(
+            /* FormBuilderTextField(
               name: 'Id',
 
               enabled: false,
               // valueTransformer: (text) => num.tryParse(text),
               initialValue: datas.first.id.toString(),
-            ),
+            ),*/
             FormBuilderTextField(
               name: 'Name',
               decoration: const InputDecoration(
@@ -105,47 +105,48 @@ FormBuilder buildForm(
               ]),
               keyboardType: TextInputType.text,
             ),
-             FormBuilderTextField(
-            name: 'Surname',
-            decoration: const InputDecoration(
-              labelText: 'Soyadı',
+            FormBuilderTextField(
+              name: 'Surname',
+              decoration: const InputDecoration(
+                labelText: 'Soyadı',
+              ),
+              initialValue: datas.first.surname,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+                FormBuilderValidators.max(context, 70),
+              ]),
+              keyboardType: TextInputType.text,
             ),
-            initialValue: datas.first.surname,
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(context),
-              FormBuilderValidators.max(context, 70),
-            ]),
-            keyboardType: TextInputType.text,
-          ),
-          FormBuilderTextField(
-            name: 'TelephoneNumber',
-            decoration: const InputDecoration(
-              labelText: 'TC Kimlik Numarası',
+            FormBuilderTextField(
+              name: 'TelephoneNumber',
+              decoration: const InputDecoration(
+                labelText: 'TC Kimlik Numarası',
+              ),
+              initialValue:
+                  datas.first.identityNumber.toString().substring(0, 10),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+              ]),
+              keyboardType: TextInputType.phone,
             ),
-           initialValue: datas.first.identityNumber.toString().substring(0,10),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(context),
-              
-            ]),
-            keyboardType: TextInputType.phone,
-          ),
-          FormBuilderTextField(
-            name: 'TelephoneNumber',
-            decoration: const InputDecoration(
-              labelText: 'Telefon',
+            FormBuilderTextField(
+              name: 'TelephoneNumber',
+              decoration: const InputDecoration(
+                labelText: 'Telefon',
+              ),
+              initialValue:
+                  datas.first.telephoneNumber.toString().substring(0, 10),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+              ]),
+              keyboardType: TextInputType.phone,
             ),
-           initialValue: datas.first.telephoneNumber.toString().substring(0,10),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(context),
-              
-            ]),
-            keyboardType: TextInputType.phone,
-          ), 
           ],
         ),
       ),
     );
   }
+
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
@@ -178,9 +179,9 @@ FormBuilder buildForm(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                 ),
-               onPressed: () {
+                onPressed: () {
+                  _formKey.currentState!.setInternalFieldValue('Id', widget.id);
                   _formKey.currentState!.save();
-
                   if (_formKey.currentState!.validate()) {
                     futureServices = FutureService();
                     futureServices.postAllUpdate(_formKey.currentState!.value,

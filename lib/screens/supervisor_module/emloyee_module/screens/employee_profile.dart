@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/base/view/base_widget.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
-import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/employee_profil_update.dart';
 import '../components/mediatype_list.dart';
 

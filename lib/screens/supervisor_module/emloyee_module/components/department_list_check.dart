@@ -1,6 +1,5 @@
 // ignore: implementation_imports, unused_import
 import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';

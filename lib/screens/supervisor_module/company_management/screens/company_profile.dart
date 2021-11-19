@@ -106,14 +106,14 @@ class CompanyProfilState extends State<CompanyProfil>
                   ? datas.first.company.country!
                   : "Seçilmedi",
             ),
-            FormBuilderTextField(
+           /* FormBuilderTextField(
               name: 'Id',
 
               enabled: false,
               // valueTransformer: (text) => num.tryParse(text),
               initialValue: datas.first.company.id.toString(),
              
-            ),
+            ),*/
             FormBuilderTextField(
               name: 'Name',
               decoration: const InputDecoration(
@@ -195,6 +195,7 @@ class CompanyProfilState extends State<CompanyProfil>
                       borderRadius: BorderRadius.circular(20.0)),
                 ),
                 onPressed: () {
+                   _formKey.currentState!.setInternalFieldValue('Id', widget.id);
                   _formKey.currentState!.save();
 
                   if (_formKey.currentState!.validate()) {
