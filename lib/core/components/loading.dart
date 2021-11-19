@@ -5,7 +5,7 @@ class LoadingLottie extends StatelessWidget {
   const LoadingLottie({Key? key}) : super(key: key);
 Center get _centerLoading => Center(
       child: Lottie.network(
-          "https://assets4.lottiefiles.com/private_files/lf30_r5i8efqc.json",
+          "https://assets3.lottiefiles.com/datafiles/OisWNdtMtC7TR1b/data.json",
           width: 125,),);
   @override
   Widget build(BuildContext context) {

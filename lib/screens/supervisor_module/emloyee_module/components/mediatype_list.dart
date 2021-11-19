@@ -6,12 +6,13 @@ import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/media_type_list.dart';
 
-import 'image_pick.dart';
+import '../../../../core/components/image_pick.dart';
 
 // ignore: must_be_immutable
 class MediaTypesLists extends StatefulWidget {
-  MediaTypesLists({Key? key, required this.employeeId}) : super(key: key);
+  MediaTypesLists({Key? key, required this.employeeId,required this.code}) : super(key: key);
   late int employeeId;
+  final String code;
   @override
   _MediaTypesListsState createState() => _MediaTypesListsState();
 }
@@ -19,6 +20,7 @@ class MediaTypesLists extends StatefulWidget {
 class _MediaTypesListsState extends State<MediaTypesLists>
     with AutomaticKeepAliveClientMixin {
   final welPath = "employee/mediaType/list";
+  final mediaPath = "employee/media/add";
   bool isLoading = false;
 
   late IFutureService futureService;
@@ -47,7 +49,7 @@ class _MediaTypesListsState extends State<MediaTypesLists>
                       ),
                       ImagePicker(
                         employeId: widget.employeeId,
-                        id: item.id,
+                        id: item.id,code: widget.code,url:mediaPath ,
                       )
                     ],
                   );

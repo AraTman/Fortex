@@ -9,8 +9,9 @@ import 'package:fortextm/screens/supervisor_module/company_management/screens/su
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SubsidiaryLists extends StatefulWidget {
-  const SubsidiaryLists({Key? key, required this.id}) : super(key: key);
+  const SubsidiaryLists({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   _SubsidiaryListsState createState() => _SubsidiaryListsState();
 }
@@ -44,7 +45,7 @@ class _SubsidiaryListsState extends State<SubsidiaryLists>
                       isDismissible: false,
                       context: context,
                       builder: (context) =>  SubsidiaryProfileItem(
-                        id: item.id,
+                        id: item.id,code: widget.code,
                       ),
                     ),
                     child: Column(

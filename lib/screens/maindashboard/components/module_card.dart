@@ -21,7 +21,7 @@ class _ModuleListState extends State<ModuleList>
   bool isLoading = false;
 
   late IFutureService futureService;
-  late Future<List<Departmans>> httpCompany;
+  late Future<List<DepartmanModel>> httpCompany;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _ModuleListState extends State<ModuleList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return httpCompany.toBuild<List<Departmans>>(onSucces: (datas) {
+    return httpCompany.toBuild<List<DepartmanModel>>(onSucces: (datas) {
       return Wrap(
         runSpacing: 15,
         spacing: 15,

@@ -8,7 +8,7 @@ import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/core/extensions/localekeys.dart';
 import 'package:fortextm/providers/menu/menu.dart';
 
-import '../../../core/base/app_bar_actions_items.dart';
+import '../../../core/components/app_bar_actions_items.dart';
 import 'components/card.dart';
 import 'components/header.dart';
 

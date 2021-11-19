@@ -3,10 +3,14 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/components/card_company_profil.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/components/official_table.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import 'actions/s_officer_add.dart';
 
 class SubsidiaryProfileItem extends StatefulWidget {
-  const SubsidiaryProfileItem({Key? key, required this.id}) : super(key: key);
+  const SubsidiaryProfileItem({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
+  final String code;
   @override
   SubsidiaryProfileItemState createState() => SubsidiaryProfileItemState();
 }
@@ -54,8 +58,22 @@ class SubsidiaryProfileItemState extends State<SubsidiaryProfileItem>
                             SizedBox(
                               height: SizeConfig.blockSizeVertical! * 5,
                             ),
+                              OutlinedButton(
+                       child: const Text('Personel Ekle'),
+                       style: OutlinedButton.styleFrom(
+                         primary: Colors.white,
+                         backgroundColor: Colors.black,
+                         shape: const RoundedRectangleBorder(
+                             borderRadius: BorderRadius.all(Radius.circular(10))),
+                       ),
+                       onPressed: () => showCupertinoModalBottomSheet(
+                         isDismissible: false,
+                         context: context,
+                         builder: (context) =>  SubsidiaryEmployeeAdd(id: widget.id,code: widget.code,),
+                       ),
+                     ),
                             OfficerList(
-                              id: widget.id,
+                              id: widget.id,code: widget.code,
                             )
                           ],
                         )),

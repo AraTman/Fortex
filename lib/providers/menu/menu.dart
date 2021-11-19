@@ -42,26 +42,24 @@ class _SideMenuState extends State<SideMenu> {
                 height: SizeConfig.blockSizeHorizontal! * 22,
               ),
               const Divider(),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: AppColors.secondaryBg,
-                      shadowColor: Colors.transparent),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/whsettings');
-                    setState(() {});
-                  },
-                  child: Column(
-                    children: const [
-                      Icon(
-                        Icons.settings,
-                        color: AppColors.lgunder,
-                      ),
-                      Text(
-                        'Ayarlar',
-                        style: TextStyle(color: AppColors.lgunder),
-                      )
-                    ],
-                  )),
+              ListTile(
+                    title: Column(
+                      children: [
+                        // ignore: unnecessary_new
+                        Icon(Icons.settings),
+                        Text(
+                         'Ayarlar',
+                          style: const TextStyle(color: AppColors.lgunder),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/whsettings', arguments: <String, String>{
+                            'code': widget.code
+                          },);
+                            },selectedColor: Colors.red,
+                  ),
+             
             ],
           ),
         ),

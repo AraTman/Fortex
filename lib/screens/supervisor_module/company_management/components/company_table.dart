@@ -6,8 +6,10 @@ import 'package:fortextm/screens/supervisor_module/company_management/models/com
 import 'package:fortextm/core/config/company_table_source.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
-import 'package:fortextm/screens/supervisor_module/company_management/screens/subsidiary_list.dart';
+import 'package:fortextm/screens/supervisor_module/company_management/screens/main_company.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import 'company_table_source.dart';
 
 class CompanyList extends StatefulWidget {
   const CompanyList({Key? key, required this.code}) : super(key: key);
@@ -23,7 +25,7 @@ class _CompanyListState extends State<CompanyList>
 
   late IFutureService futureService;
   late Future<List<modelCompanyTable>> httpCompany;
-  final ExampleSource _source1 = ExampleSource(
+  final SpCompanySource _source = SpCompanySource(
       data: [],
       editListener: (value, index, sources, source) {
         final data = source.get(index);
@@ -43,28 +45,28 @@ class _CompanyListState extends State<CompanyList>
     super.build(context);
     return  httpCompany.toBuild<List<modelCompanyTable>>(onSucces: (datas) {
       Future.delayed(Duration.zero, () async {
-    _source1.clear();
+    _source.clear();
     datas
-        .map((companys) => _source1.add({
+        .map((companys) => _source.add({
               'name': companys.name ,
               'actions': IconButton(
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,
-                  builder: (context) => CompanyProfile(
+                  builder: (context) => CompanyMainProfile(
                     id: companys.id,code: widget.code,
                   ), 
                 ),
-              )
+              ),
             }))
         .toList();
       });
       return BsCardContainer(
     child: BsDatatable(
-      source: _source1,
+      source: _source,
       title: const Text('Firma Listesi'),
-      columns: ExampleSource.columns,
+      columns: SpCompanySource.columns,
     ),
       );
     });

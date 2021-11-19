@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/core/base/loading.dart';
+import 'package:fortextm/core/components/loading.dart';
 import 'package:fortextm/core/init/cache/shared_preferences_util.dart';
 import 'package:fortextm/screens/maindashboard/moduledashboard.dart';
 import 'package:http/http.dart' as http;
@@ -29,7 +29,7 @@ class _LoginState extends State<Login> {
       });
       String username = StorageUtil.getString('username');
       String password = StorageUtil.getString('password');
-      _DenemeauthUser(username, password);
+      _autoauthUser(username, password);
     } else {
       _isLoading = false;
     }
@@ -181,12 +181,13 @@ class _LoginState extends State<Login> {
   }
 
   // ignore: non_constant_identifier_names
-  Future<String> _DenemeauthUser(String username, password) async {
+  Future<String> _autoauthUser(String username, password) async {
     Map datas = {
       'grant_type': 'password',
       'username': username,
       'password': password
     };
+     var jsonResponse;
     // ignore: prefer_typing_uninitialized_variables
     var url = 'https://app.portalofarge.com/api/login';
     var response = await http.post(Uri.parse(url),
@@ -198,6 +199,11 @@ class _LoginState extends State<Login> {
 
     return Future.delayed(loginTime).then((_) {
       if (response.statusCode == 200) {
+          jsonResponse = json.decode(response.body);
+        StorageUtil.getClear();
+        StorageUtil.putString("token", jsonResponse['access_token']);
+        StorageUtil.putString("username", username);
+        StorageUtil.putString("password", password);
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute<void>(

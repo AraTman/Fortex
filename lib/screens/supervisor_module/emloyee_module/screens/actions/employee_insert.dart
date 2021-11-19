@@ -1,4 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
@@ -7,11 +7,9 @@ import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/components/department_list.dart';
 
-import '../sp_employee.dart';
-
 class EmployeeInsert extends StatefulWidget {
-  const EmployeeInsert({Key? key,required this.code}) : super(key: key);
-final String code;
+  const EmployeeInsert({Key? key, required this.code}) : super(key: key);
+  final String code;
   @override
   EmployeeInsertState createState() => EmployeeInsertState();
 }
@@ -178,10 +176,10 @@ class EmployeeInsertState extends State<EmployeeInsert>
           ),
           onPressed: () {
             _formKey.currentState!.save();
-
-            futureService.postAll(_formKey.currentState!.value, url,context,'/spemployee',widget.code);
             if (_formKey.currentState!.validate()) {
-              _succesMessage();
+              futureService = FutureService();
+              futureService.postAll(_formKey.currentState!.value, url, context,
+                  '/hr1', widget.code);
             } else {
               // ignore: avoid_print
               print("validation failed");
@@ -190,26 +188,5 @@ class EmployeeInsertState extends State<EmployeeInsert>
         ),
       ],
     );
-  }
-
-  AwesomeDialog _succesMessage() {
-    return AwesomeDialog(
-      context: context,
-      width: 300,
-      animType: AnimType.LEFTSLIDE,
-      headerAnimationLoop: false,
-      dialogType: DialogType.SUCCES,
-      showCloseIcon: true,
-      title: 'Başarılı',
-      desc: 'Kayıt başarılı',
-      btnOkOnPress: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => SpEmployee(),
-          ),
-        );
-      },
-      btnOkIcon: Icons.check_circle,
-    )..show();
   }
 }

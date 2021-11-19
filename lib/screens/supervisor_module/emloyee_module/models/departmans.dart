@@ -1,67 +1,78 @@
-// To parse this JSON data, do
-//
-//     final departmans = departmansFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Departmans> departmansFromJson(String str) =>
-    List<Departmans>.from(json.decode(str).map((x) => Departmans.fromJson(x)));
+class DepartmanModel {
+    DepartmanModel({
+        required this.id,
+        required this.userId,
+        required this.departmentId,
+        required this.status,
+        required this.department,
+    });
 
-String departmansToJson(List<Departmans> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+    final int id;
+    final int userId;
+    final int departmentId;
+    final bool status;
+    final Department department;
 
-class Departmans {
-  Departmans({
-  required  this.department,
-  required  this.id,
-  });
+    factory DepartmanModel.fromRawJson(String str) => DepartmanModel.fromJson(json.decode(str));
 
-  Department department;
-  int id;
+    String toRawJson() => json.encode(toJson());
 
-  factory Departmans.fromJson(Map<String, dynamic> json) => Departmans(
-        department: Department.fromJson(json["Department"]),
+    factory DepartmanModel.fromJson(Map<String, dynamic> json) => DepartmanModel(
         id: json["Id"],
-      );
+        userId: json["UserId"],
+        departmentId: json["DepartmentId"],
+        status: json["Status"],
+        department: Department.fromJson(json["Department"]),
+    );
 
-  Map<String, dynamic> toJson() => {
-        "Department": department.toJson(),
+    Map<String, dynamic> toJson() => {
         "Id": id,
-      };
+        "UserId": userId,
+        "DepartmentId": departmentId,
+        "Status": status,
+        "Department": department.toJson(),
+    };
 }
 
 class Department {
-  Department({
-    required this.id,
-    required this.name,
-    required this.code,
-    required this.routes,
-    required this.color,
-    required this.image,
-  });
+    Department({
+        required this.id,
+        required this.name,
+        required this.code,
+        required this.routes,
+        required this.color,
+        required this.image,
+    });
 
-  int id;
-  String name;
-  String code;
-  String routes;
-  dynamic color;
-  dynamic image;
+    final int id;
+    final String name;
+    final String code;
+    final String routes;
+    final String color;
+    final String image;
 
-  factory Department.fromJson(Map<String, dynamic> json) => Department(
+    factory Department.fromRawJson(String str) => Department.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory Department.fromJson(Map<String, dynamic> json) => Department(
         id: json["Id"],
         name: json["Name"],
         code: json["Code"],
         routes: json["Routes"],
         color: json["Color"],
         image: json["Image"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "Id": id,
         "Name": name,
         "Code": code,
         "Routes": routes,
         "Color": color,
         "Image": image,
-      };
+    };
 }

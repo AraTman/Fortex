@@ -6,10 +6,13 @@ import 'package:fortextm/core/config/company_table_source.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/official_list.dart';
+import 'package:fortextm/screens/supervisor_module/company_management/screens/s_officer.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class OfficerList extends StatefulWidget {
-  const OfficerList({Key? key,required this.id}) : super(key: key);
+  const OfficerList({Key? key,required this.id,required this.code}) : super(key: key);
 final int id;
+final String code;
   @override
   _OfficerListState createState() => _OfficerListState();
 }
@@ -47,15 +50,21 @@ class _OfficerListState extends State<OfficerList>
               'name': official.name,
               'actions': IconButton(
                 icon: const Icon(Icons.remove_red_eye),
-                onPressed: (){}
-              )
+                onPressed: ()=> showCupertinoModalBottomSheet(
+            expand: true,
+            isDismissible: true,
+            context: context,
+            builder: (context) =>  SofficierProfile(id: official.id,code: widget.code,),
+          ),
+        ),
+              
             }))
         .toList();
       });
       return BsCardContainer(
     child: BsDatatable(
       source: _source1,
-      title: const Text('Datatables Data'),
+      title: const Text('Yetkili Listesi'),
       columns: ExampleSource.columns,
     ),
       );

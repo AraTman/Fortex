@@ -5,13 +5,18 @@ import 'package:flutter/services.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/style.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
-
 // ignore: must_be_immutable
 class ImagePicker extends StatefulWidget {
-  ImagePicker({Key? key, required this.employeId, required this.id})
+  ImagePicker({Key? key, required this.employeId, required this.id,required this.code,required this.url})
       : super(key: key);
+      ///
   late int employeId, id;
-
+   /// Allocates a new string containing the specified [employeId].
+  ///
+  /// The [employeId] can be both UTF-16 code units or runes.
+  /// If a char-code value is 16-bit, it is used as a code unit:
+  /// ```dart
+final String code,url;
   @override
   State<ImagePicker> createState() => _ImagePickerState();
 }
@@ -24,7 +29,7 @@ class _ImagePickerState extends State<ImagePicker> {
   String? _directoryPath;
   String? _extension;
   bool _isLoading = false;
-  final welPath = "employee/media/add";
+  
 // ignore: unused_field
   bool _userAborted = false;
   late FutureService futureService;
@@ -192,9 +197,9 @@ class _ImagePickerState extends State<ImagePicker> {
                                       futureService.postImage(
                                           _paths,
                                           widget.id,
-                                          welPath,
+                                          widget.url,
                                           widget.employeId,
-                                          _extension!);
+                                          _extension!,context,widget.code);
                                     },
                                     icon: const Icon(
                                       Icons.upload_file,

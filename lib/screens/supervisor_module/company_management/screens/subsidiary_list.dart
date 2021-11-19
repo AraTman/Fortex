@@ -6,15 +6,15 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'actions/company_sub_insert.dart';
 
-class CompanyProfile extends StatefulWidget {
-  const CompanyProfile({Key? key, required this.id,required this.code}) : super(key: key);
+class CompanySubsidiaryProfile extends StatefulWidget {
+  const CompanySubsidiaryProfile({Key? key, required this.id,required this.code}) : super(key: key);
   final int id;
   final String code;
   @override
-  CompanyProfileState createState() => CompanyProfileState();
+  CompanySubsidiaryProfileState createState() => CompanySubsidiaryProfileState();
 }
 
-class CompanyProfileState extends State<CompanyProfile>
+class CompanySubsidiaryProfileState extends State<CompanySubsidiaryProfile>
     with SingleTickerProviderStateMixin {
   // ignore: unused_field
   @override
@@ -74,7 +74,7 @@ class CompanyProfileState extends State<CompanyProfile>
                             SizedBox(
                               height: SizeConfig.blockSizeVertical! * 5,
                             ),
-                            SubsidiaryLists(id: widget.id,)
+                            SubsidiaryLists(id: widget.id,code: widget.code,)
                           ],
                         )),
                       ],

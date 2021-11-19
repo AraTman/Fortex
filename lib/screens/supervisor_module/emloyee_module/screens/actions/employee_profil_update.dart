@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
@@ -7,8 +8,9 @@ import 'package:fortextm/screens/supervisor_module/emloyee_module/models/employe
 
 // ignore: must_be_immutable
 class EmployeeProfil extends StatefulWidget {
-  EmployeeProfil({Key? key, required this.id}) : super(key: key);
+  EmployeeProfil({Key? key, required this.id,required this.code}) : super(key: key);
   late int id;
+  final String code;
   @override
   EmployeeProfilState createState() => EmployeeProfilState();
 }
@@ -16,14 +18,13 @@ class EmployeeProfil extends StatefulWidget {
 class EmployeeProfilState extends State<EmployeeProfil>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
-  TextEditingController ad = TextEditingController();
-  TextEditingController unvan = TextEditingController();
-  TextEditingController tel = TextEditingController();
-  TextEditingController tarih = TextEditingController();
+  final _formKey = GlobalKey<FormBuilderState>();
   bool isLoading = false;
   late IFutureService futureService;
+  late FutureService futureServices;
   late Future<List<EmployeeListModel>> httpEmployee;
   final welPath = "employee/get";
+  final url="employee/update";
   bool _status = false;
   @override
   void initState() {
@@ -55,91 +56,96 @@ class EmployeeProfilState extends State<EmployeeProfil>
                   'https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859',
                 ),
               ),
+                SizedBox(
+                height: SizeConfig.blockSizeVertical! * 4,
+              ),
+                if (_status == false) _getEditIcon(),
             ],
           )),
           SizedBox(
             height: SizeConfig.blockSizeVertical! * 5,
           ),
-          Center(
-            child: SizedBox(
-              width: 600,
-              child: Column(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[if (_status == false) _getEditIcon()],
-                  ),
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 250,
-                        child: TextFormField(
-                          initialValue: datas.first.name,
-                          enabled: _status,
-                          decoration: const InputDecoration(
-                              border: UnderlineInputBorder(), labelText: 'Ad'),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
-                      SizedBox(
-                        width: 250,
-                        child: TextFormField(
-                          initialValue: datas.first.surname,
-                          enabled: _status,
-                          decoration: const InputDecoration(
-                              border: UnderlineInputBorder(),
-                              labelText: 'Soyad'),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
+            Center(child: buildForm(datas, context)),
+                 SizedBox(
                     height: SizeConfig.blockSizeVertical! * 2,
                   ),
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 250,
-                        child: TextFormField(
-                          initialValue: datas.first.telephoneNumber.toString(),
-                          enabled: _status,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Telefon Numarası',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
-                      SizedBox(
-                        width: 250,
-                        child: TextFormField(
-                          initialValue: datas.first.identityNumber.toString(),
-                          enabled: _status,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'T.C Kimlik Numarası',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   if (_status != false) _getActionButtons()
-                ],
-              ),
-            ),
-          ),
         ],
       );
     });
   }
+FormBuilder buildForm(
+      List<EmployeeListModel> datas, BuildContext context) {
+    return FormBuilder(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: SizedBox(
+        width: SizeConfig.screenWidth! / 1.5,
+        child: Wrap(
+          children: [
+           
+            FormBuilderTextField(
+              name: 'Id',
 
+              enabled: false,
+              // valueTransformer: (text) => num.tryParse(text),
+              initialValue: datas.first.id.toString(),
+            ),
+            FormBuilderTextField(
+              name: 'Name',
+              decoration: const InputDecoration(
+                labelText: 'Firma Adı',
+              ),
+              enabled: _status,
+              // valueTransformer: (text) => num.tryParse(text),
+              initialValue: datas.first.name,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+                FormBuilderValidators.max(context, 70),
+              ]),
+              keyboardType: TextInputType.text,
+            ),
+             FormBuilderTextField(
+            name: 'Surname',
+            decoration: const InputDecoration(
+              labelText: 'Soyadı',
+            ),
+            initialValue: datas.first.surname,
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              FormBuilderValidators.max(context, 70),
+            ]),
+            keyboardType: TextInputType.text,
+          ),
+          FormBuilderTextField(
+            name: 'TelephoneNumber',
+            decoration: const InputDecoration(
+              labelText: 'TC Kimlik Numarası',
+            ),
+           initialValue: datas.first.identityNumber.toString().substring(0,10),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              
+            ]),
+            keyboardType: TextInputType.phone,
+          ),
+          FormBuilderTextField(
+            name: 'TelephoneNumber',
+            decoration: const InputDecoration(
+              labelText: 'Telefon',
+            ),
+           initialValue: datas.first.telephoneNumber.toString().substring(0,10),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(context),
+              
+            ]),
+            keyboardType: TextInputType.phone,
+          ), 
+          ],
+        ),
+      ),
+    );
+  }
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
@@ -172,11 +178,20 @@ class EmployeeProfilState extends State<EmployeeProfil>
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _status = false;
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  });
+               onPressed: () {
+                  _formKey.currentState!.save();
+
+                  if (_formKey.currentState!.validate()) {
+                    futureServices = FutureService();
+                    futureServices.postAllUpdate(_formKey.currentState!.value,
+                        url, context, '/sp1', widget.code, widget.id);
+                    setState(() {
+                      _status = false;
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    });
+                  } else {
+                    print("validation failed");
+                  }
                 },
               )),
             ),

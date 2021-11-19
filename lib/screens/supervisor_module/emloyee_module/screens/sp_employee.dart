@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/responsive.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/core/base/app_bar_actions_items.dart';
-import 'package:fortextm/core/base/header.dart';
+import 'package:fortextm/core/components/app_bar_actions_items.dart';
+import 'package:fortextm/core/components/header.dart';
 import 'package:fortextm/providers/menu/menu.dart';
-import 'package:fortextm/screens/supervisor_module/emloyee_module/components/employee_add_button.dart';
+import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/employee_add_button.dart';
 
 import '../components/employee_table.dart';
 
@@ -60,7 +60,7 @@ class SpEmployee extends StatelessWidget {
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,
                         ),
-                        const EmployeeList(),
+                         EmployeeList(code: list['code']),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // ignore: prefer_const_literals_to_create_immutables

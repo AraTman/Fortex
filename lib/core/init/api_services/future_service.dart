@@ -5,8 +5,10 @@ import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/init/cache/shared_preferences_util.dart';
 import 'package:fortextm/providers/menu/models/permissonmodel.dart';
+import 'package:fortextm/screens/supervisor_module/company_management/models/company_media_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/error_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/official_list.dart';
@@ -52,11 +54,11 @@ class FutureService extends IFutureService {
   }
 
   @override
-  Future<List<Departmans>> getHttpDepartmans(String url) async {
+  Future<List<DepartmanModel>> getHttpDepartmans(String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     final response = await _getDioRequest(url);
     if (response is List) {
-      return response.map((e) => Departmans.fromJson(e)).toList();
+      return response.map((e) => DepartmanModel.fromJson(e)).toList();
     } else {
       throw response;
     }
@@ -91,6 +93,40 @@ class FutureService extends IFutureService {
         final data = response.data;
         if (data is List) {
           return data.map((e) => SubsidiaryList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+   @override
+  Future<List<OfficialList>> getHttpOfficerGets(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => OfficialList.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+@override
+  Future<List<modelMediaCompanyTable>> getHttpTableModelGets(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"companyId": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => modelMediaCompanyTable.fromJson(e)).toList();
         } else {
           throw data;
         }
@@ -270,6 +306,7 @@ class FutureService extends IFutureService {
     }
   }
 
+
   @override
   Future<List<WhLocalizationModelList>> getHttpWhLocalizationGets(
       String url, int id) async {
@@ -394,6 +431,8 @@ class FutureService extends IFutureService {
       String location, String code, String imgUrl, int postNum) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
+     
+     
       Response response = await dio.post(
         _baseUrl + paths,
         data: data,
@@ -411,7 +450,7 @@ class FutureService extends IFutureService {
         datas.forEach((key, value) {
           deger = value;
         });
-        if (file != null) {
+      
           final path = file!.map((e) => e.path).toList()[0].toString();
           final _path = File(path);
           final String _fileName =
@@ -453,15 +492,13 @@ class FutureService extends IFutureService {
           final urls = "${_baseUrl + imgUrl}";
           response = await dio.post(urls, data: formData);
           return _succesMessage(context, location, code);
-        } else {
-          return _warningMessage(context, 'Firma Görünümü Seçmediniz!');
-        }
+       
       } else {
         return response.statusCode;
       }
     } on DioError catch (e) {
       // ignore: avoid_print
-      return e.error;
+      return _warningMessage(context, 'Hata${e.error}!');
     }
   }
 
@@ -471,7 +508,7 @@ class FutureService extends IFutureService {
       int id,
       String url,
       int employeeId,
-      String fileType) async {
+      String fileType,BuildContext context,String code) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
       if (file != null) {
@@ -503,8 +540,9 @@ class FutureService extends IFutureService {
           urls,
           data: formData,
         );
+         return _succesMessage(context, "hr1", code);
       } else {
-        return 'Error';
+        return _errorMessage(context, "hr1", "Hata", code);
       }
     } on DioError catch (e) {
       // ignore: avoid_print
@@ -526,6 +564,34 @@ class FutureService extends IFutureService {
       final Response response = await dio.post(
         _baseUrl + paths,
         data: data,
+        options: Options(
+          followRedirects: false,
+        ),
+      );
+      if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
+        return _succesMessage(context, location, code);
+      } else {
+        // ignore: use_build_context_synchronously
+        return _errorMessage(context, location, "", code);
+      }
+    } on DioError catch (e) {
+      // ignore: avoid_print
+      return _errorMessage(context, location, e.error as String, code);
+    }
+  }
+  dynamic postAllUpdate(
+      // ignore: type_annotate_public_apis
+      var data,
+      String paths,
+      BuildContext context,
+      String location,
+      String code,int Id) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $token";
+      final Response response = await dio.post(
+        _baseUrl + paths,
+        data: data ,
         options: Options(
           followRedirects: false,
         ),
@@ -580,6 +646,7 @@ class FutureService extends IFutureService {
         Navigator.pushNamed(context, location,
             arguments: <String, String>{'code': code});
       },
+      btnOkColor: AppColors.mtred,
       btnOkIcon: Icons.check_circle,
       onDissmissCallback: (type) {
         debugPrint('Dialog Dissmiss from callback $type');
@@ -597,7 +664,7 @@ class FutureService extends IFutureService {
       showCloseIcon: true,
       title: 'Hata',
       desc: 'İşlem Başarısız$message',
-      btnOkIcon: Icons.check_circle,
+      btnCancelIcon: Icons.check_circle,btnCancelColor: AppColors.mtorange,
       onDissmissCallback: (type) {
         debugPrint('Dialog Dissmiss from callback $type');
       },

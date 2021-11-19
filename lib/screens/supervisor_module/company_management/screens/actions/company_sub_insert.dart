@@ -187,10 +187,7 @@ class CompanySubInsertState extends State<CompanySubInsert>
               labelText: 'Şube No',
             ),
             // valueTransformer: (text) => num.tryParse(text),
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(context),
-              FormBuilderValidators.max(context, 70),
-            ]),
+          
             keyboardType: TextInputType.text,
           ),
           FormBuilderTextField(
@@ -273,9 +270,9 @@ class CompanySubInsertState extends State<CompanySubInsert>
             // valueTransformer: (text) => num.tryParse(text),
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(context),
-              FormBuilderValidators.max(context, 70),
+              
             ]),
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.phone,
           ),
           const SizedBox(
             height: 25,

@@ -1,12 +1,12 @@
 // ignore_for_file: avoid_print, duplicate_ignore
 
 import 'dart:io';
-
-import 'package:country_picker/country_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:fortextm/core/components/country_select.dart';
+import 'package:fortextm/core/components/image_pick.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/constants/style.dart';
@@ -21,7 +21,6 @@ class CompanyInsert extends StatefulWidget {
 
 class CompanyInsertState extends State<CompanyInsert>
     with SingleTickerProviderStateMixin {
-  TextEditingController adress = TextEditingController();
   TextEditingController countrys = TextEditingController();
   final _formKey = GlobalKey<FormBuilderState>();
   late FutureService futureService;
@@ -161,86 +160,7 @@ class CompanyInsertState extends State<CompanyInsert>
                                       AutovalidateMode.onUserInteraction,
                                   child: Column(
                                     children: <Widget>[
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: SizeConfig.screenWidth! -130,
-                                            child: FormBuilderTextField(
-                                              name: 'Country',
-                                              controller: countrys,
-                                              readOnly: true,
-                                              decoration: const InputDecoration(
-                                                labelText: 'Ülke',
-                                              ),
-                                              maxLength: 150,
-                                              // valueTransformer: (text) => num.tryParse(text),
-                                              validator: FormBuilderValidators
-                                                  .compose([
-                                                FormBuilderValidators.required(
-                                                    context),
-                                                FormBuilderValidators.max(
-                                                    context, 70),
-                                              ]),
-                                              keyboardType: TextInputType.text,
-                                            ),
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              showCountryPicker(
-                                                  context: context,
-                                                  countryListTheme:
-                                                      CountryListThemeData(
-                                                    flagSize: 25,
-                                                    backgroundColor:
-                                                        Colors.white,
-                                                    textStyle: const TextStyle(
-                                                        fontSize: 16,
-                                                        color: Colors.blueGrey),
-                                                    //Optional. Sets the border radius for the bottomsheet.
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(20.0),
-                                                      topRight:
-                                                          Radius.circular(20.0),
-                                                    ),
-                                                    //Optional. Styles the search field.
-                                                    inputDecoration:
-                                                        InputDecoration(
-                                                      labelText: 'Search',
-                                                      hintText:
-                                                          'Start typing to search',
-                                                      prefixIcon: const Icon(
-                                                          Icons.search),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: const Color(
-                                                                  0xFF8C98A8)
-                                                              .withOpacity(0.2),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  onSelect: (Country country) =>
-                                                      {
-                                                        print(
-                                                            'Select country: ${country.countryCode}'),
-                                                        adress.value,
-                                                        setState(() {
-                                                          countrys.text =
-                                                              country
-                                                                  .displayName
-                                                                  .toString();
-                                                        })
-                                                      });
-                                            },
-                                            child: const Text('Ülke'),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.deepOrange),
-                                          ),
-                                        ],
-                                      ),
+                                    CountrySelect(county: '',),
                                       FormBuilderTextField(
                                         name: 'Name',
                                         decoration: const InputDecoration(
@@ -274,6 +194,7 @@ class CompanyInsertState extends State<CompanyInsert>
                                       const SizedBox(
                                         height: 25,
                                       ),
+                                   
                                       Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -409,6 +330,7 @@ class CompanyInsertState extends State<CompanyInsert>
                 borderRadius: BorderRadius.circular(20.0)),
           ),
           onPressed: () {
+            
             _formKey.currentState!.save();
             futureService = FutureService();
             if (_formKey.currentState!.validate()) {

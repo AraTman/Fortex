@@ -1,6 +1,6 @@
+
 import 'dart:convert';
 
-// ignore: camel_case_types
 class permissionModel {
     permissionModel({
         required this.id,
@@ -8,9 +8,9 @@ class permissionModel {
         required this.permissions,
     });
 
-    int id;
-    int userId;
-    Permissions permissions;
+    final int id;
+    final int userId;
+    final Permissions permissions;
 
     factory permissionModel.fromRawJson(String str) => permissionModel.fromJson(json.decode(str));
 
@@ -38,11 +38,11 @@ class Permissions {
         required this.icon,
     });
 
-    int id;
-    String name;
-    String code;
-    String url;
-    String icon;
+    final int id;
+    final String name;
+    final String code;
+    final String url;
+    final String icon;
 
     factory Permissions.fromRawJson(String str) => Permissions.fromJson(json.decode(str));
 
@@ -63,10 +63,4 @@ class Permissions {
         "Url": url,
         "Icon": icon,
     };
-}
-class WeatherRouteArguments {
-  WeatherRouteArguments({ required this.id});
-  final int id;
-
- 
 }

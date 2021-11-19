@@ -1,5 +1,5 @@
 
-// ignore: camel_case_types
+
 class modelCompanyTable {
   modelCompanyTable({
     required this.id,
@@ -30,6 +30,14 @@ class modelCompanyTable {
         "Country":country,
         "Address": address,
       };
+}
+class modelImage{
+  modelImage({
+    required this.image,
+  });
+  String image;
+
+ 
 }
 
 

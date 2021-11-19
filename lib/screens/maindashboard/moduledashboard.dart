@@ -1,10 +1,10 @@
 // ignore: implementation_imports
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
-import 'package:fortextm/core/base/app_bar_actions_items.dart';
-import 'package:fortextm/core/base/header.dart';
+import 'package:fortextm/core/components/app_bar_actions_items.dart';
+import 'package:fortextm/core/components/header.dart';
 
-import '../../core/base/app_bar_actions_items.dart';
+import '../../core/components/app_bar_actions_items.dart';
 import 'components/module_card.dart';
 
 // ignore: must_be_immutable

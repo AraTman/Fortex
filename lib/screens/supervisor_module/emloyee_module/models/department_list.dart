@@ -18,7 +18,7 @@ class DepartmentLists {
   String name;
   String code;
   String routes;
-  String color;
+  String? color;
   String image;
 
   factory DepartmentLists.fromRawJson(String str) =>

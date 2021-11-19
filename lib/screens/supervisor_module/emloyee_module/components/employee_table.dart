@@ -1,18 +1,21 @@
 import 'package:bs_flutter_card/bs_flutter_card.dart';
 import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
 import 'package:flutter/material.dart';
+import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';
-import 'package:fortextm/core/config/company_table_source.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
+import 'package:fortextm/screens/supervisor_module/company_management/components/emloyee_table_row.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/employee_list.dart';
+import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/e_permissions_add.dart';
+import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/employee_user_add.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../screens/employee_profile.dart';
 
 class EmployeeList extends StatefulWidget {
-  const EmployeeList({Key? key}) : super(key: key);
-
+  const EmployeeList({Key? key,required this.code}) : super(key: key);
+final String code;
   @override
   _EmployeeListState createState() => _EmployeeListState();
 }
@@ -49,16 +52,36 @@ class _EmployeeListState extends State<EmployeeList>
         .map((employee) => _source1.add({
               'name': employee.name+" "+employee.surname.toString() ,
               'phone':employee.telephoneNumber,
-              'actions': IconButton(
+              'actions':Row(children: [
+                IconButton(
                 icon: const Icon(Icons.remove_red_eye),
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,
                   builder: (context) => EmployeeProfile(
-                    id: employee.id
+                    id: employee.id,code:widget.code
+                  ),
+                ),
+              ),IconButton(
+                icon: const Icon(Icons.security_outlined,color: AppColors.mtred,),
+                onPressed: () => showCupertinoModalBottomSheet(
+                  isDismissible: false,
+                  context: context,
+                  builder: (context) =>  EmployeeUserAdd(
+                    id: employee.id,code:widget.code
+                  ),
+                ),
+              ),IconButton(
+                icon: const Icon(Icons.dashboard,color: AppColors.mtorange,),
+                onPressed: () => showCupertinoModalBottomSheet(
+                  isDismissible: false,
+                  context: context,
+                  builder: (context) => EmployeePermissionsAdd(
+                    id: employee.id,code:widget.code
                   ),
                 ),
               )
+              ],) 
             }))
         .toList();
       });
@@ -66,7 +89,7 @@ class _EmployeeListState extends State<EmployeeList>
     child: BsDatatable(
       source: _source1,
       title: const Text('Datatables Data'),
-      columns: ExampleSource.columns,
+      columns: EmployeeListTabSource.columns,
     ),
       );
     });
