@@ -13,10 +13,12 @@ import 'core/config/constant.dart';
 import 'core/constants/colors.dart';
 import 'screens/customer_agent/production/production.dart';
 import 'screens/maindashboard/moduledashboard.dart';
+import 'screens/purchasing/dashboard/view/dashboard.dart';
+import 'screens/purchasing/materials/view/materials.dart';
+import 'screens/purchasing/supplier/view/supplier.dart';
+import 'screens/settings/settings.dart';
 import 'screens/supervisor_module/emloyee_module/screens/sp_employee.dart';
-import 'screens/warehouse/settings/wh_settings.dart';
 import 'screens/warehouse/stock/stock.dart';
-import 'screens/warehouse/supplier/wh_supplier.dart';
 import 'screens/warehouse/undocumented/undocumented.dart';
 
 void main() async {
@@ -44,34 +46,38 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      
       routes: {
         '/': (context) => const Login(),
         '/moduleDashboard': (context) => ModuleDashboard(),
 
         //Supervisor
-        '/sp0': (context) => const SupervisorDashboard(),
+        '/sp': (context) => const SupervisorDashboard(),
         '/sp1': (context) => SpCompany(),
         //Personele yetki ekleme
 
+        //Purchasing
+        '/ps': (context) => PurchasingDashboard(),
+        '/ps1':(context)=>PsSupplier(),
+        '/ps2':(context)=>PsMaterials(),
+
         //Warehouse,
-        '/wh0': (context) => WarehouseDashboard(),
-        '/whsettings': (context) => WhSettings(),
+        '/wh': (context) => WarehouseDashboard(),
         '/wh03': (context) => INVStock(), //Stock
         '/wh09': (context) => INVLocation(),
         '/wh01': (context) => INVUndocumented(),
 
-        //TestSupplier
-        '/testsupplier': (context) => TestSupplier(),
 
         //HumanResources
         '/hr1': (context) => SpEmployee(),
 
         '/productDash': (context) => CostumerProduction(),
         '/costumer': (context) => Costumer(),
-      
-        '/cd0': (context) => CostumerDashboard(),
 
+        '/cr': (context) => CostumerDashboard(),
+
+        //Settings
+        '/settings': (context) => Settings(),
+        
       },
       theme: ThemeData(
           primarySwatch: Colors.blue,

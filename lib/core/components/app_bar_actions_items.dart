@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fortextm/core/init/cache/shared_preferences_util.dart';
 import 'package:fortextm/screens/authentication/login/login.dart';
+import 'package:fortextm/screens/warehouse/dashboard/dashbaord.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../config/constant.dart';
@@ -42,7 +43,12 @@ class AppBarActionItems extends StatelessWidget {
           animationType: BadgeAnimationType.scale,
           child: IconButton(
               icon: SvgPicture.asset('lib/assets/svg/ring.svg', width: 20.0),
-              onPressed: () {}),
+              onPressed: () => showCupertinoModalBottomSheet(
+            expand: true,
+            isDismissible: true,
+            context: context,
+            builder: (context) =>  WarehouseDashboard(),
+          ),),
         ),
 
         const SizedBox(width: 15),

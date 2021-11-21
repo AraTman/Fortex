@@ -5,20 +5,25 @@ import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/components/app_bar_actions_items.dart';
 import 'package:fortextm/core/components/header.dart';
 import 'package:fortextm/providers/menu/menu.dart';
-import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/employee_add_button.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../components/employee_table.dart';
+import 'actions/e_add.dart';
 
 class SpEmployee extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   SpEmployee({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-     final Map list = ModalRoute.of(context)?.settings.arguments as Map;
+    final Map list = ModalRoute.of(context)?.settings.arguments as Map;
     SizeConfig().init(context);
     return Scaffold(
       key: _drawerKey,
-      drawer:  SizedBox(width: 100, child: SideMenu(code: list['code'],)),
+      drawer: SizedBox(
+          width: 100,
+          child: SideMenu(
+            code: list['code'],
+          )),
       appBar: !Responsive.isDesktop(context)
           ? AppBar(
               elevation: 0,
@@ -42,9 +47,11 @@ class SpEmployee extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-               Expanded(
+              Expanded(
                 flex: 1,
-                child: SideMenu(code: list['code'],),
+                child: SideMenu(
+                  code: list['code'],
+                ),
               ),
             Expanded(
                 flex: 14,
@@ -55,18 +62,35 @@ class SpEmployee extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         HeaderProvider(title: 'Personel Bilgileri',),
-                        EmployeeAddButton(list['code']),
+                        HeaderProvider(
+                          title: 'Personel Bilgileri',
+                        ),
+                        OutlinedButton(
+                          child: const Text('Personel Ekle'),
+                          style: OutlinedButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.black,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                          ),
+                          onPressed: () => showCupertinoModalBottomSheet(
+                            isDismissible: false,
+                            context: context,
+                            builder: (context) => EmployeeInsert(
+                              code: list['code'],
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: SizeConfig.blockSizeVertical! * 3,
                         ),
-                         EmployeeList(code: list['code']),
+                        EmployeeList(code: list['code']),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // ignore: prefer_const_literals_to_create_immutables
                           children: [],
                         ),
-                       
                       ],
                     ),
                   ),

@@ -54,7 +54,7 @@ class _SideMenuState extends State<SideMenu> {
                       ],
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/whsettings', arguments: <String, String>{
+                      Navigator.pushNamed(context, '/settings', arguments: <String, String>{
                             'code': widget.code
                           },);
                             },selectedColor: Colors.red,

@@ -1,46 +1,44 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
-import 'package:fortextm/screens/supervisor_module/company_management/models/official_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_category_list.dart';
 
 // ignore: must_be_immutable
-class SEmployeeUpdate extends StatefulWidget {
-  SEmployeeUpdate({Key? key, required this.id, required this.code})
+class SetMaterialCategoryGet extends StatefulWidget {
+  SetMaterialCategoryGet({Key? key, required this.id, required this.code})
       : super(key: key);
   late int id;
   final String code;
   @override
-  SEmployeeUpdateState createState() => SEmployeeUpdateState();
+  SetMaterialCategoryGetState createState() => SetMaterialCategoryGetState();
 }
 
-class SEmployeeUpdateState extends State<SEmployeeUpdate>
+class SetMaterialCategoryGetState extends State<SetMaterialCategoryGet>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
+  final _formKey = GlobalKey<FormBuilderState>();
   bool isLoading = false;
   late IFutureService futureService;
-
   late FutureService futureServices;
-  late Future<List<OfficialList>> httpOfficial;
-  final _formKey = GlobalKey<FormBuilderState>();
-  final welPath = "company/official/get";
-  final url = "company/official/update";
+  late Future<List<ModelSMaterialCategory>> httpEmployee;
+  final welPath = "materials/category/get";
+  final url = "materials/category/update";
   bool _status = false;
   @override
   void initState() {
     super.initState();
     futureService = FutureService();
-    httpOfficial = futureService.getHttpOfficerGets(welPath, widget.id);
+    httpEmployee = futureService.getMaterialsCategory(welPath, widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return  httpOfficial.toBuild<List<OfficialList>>(
+    return httpEmployee.toBuild<List<ModelSMaterialCategory>>(
         onSucces: (datas) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,33 +47,26 @@ class SEmployeeUpdateState extends State<SEmployeeUpdate>
             height: SizeConfig.blockSizeVertical! * 5,
           ),
           Center(
-            child: SizedBox(
-              width: SizeConfig.screenWidth,
               child: Column(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      if (_status == false) _getEditIcon(),
-                    ],
-                  ),
-                  buildForm(datas, context),
-                  SizedBox(
-                    height: SizeConfig.blockSizeVertical! * 2,
-                  ),
-                  if (_status != false) _getActionButtons()
-                ],
+            children: [
+              if (_status == false) _getEditIcon(),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical! * 5,
               ),
-            ),
+              buildForm(datas, context),
+            ],
+          )),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical! * 2,
           ),
+          if (_status != false) _getActionButtons()
         ],
       );
     });
   }
 
   FormBuilder buildForm(
-      List<OfficialList> datas, BuildContext context) {
+      List<ModelSMaterialCategory> datas, BuildContext context) {
     return FormBuilder(
       key: _formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -83,21 +74,11 @@ class SEmployeeUpdateState extends State<SEmployeeUpdate>
         width: SizeConfig.screenWidth! / 1.5,
         child: Wrap(
           children: [
-           
-            FormBuilderTextField(
-              name: 'Id',
-
-              enabled: false,
-              // valueTransformer: (text) => num.tryParse(text),
-              initialValue: datas.first.id.toString(),
-            ),
             FormBuilderTextField(
               name: 'Name',
               decoration: const InputDecoration(
-                labelText: 'Firma Adı',
+                labelText: 'Adı',
               ),
-              enabled: _status,
-              // valueTransformer: (text) => num.tryParse(text),
               initialValue: datas.first.name,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(context),
@@ -105,43 +86,31 @@ class SEmployeeUpdateState extends State<SEmployeeUpdate>
               ]),
               keyboardType: TextInputType.text,
             ),
-             FormBuilderTextField(
-            name: 'Surname',
-            decoration: const InputDecoration(
-              labelText: 'Soyadı',
+            FormBuilderTextField(
+              name: 'Code',
+              decoration: const InputDecoration(
+                labelText: 'Firma Adı',
+              ),
+              enabled: _status,
+              // valueTransformer: (text) => num.tryParse(text),
+              initialValue: datas.first.code,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+                FormBuilderValidators.max(context, 70),
+              ]),
+              keyboardType: TextInputType.text,
             ),
-            initialValue: datas.first.surname,
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(context),
-              FormBuilderValidators.max(context, 70),
-            ]),
-            keyboardType: TextInputType.text,
-          ),
-          FormBuilderTextField(
-            name: 'Email',
-            decoration: const InputDecoration(
-              labelText: 'Email',
+            FormBuilderTextField(
+              name: 'Description',
+              decoration: const InputDecoration(
+                labelText: 'Açıklama',
+              ),
+              initialValue: datas.first.description,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+              ]),
+              keyboardType: TextInputType.phone,
             ),
-           initialValue: datas.first.email,
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(context),
-            
-            ]),
-            keyboardType: TextInputType.emailAddress,
-          ),
-          
-          FormBuilderTextField(
-            name: 'TelephoneNumber',
-            decoration: const InputDecoration(
-              labelText: 'Telefon',
-            ),
-           initialValue: datas.first.telephoneNumber,
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(context),
-              
-            ]),
-            keyboardType: TextInputType.phone,
-          ),
           ],
         ),
       ),
@@ -181,8 +150,8 @@ class SEmployeeUpdateState extends State<SEmployeeUpdate>
                       borderRadius: BorderRadius.circular(20.0)),
                 ),
                 onPressed: () {
+                  _formKey.currentState!.setInternalFieldValue('Id', widget.id);
                   _formKey.currentState!.save();
-
                   if (_formKey.currentState!.validate()) {
                     futureServices = FutureService();
                     futureServices.postAllUpdate(_formKey.currentState!.value,

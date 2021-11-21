@@ -8,6 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/constants/colors.dart';
 import 'package:fortextm/core/init/cache/shared_preferences_util.dart';
 import 'package:fortextm/providers/menu/models/permissonmodel.dart';
+import 'package:fortextm/screens/purchasing/supplier/model/s_category_model.dart';
+import 'package:fortextm/screens/purchasing/supplier/model/s_model.dart';
+import 'package:fortextm/screens/settings/materials/models/m_category_list.dart';
+import 'package:fortextm/screens/settings/warehouse/models/w_category_list.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_media_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/error_model.dart';
@@ -17,14 +21,7 @@ import 'package:fortextm/screens/supervisor_module/emloyee_module/models/departm
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/department_list.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/employee_list.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/media_type_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_localization_size_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_supplier_list.dart';
-import 'package:fortextm/screens/warehouse/supplier/models/supplier_list.dart';
 import 'package:http_parser/http_parser.dart';
-
 import 'futures_service.dart';
 
 class FutureService extends IFutureService {
@@ -52,6 +49,7 @@ class FutureService extends IFutureService {
       throw response;
     }
   }
+  
 
   @override
   Future<List<DepartmanModel>> getHttpDepartmans(String url) async {
@@ -82,7 +80,33 @@ class FutureService extends IFutureService {
         return response.data;
     }
   }
-
+ @override
+  Future<List<ModelSMaterialCategory>> listMaterialsCategory(String path) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final response = await _getDioRequest(path);
+    if (response is List) {
+      return response.map((e) => ModelSMaterialCategory.fromJson(e)).toList();
+    } else {
+      throw response;
+    }
+  }
+    @override
+  Future<List<ModelSMaterialCategory>> getMaterialsCategory(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => ModelSMaterialCategory.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
   @override
   Future<List<SubsidiaryList>> getHttpSubsidiaryList(String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
@@ -175,6 +199,16 @@ class FutureService extends IFutureService {
       throw response;
     }
   }
+  @override
+  Future<List<ModelPsCategory>> listSupplierCategory(String url) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final response = await _getDioRequest(url);
+    if (response is List) {
+      return response.map((e) => ModelPsCategory.fromJson(e)).toList();
+    } else {
+      throw response;
+    }
+  }
 
   @override
   Future<List<OfficialList>> getHttpOfficialList(String url, int id) async {
@@ -214,26 +248,26 @@ class FutureService extends IFutureService {
   }
 
 //Warehouse
-  @override
-  Future<List<WhCategoryLists>> getHttpWhCategoryLists(String url) async {
+
+
+
+
+
+
+
+
+ @override
+  Future<List<ModelSupplier>> listSupplier(String url) async {
     dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls);
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data.map((e) => WhCategoryLists.fromJson(e)).toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
+    final response = await _getDioRequest(url);
+    if (response is List) {
+      return response.map((e) => ModelSupplier.fromJson(e)).toList();
+    } else {
+      throw response;
     }
   }
-
-  @override
-  Future<List<WhCategoryLists>> getHttpWhCategoryGets(
+ @override
+  Future<List<ModelSupplier>> getSupplier(
       String url, int id) async {
     dio.options.headers["Authorization"] = "Bearer $token";
     final String urls = _baseUrl + url;
@@ -242,62 +276,7 @@ class FutureService extends IFutureService {
       case HttpStatus.ok:
         final data = response.data;
         if (data is List) {
-          return data.map((e) => WhCategoryLists.fromJson(e)).toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
-
-  @override
-  Future<List<WhModelList>> getHttpWhLists(String url) async {
-    dio.options.headers["Authorization"] = 'Bearer $token';
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls);
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data.map((e) => WhModelList.fromJson(e)).toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
-
-  @override
-  Future<List<WhModelList>> getHttpWhGets(String url, int id) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls, queryParameters: {"id": id});
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data.map((e) => WhModelList.fromJson(e)).toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
-
-  @override
-  Future<List<WhLocalizationModelList>> getHttpWhLocalizationLists(
-      String url) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls);
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data.map((e) => WhLocalizationModelList.fromJson(e)).toList();
+          return data.map((e) => ModelSupplier.fromJson(e)).toList();
         } else {
           throw data;
         }
@@ -307,124 +286,10 @@ class FutureService extends IFutureService {
   }
 
 
-  @override
-  Future<List<WhLocalizationModelList>> getHttpWhLocalizationGets(
-      String url, int id) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls, queryParameters: {"id": id});
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data.map((e) => WhLocalizationModelList.fromJson(e)).toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
 
-  @override
-  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeLists(
-      String url) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls);
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data
-              .map((e) => WhLocalizationSizeModelList.fromJson(e))
-              .toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
 
-  @override
-  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeGets(
-      String url, int id) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls, queryParameters: {"id": id});
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data
-              .map((e) => WhLocalizationSizeModelList.fromJson(e))
-              .toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
-
-  @override
-  Future<List<WhSupplierCategoryModelList>> getHttpSupplierCategoryLists(
-      String url) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls);
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data
-              .map((e) => WhSupplierCategoryModelList.fromJson(e))
-              .toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
-
-  @override
-  Future<List<SupplierModelList>> getHttpSupplierLists(String url) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls);
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data.map((e) => SupplierModelList.fromJson(e)).toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
-
-  @override
-  Future<List<SupplierModelList>> getHttpSupplierGets(
-      String url, int id) async {
-    dio.options.headers["Authorization"] = "Bearer $token";
-    final String urls = _baseUrl + url;
-    final response = await dio.get(urls, queryParameters: {"id": id});
-    switch (response.statusCode) {
-      case HttpStatus.ok:
-        final data = response.data;
-        if (data is List) {
-          return data.map((e) => SupplierModelList.fromJson(e)).toList();
-        } else {
-          throw data;
-        }
-      default:
-        return response.data;
-    }
-  }
+  
+ 
 
   //Post
   dynamic postCompany(var data, String paths, var file, BuildContext context,
@@ -432,8 +297,8 @@ class FutureService extends IFutureService {
     try {
       dio.options.headers["Authorization"] = "Bearer $token";
      
-     
-      Response response = await dio.post(
+     if (file != null) {
+        Response response = await dio.post(
         _baseUrl + paths,
         data: data,
         options: Options(
@@ -492,10 +357,15 @@ class FutureService extends IFutureService {
           final urls = "${_baseUrl + imgUrl}";
           response = await dio.post(urls, data: formData);
           return _succesMessage(context, location, code);
-       
-      } else {
+          
+     } else {
         return response.statusCode;
-      }
+      } 
+     
+       
+      }else {
+       return _errorMessage(context, location, " Resim Ekleniyiz!", code);
+     }
     } on DioError catch (e) {
       // ignore: avoid_print
       return _warningMessage(context, 'Hata${e.error}!');
@@ -671,4 +541,16 @@ class FutureService extends IFutureService {
       },
     )..show();
   }
+
+  @override
+  Future<List<ModelSWarehouseCategory>> getWarehouseCategory(String url, int id) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ModelSWarehouseCategory>> listWarehouseCategory(String url) {
+    throw UnimplementedError();
+  }
+
+ 
 }

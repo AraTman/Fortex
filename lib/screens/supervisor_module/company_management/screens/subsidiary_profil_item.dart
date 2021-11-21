@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/constants/colors.dart';
-import 'package:fortextm/screens/supervisor_module/company_management/components/card_company_profil.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/components/official_table.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -54,7 +53,7 @@ class SubsidiaryProfileItemState extends State<SubsidiaryProfileItem>
                             SizedBox(
                               height: SizeConfig.blockSizeVertical! * 5,
                             ),
-                            const Center(child: CompanyPCard()),
+                           
                             SizedBox(
                               height: SizeConfig.blockSizeVertical! * 5,
                             ),

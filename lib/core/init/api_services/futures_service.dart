@@ -1,4 +1,8 @@
 import 'package:fortextm/providers/menu/models/permissonmodel.dart';
+import 'package:fortextm/screens/purchasing/supplier/model/s_category_model.dart';
+import 'package:fortextm/screens/purchasing/supplier/model/s_model.dart';
+import 'package:fortextm/screens/settings/materials/models/m_category_list.dart';
+import 'package:fortextm/screens/settings/warehouse/models/w_category_list.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_media_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/official_list.dart';
@@ -7,16 +11,11 @@ import 'package:fortextm/screens/supervisor_module/emloyee_module/models/departm
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/department_list.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/employee_list.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/media_type_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_category_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_localization_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_localization_size_list.dart';
-import 'package:fortextm/screens/warehouse/settings/models/wh_supplier_list.dart';
-import 'package:fortextm/screens/warehouse/supplier/models/supplier_list.dart';
 
 abstract class IFutureService {
   Future<List<modelCompanyTable>> getHttpTableModel(String path);
-  Future<List<modelMediaCompanyTable>> getHttpTableModelGets(String path,int id);
+  Future<List<modelMediaCompanyTable>> getHttpTableModelGets(
+      String path, int id);
   Future<List<DepartmanModel>> getHttpDepartmans(String url);
   Future<List<SubsidiaryList>> getHttpSubsidiaryList(String url, int id);
   Future<List<EmployeeListModel>> getHttpEmployeeList(String url);
@@ -25,25 +24,20 @@ abstract class IFutureService {
   Future<List<OfficialList>> getHttpOfficerGets(String url, int id);
   Future<List<DepartmentLists>> getHttpDepartmentLists(String url);
   Future<List<MediaTypeList>> getHttpMediaTypeLists(String url);
-  Future<List<permissionModel>> getHttpPermission(String url,String code);
-
+  Future<List<permissionModel>> getHttpPermission(String url, String code);
 
   //Warehouse
-  Future<List<WhCategoryLists>> getHttpWhCategoryLists(String url);
-  Future<List<WhCategoryLists>> getHttpWhCategoryGets(String url, int id);
-  Future<List<WhModelList>> getHttpWhLists(String url);
-  Future<List<WhModelList>> getHttpWhGets(String url, int id);
 
-  Future<List<WhLocalizationModelList>> getHttpWhLocalizationLists(String url);
-  Future<List<WhLocalizationModelList>> getHttpWhLocalizationGets(
-      String url, int id);
+  //Supplier
+  Future<List<ModelSupplier>> listSupplier(String url);
+  Future<List<ModelSupplier>> getSupplier(String url, int id);
+  Future<List<ModelPsCategory>> listSupplierCategory(String url);
 
-  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeLists(String url);
-  Future<List<WhLocalizationSizeModelList>> getHttpWhLocalizationSizeGets(
-      String url, int id);
-
-       Future<List<WhSupplierCategoryModelList>> getHttpSupplierCategoryLists(String url);
-         Future<List<SupplierModelList>> getHttpSupplierLists(String url);
-         Future<List<SupplierModelList>> getHttpSupplierGets(
-      String url, int id);
+  //Settings
+  //Materials
+  Future<List<ModelSMaterialCategory>> listMaterialsCategory(String url);
+  Future<List<ModelSMaterialCategory>> getMaterialsCategory(String url,int id);
+  //Warehouse
+  Future<List<ModelSWarehouseCategory>> listWarehouseCategory(String url);
+  Future<List<ModelSWarehouseCategory>> getWarehouseCategory(String url,int id);
 }

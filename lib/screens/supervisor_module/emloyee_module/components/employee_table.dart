@@ -8,7 +8,7 @@ import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/components/emloyee_table_row.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/models/employee_list.dart';
 import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/e_permissions_add.dart';
-import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/employee_user_add.dart';
+import 'package:fortextm/screens/supervisor_module/emloyee_module/screens/actions/e_user_add.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../screens/employee_profile.dart';
