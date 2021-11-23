@@ -29,7 +29,7 @@ class MaterialsSettingsState extends State<MaterialsSettings>
         id: 0,
         code: widget.code,
         context: context,
-         title: 'Hammadde Ayarları',
+         title: 'Ürün Ayarları',
         mainMobilPageBuilder: (context) {
           return Column(
             // ignore: prefer_const_literals_to_create_immutables
@@ -47,7 +47,7 @@ class MaterialsSettingsState extends State<MaterialsSettings>
               ),
                 Center(
                   child: OutlinedButton(
-                            child: const Text('Hammadde Ekle'),
+                            child: const Text('Ürün Kategorisi Ekle'),
                             style: OutlinedButton.styleFrom(
                               primary: Colors.white,
                               backgroundColor: Colors.black,

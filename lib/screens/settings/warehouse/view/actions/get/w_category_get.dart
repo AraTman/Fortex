@@ -89,7 +89,7 @@ class SetWarehouseCategoryGetState extends State<SetWarehouseCategoryGet>
             FormBuilderTextField(
               name: 'Code',
               decoration: const InputDecoration(
-                labelText: 'Firma Adı',
+                labelText: 'Kod',
               ),
               enabled: _status,
               // valueTransformer: (text) => num.tryParse(text),
@@ -155,7 +155,7 @@ class SetWarehouseCategoryGetState extends State<SetWarehouseCategoryGet>
                   if (_formKey.currentState!.validate()) {
                     futureServices = FutureService();
                     futureServices.postAllUpdate(_formKey.currentState!.value,
-                        url, context, '/sp1', widget.code, widget.id);
+                        url, context, '/settings', widget.code, widget.id);
                     setState(() {
                       _status = false;
                       FocusScope.of(context).requestFocus(FocusNode());

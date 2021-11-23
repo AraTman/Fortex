@@ -4,41 +4,42 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
-import 'package:fortextm/screens/settings/materials/models/m_category_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_group_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_material_list.dart';
 
 // ignore: must_be_immutable
-class SetMaterialCategoryGet extends StatefulWidget {
-  SetMaterialCategoryGet({Key? key, required this.id, required this.code})
+class SetMaterialMaterialGet extends StatefulWidget {
+  SetMaterialMaterialGet({Key? key, required this.id, required this.code})
       : super(key: key);
   late int id;
   final String code;
   @override
-  SetMaterialCategoryGetState createState() => SetMaterialCategoryGetState();
+  SetMaterialMaterialGetState createState() => SetMaterialMaterialGetState();
 }
 
-class SetMaterialCategoryGetState extends State<SetMaterialCategoryGet>
+class SetMaterialMaterialGetState extends State<SetMaterialMaterialGet>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
   final _formKey = GlobalKey<FormBuilderState>();
   bool isLoading = false;
   late IFutureService futureService;
   late FutureService futureServices;
-  late Future<List<ModelSMaterialCategory>> httpEmployee;
-  final welPath = "materials/category/get";
-  final url = "materials/category/update";
+  late Future<List<ModelSMaterialsMaterial>> httpEmployee;
+  final welPath = "materials/get";
+  final url = "materials/update";
   bool _status = false;
   @override
   void initState() {
     super.initState();
     futureService = FutureService();
-    httpEmployee = futureService.getMaterialsCategory(welPath, widget.id);
+    httpEmployee = futureService.getMaterialsMaterial(welPath, widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return httpEmployee.toBuild<List<ModelSMaterialCategory>>(
+    return httpEmployee.toBuild<List<ModelSMaterialsMaterial>>(
         onSucces: (datas) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +67,7 @@ class SetMaterialCategoryGetState extends State<SetMaterialCategoryGet>
   }
 
   FormBuilder buildForm(
-      List<ModelSMaterialCategory> datas, BuildContext context) {
+      List<ModelSMaterialsMaterial> datas, BuildContext context) {
     return FormBuilder(
       key: _formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -74,6 +75,20 @@ class SetMaterialCategoryGetState extends State<SetMaterialCategoryGet>
         width: SizeConfig.screenWidth! / 1.5,
         child: Wrap(
           children: [
+             FormBuilderTextField(
+              name: 'Code',
+              decoration: const InputDecoration(
+                labelText: 'Kodu',
+              ),
+              enabled: _status,
+              // valueTransformer: (text) => num.tryParse(text),
+              initialValue: datas.first.code,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+                FormBuilderValidators.max(context, 70),
+              ]),
+              keyboardType: TextInputType.text,
+            ),
             FormBuilderTextField(
               name: 'Name',
               decoration: const InputDecoration(
@@ -86,19 +101,38 @@ class SetMaterialCategoryGetState extends State<SetMaterialCategoryGet>
               ]),
               keyboardType: TextInputType.text,
             ),
-            FormBuilderTextField(
-              name: 'Code',
+              FormBuilderTextField(
+              name: 'Color',
               decoration: const InputDecoration(
-                labelText: 'Firma Adı',
+                labelText: 'Renk',
               ),
-              enabled: _status,
-              // valueTransformer: (text) => num.tryParse(text),
-              initialValue: datas.first.code,
+              initialValue: datas.first.description,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(context),
-                FormBuilderValidators.max(context, 70),
               ]),
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.phone,
+            ),
+            FormBuilderTextField(
+              name: 'Type',
+              decoration: const InputDecoration(
+                labelText: 'Tip',
+              ),
+              initialValue: datas.first.description,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+              ]),
+              keyboardType: TextInputType.phone,
+            ),
+             FormBuilderTextField(
+              name: 'Weight',
+              decoration: const InputDecoration(
+                labelText: 'Ağırlık',
+              ),
+              initialValue: datas.first.description,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(context),
+              ]),
+              keyboardType: TextInputType.phone,
             ),
             FormBuilderTextField(
               name: 'Description',

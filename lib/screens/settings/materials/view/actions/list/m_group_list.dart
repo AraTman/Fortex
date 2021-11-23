@@ -5,26 +5,27 @@ import 'package:fortextm/core/config/company_table_source.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
-import 'package:fortextm/screens/settings/warehouse/models/w_category_list.dart';
-import 'package:fortextm/screens/settings/warehouse/view/profil/w_category_profil.dart';
+import 'package:fortextm/screens/settings/materials/models/m_group_list.dart';
+import 'package:fortextm/screens/settings/materials/view/profil/m_category_profile.dart';
+import 'package:fortextm/screens/settings/materials/view/profil/m_group_profile.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-
-
-class SetWarehouseCategoryList extends StatefulWidget {
-  const SetWarehouseCategoryList({Key? key,required this.code}) : super(key: key);
-final String code;
+// ignore: must_be_immutable
+class SetMaterialGroupList extends StatefulWidget {
+  SetMaterialGroupList({Key? key, required this.id, required this.code})
+      : super(key: key);
+  late int id;
+  final String code;
   @override
-  _SetWarehouseCategoryListState createState() => _SetWarehouseCategoryListState();
+  SetMaterialGroupListState createState() => SetMaterialGroupListState();
 }
 
-class _SetWarehouseCategoryListState extends State<SetWarehouseCategoryList>
-    with AutomaticKeepAliveClientMixin {
-  final welPath = "warehouse/category/list";
-  bool isLoading = false;
-
+class SetMaterialGroupListState extends State<SetMaterialGroupList>
+    with SingleTickerProviderStateMixin {
+      final welPath = "materials/group/list";
+  final url = "materials/group/update";
   late IFutureService futureService;
-  late Future<List<ModelSWarehouseCategory>> httpEmployee;
+  late Future<List<ModelSMaterialsGroup>> httpEmployee;
   final ExampleSource _source1 = ExampleSource(
       data: [],
       editListener: (value, index, sources, source) {
@@ -37,13 +38,12 @@ class _SetWarehouseCategoryListState extends State<SetWarehouseCategoryList>
   void initState() {
     super.initState();
     futureService = FutureService();
-    httpEmployee = futureService.listWarehouseCategory(welPath);
+    httpEmployee = futureService.listMaterialsGroup(welPath,widget.id);
   }
 
-  @override
+   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return  httpEmployee.toBuild<List<ModelSWarehouseCategory>>(onSucces: (datas) {
+    return  httpEmployee.toBuild<List<ModelSMaterialsGroup>>(onSucces: (datas) {
       Future.delayed(Duration.zero, () async {
     _source1.clear();
     datas
@@ -55,7 +55,7 @@ class _SetWarehouseCategoryListState extends State<SetWarehouseCategoryList>
                 onPressed: () => showCupertinoModalBottomSheet(
                   isDismissible: false,
                   context: context,
-                  builder: (context) => SetWarehouseCategoryProfil(
+                  builder: (context) => SetMaterialGroupProfile(
                     id: employee.id,code:widget.code
                   ),
                 ),
@@ -67,21 +67,12 @@ class _SetWarehouseCategoryListState extends State<SetWarehouseCategoryList>
       return BsCardContainer(
     child: BsDatatable(
       source: _source1,
-      title: const Text('Kategori Listesi'),
+      title: const Text('Ürün Grup Tablosu'),
       columns: ExampleSource.columns,
     ),
       );
     });
   }
 
-  Widget get buildTitleLaoding {
-    return isLoading
-        ? const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          )
-        : const Text("Http");
-  }
-
-  @override
-  bool get wantKeepAlive => true;
+ 
 }

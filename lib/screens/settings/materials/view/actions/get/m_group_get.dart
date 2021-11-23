@@ -5,40 +5,41 @@ import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
 import 'package:fortextm/screens/settings/materials/models/m_category_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_group_list.dart';
 
 // ignore: must_be_immutable
-class SetMaterialCategoryGet extends StatefulWidget {
-  SetMaterialCategoryGet({Key? key, required this.id, required this.code})
+class SetMaterialGroupGet extends StatefulWidget {
+  SetMaterialGroupGet({Key? key, required this.id, required this.code})
       : super(key: key);
   late int id;
   final String code;
   @override
-  SetMaterialCategoryGetState createState() => SetMaterialCategoryGetState();
+  SetMaterialGroupGetState createState() => SetMaterialGroupGetState();
 }
 
-class SetMaterialCategoryGetState extends State<SetMaterialCategoryGet>
+class SetMaterialGroupGetState extends State<SetMaterialGroupGet>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
   final _formKey = GlobalKey<FormBuilderState>();
   bool isLoading = false;
   late IFutureService futureService;
   late FutureService futureServices;
-  late Future<List<ModelSMaterialCategory>> httpEmployee;
-  final welPath = "materials/category/get";
-  final url = "materials/category/update";
+  late Future<List<ModelSMaterialsGroup>> httpEmployee;
+  final welPath = "materials/group/get";
+  final url = "materials/group/update";
   bool _status = false;
   @override
   void initState() {
     super.initState();
     futureService = FutureService();
-    httpEmployee = futureService.getMaterialsCategory(welPath, widget.id);
+    httpEmployee = futureService.getMaterialsGroup(welPath, widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return httpEmployee.toBuild<List<ModelSMaterialCategory>>(
+    return httpEmployee.toBuild<List<ModelSMaterialsGroup>>(
         onSucces: (datas) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +67,7 @@ class SetMaterialCategoryGetState extends State<SetMaterialCategoryGet>
   }
 
   FormBuilder buildForm(
-      List<ModelSMaterialCategory> datas, BuildContext context) {
+      List<ModelSMaterialsGroup> datas, BuildContext context) {
     return FormBuilder(
       key: _formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,

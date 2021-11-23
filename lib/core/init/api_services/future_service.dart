@@ -11,6 +11,8 @@ import 'package:fortextm/providers/menu/models/permissonmodel.dart';
 import 'package:fortextm/screens/purchasing/supplier/model/s_category_model.dart';
 import 'package:fortextm/screens/purchasing/supplier/model/s_model.dart';
 import 'package:fortextm/screens/settings/materials/models/m_category_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_group_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_material_list.dart';
 import 'package:fortextm/screens/settings/warehouse/models/w_category_list.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_media_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
@@ -63,6 +65,34 @@ class FutureService extends IFutureService {
   }
 
   @override
+  Future<List<ModelSWarehouseCategory>> getWarehouseCategory(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => ModelSWarehouseCategory.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+  @override
+  Future<List<ModelSWarehouseCategory>> listWarehouseCategory(String url) async {
+     dio.options.headers["Authorization"] = "Bearer $token";
+    final response = await _getDioRequest(url);
+    if (response is List) {
+      return response.map((e) => ModelSWarehouseCategory.fromJson(e)).toList();
+    } else {
+      throw response;
+    }
+  }
+  @override
   Future<List<permissionModel>> getHttpPermission(
       String url, String code) async {
     dio.options.headers["Authorization"] = "Bearer $token";
@@ -100,6 +130,77 @@ class FutureService extends IFutureService {
         final data = response.data;
         if (data is List) {
           return data.map((e) => ModelSMaterialCategory.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+    @override
+  Future<List<ModelSMaterialsGroup>> listMaterialsGroup(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"categoryId": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => ModelSMaterialsGroup.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+    @override
+  Future<List<ModelSMaterialsGroup>> getMaterialsGroup(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => ModelSMaterialsGroup.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+
+    @override
+  Future<List<ModelSMaterialsMaterial>> listMaterialsMaterial(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"groupId": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => ModelSMaterialsMaterial.fromJson(e)).toList();
+        } else {
+          throw data;
+        }
+      default:
+        return response.data;
+    }
+  }
+    @override
+  Future<List<ModelSMaterialsMaterial>> getMaterialsMaterial(String url, int id) async {
+    dio.options.headers["Authorization"] = "Bearer $token";
+    final String urls = _baseUrl + url;
+    final response = await dio.get(urls, queryParameters: {"id": id});
+    switch (response.statusCode) {
+      case HttpStatus.ok:
+        final data = response.data;
+        if (data is List) {
+          return data.map((e) => ModelSMaterialsMaterial.fromJson(e)).toList();
         } else {
           throw data;
         }
@@ -542,15 +643,6 @@ class FutureService extends IFutureService {
     )..show();
   }
 
-  @override
-  Future<List<ModelSWarehouseCategory>> getWarehouseCategory(String url, int id) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<ModelSWarehouseCategory>> listWarehouseCategory(String url) {
-    throw UnimplementedError();
-  }
 
  
 }

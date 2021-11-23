@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/base/view/base_widget.dart';
 import 'package:fortextm/core/config/size_config.dart';
-import 'package:fortextm/screens/settings/materials/view/actions/add/m_group_add.dart';
+import 'package:fortextm/screens/settings/materials/view/actions/add/m_material_add.dart';
 import 'package:fortextm/screens/settings/materials/view/actions/get/m_category_get.dart';
+import 'package:fortextm/screens/settings/materials/view/actions/get/m_group_get.dart';
+import 'package:fortextm/screens/settings/materials/view/actions/list/m_material_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../actions/list/m_group_list.dart';
 
-class SetMaterialCategoryProfile extends StatefulWidget {
-  const SetMaterialCategoryProfile(
+class SetMaterialGroupProfile extends StatefulWidget {
+  const SetMaterialGroupProfile(
       {Key? key, required this.id, required this.code})
       : super(key: key);
   final int id;
   final String code;
   @override
-  SetMaterialCategoryProfileState createState() =>
-      SetMaterialCategoryProfileState();
+  SetMaterialGroupProfileState createState() =>
+      SetMaterialGroupProfileState();
 }
 
-class SetMaterialCategoryProfileState extends State<SetMaterialCategoryProfile>
+class SetMaterialGroupProfileState extends State<SetMaterialGroupProfile>
     with SingleTickerProviderStateMixin {
   // ignore: unused_field
   @override
@@ -32,7 +34,7 @@ class SetMaterialCategoryProfileState extends State<SetMaterialCategoryProfile>
         id: widget.id,
         code: widget.code,
         context: context,
-        title: 'Ürün Profil',
+        title: 'Grup Profil',
         mainMobilPageBuilder: (context) {
           return Column(
             // ignore: prefer_const_literals_to_create_immutables
@@ -43,16 +45,13 @@ class SetMaterialCategoryProfileState extends State<SetMaterialCategoryProfile>
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SetMaterialCategoryGet(
+              SetMaterialGroupGet(
                 id: widget.id,
                 code: widget.code,
               ),
-              SizedBox(
-                height: SizeConfig.blockSizeVertical! * 3,
-              ),
-               Center(
+                Center(
                   child: OutlinedButton(
-                            child: const Text('Grup Ekle'),
+                            child: const Text('Ürün Ekle'),
                             style: OutlinedButton.styleFrom(
                               primary: Colors.white,
                               backgroundColor: Colors.black,
@@ -63,14 +62,17 @@ class SetMaterialCategoryProfileState extends State<SetMaterialCategoryProfile>
                             onPressed: () => showCupertinoModalBottomSheet(
                               isDismissible: false,
                               context: context,
-                              builder: (context) => SetMaterialGroupAdd(
+                              builder: (context) => SetMaterialsMaterialAdd(
                                 code: widget.code,id: widget.id,
                               ),
                             ),
                           ),
                 ),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical! * 3,
+              ),
               // if (!Responsive.isDesktop(context))
-              SetMaterialGroupList(
+              SetMaterialsMaterialList(
                 id: widget.id,
                 code: widget.code,
               )

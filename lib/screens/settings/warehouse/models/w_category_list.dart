@@ -12,7 +12,7 @@ class ModelSWarehouseCategory {
     final int id;
     final String name;
     final String code;
-    final String description;
+    final String? description;
 
     factory ModelSWarehouseCategory.fromRawJson(String str) => ModelSWarehouseCategory.fromJson(json.decode(str));
 
@@ -22,7 +22,7 @@ class ModelSWarehouseCategory {
         id: json["Id"],
         name: json["Name"],
         code: json["Code"],
-        description: json["Description"] == null ? null : json["Description"],
+        description: json["Description"] ,
     );
 
     Map<String, dynamic> toJson() => {

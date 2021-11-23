@@ -2,6 +2,8 @@ import 'package:fortextm/providers/menu/models/permissonmodel.dart';
 import 'package:fortextm/screens/purchasing/supplier/model/s_category_model.dart';
 import 'package:fortextm/screens/purchasing/supplier/model/s_model.dart';
 import 'package:fortextm/screens/settings/materials/models/m_category_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_group_list.dart';
+import 'package:fortextm/screens/settings/materials/models/m_material_list.dart';
 import 'package:fortextm/screens/settings/warehouse/models/w_category_list.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_media_model.dart';
 import 'package:fortextm/screens/supervisor_module/company_management/models/company_table_model.dart';
@@ -37,6 +39,10 @@ abstract class IFutureService {
   //Materials
   Future<List<ModelSMaterialCategory>> listMaterialsCategory(String url);
   Future<List<ModelSMaterialCategory>> getMaterialsCategory(String url,int id);
+  Future<List<ModelSMaterialsGroup>> listMaterialsGroup(String url,int id);
+  Future<List<ModelSMaterialsGroup>> getMaterialsGroup(String url,int id);
+  Future<List<ModelSMaterialsMaterial>> listMaterialsMaterial(String url,int id);
+  Future<List<ModelSMaterialsMaterial>> getMaterialsMaterial(String url,int id);
   //Warehouse
   Future<List<ModelSWarehouseCategory>> listWarehouseCategory(String url);
   Future<List<ModelSWarehouseCategory>> getWarehouseCategory(String url,int id);

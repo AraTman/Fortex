@@ -100,7 +100,7 @@ class Settings extends StatelessWidget {
                                   child: Row(
                                 children: [
                                   Icon(Icons.h_mobiledata),
-                                  const Text('Hammadde'),
+                                  const Text('Ürün'),
                                 ],
                               )),
                               style: OutlinedButton.styleFrom(
