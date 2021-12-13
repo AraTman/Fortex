@@ -157,7 +157,7 @@ class _LoginState extends State<Login> {
     };
     // ignore: prefer_typing_uninitialized_variables
     var jsonResponse;
-    var url = 'https://app.portalofarge.com/api/login';
+    var url = 'http://localhost:44372/api/login';
     var response = await http.post(Uri.parse(url),
         headers: {
           'Accept': 'application/json',
@@ -189,7 +189,7 @@ class _LoginState extends State<Login> {
     };
      var jsonResponse;
     // ignore: prefer_typing_uninitialized_variables
-    var url = 'https://app.portalofarge.com/api/login';
+    var url = 'http://localhost:44372/api/login';
     var response = await http.post(Uri.parse(url),
         headers: {
           'Accept': 'application/json',

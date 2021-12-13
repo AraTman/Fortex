@@ -5,9 +5,7 @@ import 'package:fortextm/core/config/company_table_source.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
-import 'package:fortextm/screens/settings/materials/models/m_group_list.dart';
 import 'package:fortextm/screens/settings/materials/models/m_material_list.dart';
-import 'package:fortextm/screens/settings/materials/view/profil/m_category_profile.dart';
 import 'package:fortextm/screens/settings/materials/view/profil/m_material_profile.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 

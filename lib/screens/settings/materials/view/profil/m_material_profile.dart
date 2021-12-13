@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fortextm/core/base/view/base_widget.dart';
 import 'package:fortextm/core/config/size_config.dart';
-import 'package:fortextm/screens/settings/materials/view/actions/get/m_category_get.dart';
-import 'package:fortextm/screens/settings/materials/view/actions/get/m_group_get.dart';
 import 'package:fortextm/screens/settings/materials/view/actions/get/m_material_get.dart';
-import 'package:fortextm/screens/settings/materials/view/actions/list/m_material_list.dart';
 
-import '../actions/list/m_group_list.dart';
 
 class SetMaterialMaterialProfile extends StatefulWidget {
   const SetMaterialMaterialProfile(

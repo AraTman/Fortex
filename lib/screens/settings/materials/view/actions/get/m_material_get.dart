@@ -4,7 +4,6 @@ import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/core/init/api_services/future_extension.dart';
 import 'package:fortextm/core/init/api_services/future_service.dart';
 import 'package:fortextm/core/init/api_services/futures_service.dart';
-import 'package:fortextm/screens/settings/materials/models/m_group_list.dart';
 import 'package:fortextm/screens/settings/materials/models/m_material_list.dart';
 
 // ignore: must_be_immutable

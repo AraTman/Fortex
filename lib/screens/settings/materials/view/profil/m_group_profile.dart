@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fortextm/core/base/view/base_widget.dart';
 import 'package:fortextm/core/config/size_config.dart';
 import 'package:fortextm/screens/settings/materials/view/actions/add/m_material_add.dart';
-import 'package:fortextm/screens/settings/materials/view/actions/get/m_category_get.dart';
 import 'package:fortextm/screens/settings/materials/view/actions/get/m_group_get.dart';
 import 'package:fortextm/screens/settings/materials/view/actions/list/m_material_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
-import '../actions/list/m_group_list.dart';
 
 class SetMaterialGroupProfile extends StatefulWidget {
   const SetMaterialGroupProfile(
